@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Icon from '../components/Icon.astro';
 import Polaroid from '../components/Polaroid.astro';
+import PolaStrip from '../components/PolaStrip.astro';
 import { SITE, waLink } from '../config';
 
 const temas = [
@@ -153,6 +154,13 @@ const faqs = [
       </div>
     </section>
 
+    <PolaStrip fotos={[
+      { src: 'pola-italia', cap: 'A Itália real' },
+      { src: 'pola-familia', cap: 'Família reunida' },
+      { src: 'pola-brasil', cap: 'O Brasil no coração' },
+      { src: 'pola-se', cap: 'São Paulo, com os meus' },
+    ]} />
+
     <!-- QUEM CHEGA AQUI -->
     <section class="sec quem">
       <div class="container">
@@ -187,7 +195,7 @@ const faqs = [
           <span class="sobre-dots" aria-hidden="true"></span>
           <p class="std-tag"><span class="std-dot"></span> Quem conduz a mentoria</p>
           <h2 class="sobre-title"><span class="serif-italic">Prazer,</span> <span class="grifo">Alexandre</span></h2>
-          <p class="sobre-cred"><Icon name="badge" size={16} /> <strong>23 anos na Itália</strong> · Funcionário público em Monza · Pai de 3</p>
+          <p class="sobre-cred"><Icon name="badge" size={16} /> <strong>23 anos na Itália</strong><span>Funcionário público em Monza</span><span>Pai de 3</span></p>
           <p>Em 2003, eu tinha a vida que a classe média brasileira considera ideal: ótimo emprego, apartamento, dois carros e escola particular. Até que um sequestro relâmpago e um assalto à mão armada me mostraram que eu tinha tudo, menos segurança.</p>
           <p>Vim sozinho, sem falar italiano, com 2 euros no bolso. Bati em mais de cem portas, passei frio e solidão, e reuni a minha família numa casa de 300 euros na montanha. Hoje, meus três filhos são adultos realizados na Itália. <strong>Eu estendo a mão para você, como alguém um dia fez comigo.</strong></p>
           <div class="sobre-cta">
@@ -224,6 +232,13 @@ const faqs = [
         </ol>
       </div>
     </section>
+
+    <PolaStrip reverse fotos={[
+      { src: 'pola-rio', cap: 'Rio de Janeiro' },
+      { src: 'pola-estrada', cap: 'Sempre pronto pra estrada' },
+      { src: 'pola-masp', cap: 'Visita ao MASP' },
+      { src: 'pola-mar', cap: 'Olhando o mar' },
+    ]} />
 
     <!-- JORNADA -->
     <section class="sec jornada" id="mentoria">
@@ -1005,6 +1020,10 @@ const faqs = [
   }
   .sobre-title .serif-italic {
     font-size: 1.05em;
+  }
+  .sobre-cred span::before {
+    content: '·';
+    margin-right: 8px;
   }
   .sobre-cred {
     display: flex;
@@ -2089,6 +2108,108 @@ const faqs = [
   @media (max-width: 680px) {
     .hero {
       padding-top: 120px;
+    }
+    /* Situações: carrossel de deslizar */
+    .quem-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 4px var(--gutter) 16px;
+      scrollbar-width: none;
+    }
+    .quem-grid::-webkit-scrollbar {
+      display: none;
+    }
+    .quem-card {
+      flex: 0 0 84%;
+      scroll-snap-align: center;
+      padding: 24px;
+    }
+    .quem-top {
+      margin-bottom: 20px;
+    }
+    .quem-num {
+      font-size: 2.6rem;
+    }
+    /* Passos: cards compactos com ícone ao lado */
+    .jor-grid {
+      gap: 10px;
+    }
+    .jor-card {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      column-gap: 16px;
+      padding: 18px;
+    }
+    .jor-top {
+      grid-row: span 2;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 8px;
+      margin: 0;
+    }
+    .jor-num {
+      font-size: 0.8rem;
+    }
+    .jor-card h3 {
+      font-size: 1.15rem;
+      margin: 2px 0 4px;
+    }
+    .jor-card p {
+      font-size: 0.93rem;
+    }
+    /* Sobre e guia mais enxutos */
+    .sobre-card {
+      padding: 28px 22px;
+    }
+    .story {
+      min-height: 460px;
+    }
+    .guia-visual {
+      padding: 32px;
+    }
+    .livro {
+      width: 180px;
+      padding: 20px;
+    }
+    .livro-titulo {
+      font-size: 1.45rem;
+    }
+    .sobre-cred {
+      gap: 6px;
+    }
+    .sobre-cred span {
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      background: rgba(30, 26, 21, 0.06);
+      font-size: 0.85rem;
+    }
+    .sobre-cred span::before {
+      display: none;
+    }
+    .guia-copy {
+      padding: 28px 22px;
+    }
+    /* FAQ: perguntas primeiro, contato depois */
+    .faq-list {
+      order: 1;
+    }
+    .faq-aside {
+      order: 2;
+      padding: 24px;
+      gap: 20px;
+    }
+    .faq-item summary {
+      padding: 18px;
+      font-size: 1.02rem;
+    }
+    .faq-a {
+      padding: 0 18px 18px;
+    }
+    .modo {
+      padding: 26px 22px;
     }
     .hero-creds {
       flex-wrap: nowrap;

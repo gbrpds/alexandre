@@ -1,0 +1,24 @@
+---
+// Varal de polaroids para telas menores: substitui as polaroids laterais
+// por uma faixa que passa de ponta a ponta, sem deixar vazios nas bordas.
+interface Foto {
+  src: string;
+  cap: string;
+}
+interface Props {
+  fotos: Foto[];
+  reverse?: boolean;
+}
+const { fotos, reverse = false } = Astro.props;
+const lista = [...fotos, ...fotos, ...fotos, ...fotos];
+---
+<div class="pola-strip mq" aria-hidden="true">
+  <div class:list={['mq-track', 'pola-strip-track', reverse && 'is-reverse']} style="--dur:45s">
+    {lista.map((f) => (
+      <figure class="pola">
+        <img src={`/fotos/${f.src}.jpg`} alt="" loading="lazy" width="700" height="700" />
+        <figcaption>{f.cap}</figcaption>
+      </figure>
+    ))}
+  </div>
+</div>

@@ -194,7 +194,7 @@ p {
 /* Cabeçalhos de seção */
 .sec {
   position: relative;
-  padding: clamp(80px, 11vw, 150px) 0;
+  padding: clamp(64px, 11vw, 150px) 0;
 }
 .sec-head {
   max-width: 760px;
@@ -377,29 +377,40 @@ p {
   color: var(--ink-2);
   line-height: 1.1;
 }
+/* Varal de polaroids (só abaixo de 1360px, onde as laterais somem) */
+.pola-strip {
+  display: none;
+  padding: 26px 0 34px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.pola-strip-track > .pola {
+  flex: none;
+  width: 138px;
+  margin: 0 -4px;
+  padding: 7px 7px 30px;
+}
+.pola-strip-track > .pola:nth-child(odd) {
+  --rot: -5deg;
+  translate: 0 8px;
+}
+.pola-strip-track > .pola:nth-child(even) {
+  --rot: 4deg;
+  translate: 0 -6px;
+}
+.pola-strip-track > .pola:nth-child(3n) {
+  --rot: -2deg;
+}
+.pola-strip-track figcaption {
+  font-size: 0.85rem;
+  margin-top: 7px;
+}
 @media (max-width: 1359px) {
   .deco {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin: -12px 0 44px;
-    transform: none !important;
-  }
-  .deco-left.has-pair {
     display: none;
   }
-  .pola,
-  .pola + .pola {
-    width: min(42vw, 180px);
-    margin: 0;
-  }
-  .pola + .pola {
-    margin-top: 26px;
+  .pola-strip {
+    display: block;
   }
 }
 
