@@ -26,10 +26,11 @@
   --font-body: 'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
 
-  --r-sm: 10px;
-  --r-md: 18px;
-  --r-lg: 28px;
-  --r-xl: 40px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-btn: 10px;
 
   --shadow-sm: 0 1px 2px rgba(30, 26, 21, 0.06), 0 4px 14px -6px rgba(30, 26, 21, 0.12);
   --shadow-md: 0 2px 6px rgba(30, 26, 21, 0.06), 0 22px 44px -22px rgba(30, 26, 21, 0.35);
@@ -47,6 +48,7 @@
 }
 
 html {
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: 90px;
 }
@@ -66,7 +68,7 @@ body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -155,7 +157,7 @@ p {
   align-items: center;
   gap: 10px;
   padding: 7px 16px 7px 12px;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   border: 1px solid var(--line);
   background: var(--surface);
   font-family: var(--font-display);
@@ -236,7 +238,7 @@ p {
   justify-content: center;
   gap: 10px;
   padding: 16px 26px;
-  border-radius: 999px;
+  border-radius: var(--r-btn);
   border: 1px solid transparent;
   background: var(--btn-bg);
   color: var(--btn-fg);
@@ -302,48 +304,103 @@ p {
 /* ---------- Revelação no scroll ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  filter: blur(6px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease);
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
   transition-delay: var(--d, 0s);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
-/* ---------- Marquee arrastável ---------- */
+/* ---------- Marquee (animação só com transform, roda na GPU) ---------- */
 .mq {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-}
-.mq::-webkit-scrollbar {
-  display: none;
 }
 .mq-track {
   display: flex;
   width: max-content;
+  animation: mq var(--dur, 60s) linear infinite;
+  will-change: transform;
+}
+.mq-track.is-reverse {
+  animation-direction: reverse;
+}
+.mq:hover .mq-track {
+  animation-play-state: paused;
+}
+@keyframes mq {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
-/* ---------- Desfoque progressivo na base da tela ---------- */
-.pblur {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 64px;
-  z-index: 40;
+/* ---------- Polaroids decorativas nas laterais ---------- */
+.deco {
+  position: absolute;
+  z-index: 1;
+  top: var(--top, 80px);
+  width: var(--w, 220px);
   pointer-events: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  -webkit-mask-image: linear-gradient(to top, #000, transparent);
-  mask-image: linear-gradient(to top, #000, transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
+  will-change: transform;
+}
+.deco-left {
+  left: var(--side, 2.5%);
+}
+.deco-right {
+  right: var(--side, 2.5%);
+}
+.pola {
+  margin: 0;
+  padding: 10px 10px 40px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(30, 26, 21, 0.08), 0 24px 40px -18px rgba(30, 26, 21, 0.45);
+  transform: rotate(var(--rot, -4deg));
+}
+.pola + .pola {
+  width: 82%;
+  margin: -46% 0 0 auto;
+}
+.pola img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.pola figcaption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink-2);
+  line-height: 1.1;
+}
+@media (max-width: 1359px) {
+  .deco {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: -12px 0 44px;
+    transform: none !important;
+  }
+  .deco-left.has-pair {
+    display: none;
+  }
+  .pola,
+  .pola + .pola {
+    width: min(42vw, 180px);
+    margin: 0;
+  }
+  .pola + .pola {
+    margin-top: 26px;
+  }
 }
 
 /* ---------- WhatsApp flutuante ---------- */
@@ -373,12 +430,14 @@ p {
   .reveal {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
   .grifo {
     background-size: 100% 0.36em;
     transition: none;
+  }
+  .mq-track {
+    animation: none;
   }
   .std-dot {
     animation: none;

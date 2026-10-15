@@ -45,7 +45,12 @@ const year = new Date().getFullYear();
       <p>Feito com cuidado entre o Brasil e a Itália.</p>
     </div>
   </div>
-  <p class="ft-giant" aria-hidden="true">Vida Italiana</p>
+  <div class="ft-end" aria-hidden="true">
+    <span class="ft-glow ft-glow-1"></span>
+    <span class="ft-glow ft-glow-2"></span>
+    <span class="ft-glow ft-glow-3"></span>
+    <p class="ft-giant">Vida Italiana <span class="serif-italic">na Prática</span></p>
+  </div>
 </footer>
 
 <style>
@@ -55,6 +60,7 @@ const year = new Date().getFullYear();
     background: var(--dark);
     padding: 90px 0 0;
     color: rgba(255, 255, 255, 0.72);
+    background: linear-gradient(180deg, var(--dark) 0%, var(--dark) 55%, #2a1d12 100%);
     font-size: 0.95rem;
   }
   .ft-grid {
@@ -138,17 +144,67 @@ const year = new Date().getFullYear();
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.45);
   }
+  .ft-end {
+    position: relative;
+    margin-top: 40px;
+    padding: clamp(60px, 9vw, 140px) 0 0;
+    overflow: hidden;
+  }
+  .ft-end::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, var(--dark) 0%, rgba(30, 26, 21, 0) 45%);
+  }
   .ft-giant {
-    margin: 30px 0 -0.22em;
+    z-index: 2;
+  }
+  .ft-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ft-glow-1 {
+    width: 70vw;
+    height: 70vw;
+    left: -20vw;
+    bottom: -45vw;
+    background: radial-gradient(circle, rgba(245, 196, 0, 0.45), transparent 62%);
+  }
+  .ft-glow-2 {
+    width: 60vw;
+    height: 60vw;
+    right: -15vw;
+    bottom: -38vw;
+    background: radial-gradient(circle, rgba(182, 90, 54, 0.55), transparent 62%);
+  }
+  .ft-glow-3 {
+    width: 50vw;
+    height: 40vw;
+    left: 25vw;
+    bottom: -30vw;
+    background: radial-gradient(ellipse, rgba(255, 226, 122, 0.25), transparent 65%);
+  }
+  .ft-giant {
+    position: relative;
+    margin: 0 0 -0.16em;
     text-align: center;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(4rem, 15vw, 15rem);
-    letter-spacing: -0.06em;
+    font-size: clamp(2.6rem, 8.2vw, 9.5rem);
+    letter-spacing: -0.055em;
     line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
     white-space: nowrap;
+    background: linear-gradient(180deg, #fff 0%, #fff1b8 35%, var(--accent) 70%, rgba(245, 196, 0, 0.35) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ft-giant .serif-italic {
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
   @media (max-width: 860px) {
     .ft-grid {

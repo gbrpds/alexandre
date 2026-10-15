@@ -1,0 +1,32 @@
+---
+// Grupo de polaroids decorativas nas laterais da seção.
+// No desktop fica solto na margem (com parallax); no celular vira uma fileira.
+interface Foto {
+  src: string;
+  cap: string;
+  rot?: number;
+}
+interface Props {
+  fotos: Foto[];
+  side?: 'left' | 'right';
+  top?: string;
+  offset?: string;
+  width?: number;
+  speed?: number;
+  pair?: boolean;
+}
+const { fotos, side = 'right', top = '80px', offset = '-48px', width = 175, speed = 0.08, pair = false } = Astro.props;
+---
+<div
+  class:list={['deco', `deco-${side}`, pair && 'has-pair']}
+  style={`--top:${top};--side:${offset};--w:${width}px`}
+  data-speed={speed}
+  aria-hidden="true"
+>
+  {fotos.map((f) => (
+    <figure class="pola" style={`--rot:${f.rot ?? -4}deg`}>
+      <img src={`/fotos/${f.src}.jpg`} alt="" loading="lazy" width="800" height="800" />
+      <figcaption>{f.cap}</figcaption>
+    </figure>
+  ))}
+</div>

@@ -14,3 +14,4 @@ Para trocar, basta substituir o arquivo mantendo o mesmo nome.
 | `testi-bg.jpg` | Fundo da seção de depoimentos | Horizontal, 1920×1100 |
 | `galeria-01..08.jpg` | Galeria "A Itália que espera por você" | Vertical 3:4, 900×1200 |
 | `cta-bg.jpg` | Fundo do formulário final | Horizontal, 1920×1100 |
+| `pola-01..14.jpg` | Polaroids nas laterais das seções (cada uma tem uma legenda no código, em `src/pages/index.astro`) | Quadrada, 800×800 |

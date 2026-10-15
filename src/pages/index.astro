@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Icon from '../components/Icon.astro';
+import Polaroid from '../components/Polaroid.astro';
 import { SITE, waLink } from '../config';
 
 const temas = [
@@ -11,12 +12,12 @@ const temas = [
 ];
 
 const vitrine = [
-  { img: 'card-aluguel', titulo: 'Aluguel na Itália', texto: 'O proprietário italiano não aluga para quem não conhece. Veja o que ele exige e como chegar com a chave na mão.', href: '/blog/como-alugar-casa-na-italia' },
-  { img: 'card-custo', titulo: 'Custo de vida real', texto: 'Aluguel, contas, mercado e aquecimento: os números de uma família na Lombardia, sem romantismo.', href: '/blog/custo-de-vida-na-italia' },
-  { img: 'card-reserva', titulo: 'Reserva financeira', texto: 'Por que 5 mil euros não bastam, e quanto juntar sozinho, em casal ou com filhos.', href: '/blog/reserva-financeira-para-morar-na-italia' },
-  { img: 'card-documentos', titulo: 'Documentos e residência', texto: 'A ordem certa: contrato, codice fiscale, permesso, residência, médico e identidade.', href: '/blog/residencia-na-italia-primeiros-documentos' },
-  { img: 'card-monza', titulo: 'Morar em Monza', texto: 'Clima de interior e o quintal em Milão. A cidade que me acolheu duas vezes.', href: '/blog/morar-em-monza' },
-  { img: 'card-concurso', titulo: 'Concurso público', texto: 'Estabilidade e tempo com a família: o caminho que pouca gente conhece.', href: '/blog/concurso-publico-na-italia' },
+  { img: 'card-aluguel', titulo: 'Aluguel antes do embarque', texto: 'Eu faço a ponte com imobiliárias e proprietários para você chegar com o contrato encaminhado.' },
+  { img: 'card-monza', titulo: 'A cidade certa para você', texto: 'Escolhida pelo seu perfil, trabalho e rede de apoio, não pela moda do Instagram.' },
+  { img: 'card-reserva', titulo: 'Reserva na medida', texto: 'Quanto juntar para atravessar os primeiros meses com paz, sem expor a sua família.' },
+  { img: 'card-documentos', titulo: 'Documentos na ordem certa', texto: 'Codice fiscale, permesso, residência e médico de família, sem passos no escuro.' },
+  { img: 'galeria-03', titulo: 'Os filhos na escola', texto: 'Idioma, matrícula e adaptação: o que eu vivi com os meus três, para os seus.' },
+  { img: 'galeria-05', titulo: 'Chegada acompanhada', texto: 'Na Questura, na prefeitura e na rua, com alguém que fala a língua deles ao seu lado.' },
 ];
 
 const situacoes = [
@@ -128,29 +129,32 @@ const faqs = [
     </section>
 
     <!-- FAIXA DE TEMAS -->
-    <div class="topics" data-marquee="48" role="group" aria-label="Temas da mentoria">
-      <div class="mq-track topics-track" aria-hidden="true">
+    <div class="topics mq" role="group" aria-label="Temas da mentoria">
+      <div class="mq-track topics-track" style="--dur:55s" aria-hidden="true">
         {[...temas, ...temas].map((t) => <span class="topic">{t}<span class="topic-sep">◆</span></span>)}
       </div>
     </div>
 
     <!-- VITRINE -->
     <section class="vitrine">
+      <Polaroid side="left" pair top="40px" fotos={[{ src: 'pola-01', cap: 'Duomo de Milão', rot: -7 }]} />
+      <Polaroid side="right" top="110px" speed={0.12} fotos={[{ src: 'pola-02', cap: 'Parque de Monza', rot: 6 }]} />
       <div class="container sec-head center reveal">
-        <p class="std-tag"><span class="std-dot"></span> A Itália real em evidência</p>
-        <h2 class="sec-title">Tudo o que ninguém te conta <span class="grifo">no Instagram</span>.</h2>
-        <p class="sec-lede">Números, documentos e histórias de quem vive o chão italiano há mais de duas décadas.</p>
+        <p class="std-tag"><span class="std-dot"></span> O que a mentoria cobre</p>
+        <h2 class="sec-title">Tudo o que derruba uma família na chegada, <span class="grifo">resolvido antes</span>.</h2>
+        <p class="sec-lede">Os pontos que mais fazem brasileiros voltarem para casa, e como eu cuido de cada um com você.</p>
       </div>
-      <div class="mq vitrine-mq" data-marquee="38">
-        <div class="mq-track vitrine-track">
+      <div class="mq vitrine-mq">
+        <div class="mq-track vitrine-track" style="--dur:70s">
           {[...vitrine, ...vitrine].map((c, i) => (
-            <a class="v-card" href={c.href} aria-hidden={i >= vitrine.length ? 'true' : undefined} tabindex={i >= vitrine.length ? -1 : undefined}>
+            <a class="v-card" href={waLink()} aria-hidden={i >= vitrine.length ? 'true' : undefined} tabindex={i >= vitrine.length ? -1 : undefined}>
               <img src={`/fotos/${c.img}.jpg`} alt="" loading="lazy" width="900" height="1200" />
               <span class="v-veil"></span>
               <div class="v-text">
+                <span class="v-num">0{(i % vitrine.length) + 1}</span>
                 <h3>{c.titulo}</h3>
                 <p>{c.texto}</p>
-                <span class="v-link">Ler artigo <Icon name="arrow" size={15} /></span>
+                <span class="v-link">Falar sobre isso <Icon name="arrow" size={15} /></span>
               </div>
             </a>
           ))}
@@ -161,6 +165,8 @@ const faqs = [
     <!-- QUEM CHEGA AQUI -->
     <section class="sec quem">
       <div class="container">
+        <Polaroid side="left" pair top="45%" fotos={[{ src: 'pola-03', cap: 'Ligúria, 2004', rot: -6 }]} />
+        <Polaroid top="90px" speed={0.12} fotos={[{ src: 'pola-04', cap: 'O primeiro inverno', rot: 6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Quem chega até mim</p>
           <h2 class="sec-title">Talvez você se reconheça em <span class="grifo">alguma dessas situações</span>.</h2>
@@ -183,6 +189,8 @@ const faqs = [
 
     <!-- SOBRE -->
     <section class="sec sobre" id="historia">
+      <Polaroid side="left" pair top="18%" speed={0.12} fotos={[{ src: 'pola-13', cap: 'São Paulo, 2003', rot: -5 }]} />
+      <Polaroid top="62%" fotos={[{ src: 'pola-14', cap: 'Os três, pequenos', rot: 6 }]} />
       <div class="container sobre-grid">
         <div class="sobre-card reveal">
           <span class="sobre-dots" aria-hidden="true"></span>
@@ -193,7 +201,7 @@ const faqs = [
           <p>Vim sozinho, sem falar italiano, com 2 euros no bolso. Bati em mais de cem portas, passei frio e solidão, e reuni a minha família numa casa de 300 euros na montanha. Hoje, meus três filhos são adultos realizados na Itália. <strong>Eu estendo a mão para você, como alguém um dia fez comigo.</strong></p>
           <div class="sobre-cta">
             <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" size={16} /> Falar com o Alexandre</a>
-            <a href="/blog" class="btn btn-ghost">Ler o blog <Icon name="arrow" size={16} /></a>
+            <a href="#mentoria" class="btn btn-ghost">Como funciona a mentoria <Icon name="arrow" size={16} /></a>
           </div>
         </div>
         <div class="story reveal" style="--d:.15s" data-story>
@@ -229,6 +237,8 @@ const faqs = [
     <!-- JORNADA -->
     <section class="sec jornada" id="mentoria">
       <div class="container">
+        <Polaroid top="120px" speed={0.1} fotos={[{ src: 'pola-05', cap: 'Trem Monza–Milão', rot: 6 }]} />
+        <Polaroid side="left" pair top="55%" speed={0.14} fotos={[{ src: 'pola-06', cap: 'Café no balcão', rot: -7 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Como a mentoria funciona</p>
           <h2 class="sec-title">Seis passos. <span class="grifo">Nenhum no escuro.</span></h2>
@@ -266,6 +276,7 @@ const faqs = [
     <!-- DIFERENCIAIS -->
     <section class="sec dif">
       <div class="container">
+        <Polaroid top="40px" fotos={[{ src: 'pola-07', cap: 'A chave na mão', rot: 6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> O que distingue</p>
           <h2 class="sec-title">O que só quem vive aqui <span class="grifo">consegue fazer</span>.</h2>
@@ -307,6 +318,8 @@ const faqs = [
           <path d="M-100 740 C 420 600, 800 920, 1200 720 S 1680 660, 1700 860" />
         </svg>
       </div>
+      <Polaroid side="left" pair top="38%" speed={0.14} fotos={[{ src: 'pola-08', cap: 'Nossa primeira casa', rot: -8 }]} />
+      <Polaroid top="58%" speed={0.1} fotos={[{ src: 'pola-09', cap: 'Família reunida', rot: 7 }]} />
       <div class="container obj-inner">
         <div class="sec-head center reveal">
           <p class="std-tag"><span class="std-dot"></span> Antes da sua decisão</p>
@@ -358,8 +371,8 @@ const faqs = [
             </div>
           )}
         </div>
-        <div class="mq testi-mq" data-marquee="40">
-          <div class="mq-track testi-track">
+        <div class="mq testi-mq">
+          <div class="mq-track testi-track" style="--dur:80s">
             {[...depoimentos, ...depoimentos].map((d, i) => (
               <article class="t-card" aria-hidden={i >= depoimentos.length ? 'true' : undefined}>
                 <p>“{d}”</p>
@@ -408,6 +421,7 @@ const faqs = [
     <!-- FAQ -->
     <section class="sec faq" id="faq">
       <div class="container">
+        <Polaroid side="left" top="30%" fotos={[{ src: 'pola-10', cap: 'Aperitivo em Monza', rot: -6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Dúvidas frequentes</p>
           <h2 class="sec-title">Perguntas <span class="grifo">mais comuns</span>.</h2>
@@ -444,17 +458,30 @@ const faqs = [
 
     <!-- GALERIA -->
     <section class="galeria">
+      <Polaroid side="left" pair top="10px" fotos={[{ src: 'pola-11', cap: 'Lago de Como', rot: -6 }]} />
+      <Polaroid top="40px" speed={0.12} fotos={[{ src: 'pola-12', cap: 'Centro de Monza', rot: 5 }]} />
       <div class="container sec-head center reveal">
         <p class="std-tag"><span class="std-dot"></span> O chão real</p>
         <h2 class="sec-title">A Itália que <span class="grifo">espera por você</span>.</h2>
       </div>
-      <div class="mq gal-mq" data-marquee="44">
-        <div class="mq-track gal-track">
-          {[...Array(16)].map((_, i) => (
-            <figure class="gal-item" aria-hidden={i >= 8 ? 'true' : undefined}>
-              <img src={`/fotos/galeria-0${(i % 8) + 1}.jpg`} alt="" loading="lazy" width="900" height="1200" />
-            </figure>
-          ))}
+      <div class="gal-rows">
+        <div class="mq gal-mq">
+          <div class="mq-track gal-track" style="--dur:90s">
+            {[1, 2, 3, 4, 1, 2, 3, 4].map((n, i) => (
+              <figure class="gal-item" aria-hidden={i >= 4 ? 'true' : undefined}>
+                <img src={`/fotos/galeria-0${n}.jpg`} alt="" loading="lazy" width="900" height="1200" />
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div class="mq gal-mq">
+          <div class="mq-track gal-track is-reverse" style="--dur:100s">
+            {[5, 6, 7, 8, 5, 6, 7, 8].map((n, i) => (
+              <figure class="gal-item gal-item--wide" aria-hidden={i >= 4 ? 'true' : undefined}>
+                <img src={`/fotos/galeria-0${n}.jpg`} alt="" loading="lazy" width="900" height="1200" />
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -510,8 +537,8 @@ const faqs = [
           <p class="form-note" role="status" aria-live="polite"></p>
         </form>
       </div>
-      <div class="cta-mq" data-marquee="52">
-        <div class="mq-track cta-track" aria-hidden="true">
+      <div class="cta-mq mq">
+        <div class="mq-track cta-track" style="--dur:60s" aria-hidden="true">
           {[...temas, ...temas].map((t) => <span class="cta-item">{t}<span>◆</span></span>)}
         </div>
       </div>
@@ -662,7 +689,7 @@ const faqs = [
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    border-radius: 999px;
+    border-radius: var(--r-sm);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(10px);
@@ -819,9 +846,23 @@ const faqs = [
   .vitrine {
     padding: clamp(80px, 11vw, 140px) 0 clamp(60px, 8vw, 100px);
   }
+  .vitrine {
+    position: relative;
+    overflow: hidden;
+  }
   .vitrine-track {
-    gap: 20px;
     padding: 10px 0;
+  }
+  .vitrine-track > * {
+    margin-right: 20px;
+  }
+  .v-num {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 4px;
   }
   .v-card {
     position: relative;
@@ -879,6 +920,14 @@ const faqs = [
   /* ================= QUEM ================= */
   .quem {
     padding-top: clamp(40px, 6vw, 80px);
+    overflow: hidden;
+  }
+  .jornada,
+  .dif {
+    overflow: hidden;
+  }
+  .faq {
+    overflow-x: clip;
   }
   .quem-grid {
     display: grid;
@@ -936,7 +985,7 @@ const faqs = [
     font-weight: 600;
     text-decoration: none;
     padding: 10px 16px;
-    border-radius: 999px;
+    border-radius: var(--r-btn);
     background: var(--sand);
     transition: background 0.3s;
   }
@@ -947,6 +996,7 @@ const faqs = [
   /* ================= SOBRE ================= */
   .sobre {
     padding-top: clamp(40px, 6vw, 80px);
+    overflow: hidden;
   }
   .sobre-grid {
     display: grid;
@@ -1034,9 +1084,8 @@ const faqs = [
     right: 20px;
     bottom: 22px;
     padding: 12px 16px;
-    border-radius: 14px;
-    background: rgba(30, 26, 21, 0.55);
-    backdrop-filter: blur(10px);
+    border-radius: var(--r-sm);
+    background: rgba(30, 26, 21, 0.72);
     color: #fff;
     font-family: var(--font-display);
     font-weight: 500;
@@ -1390,7 +1439,6 @@ const faqs = [
     background-size: 64px 64px;
     -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
     mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
-    animation: gridMove 30s linear infinite;
   }
   @keyframes gridMove {
     to {
@@ -1399,22 +1447,21 @@ const faqs = [
   }
   .obj-glow {
     position: absolute;
-    width: 520px;
-    height: 520px;
+    width: 800px;
+    height: 800px;
     border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.35;
     animation: float 14s ease-in-out infinite alternate;
+    will-change: transform;
   }
   .obj-glow-1 {
-    background: var(--accent);
-    top: -160px;
-    left: -120px;
+    background: radial-gradient(circle, rgba(245, 196, 0, 0.28), transparent 65%);
+    top: -320px;
+    left: -280px;
   }
   .obj-glow-2 {
-    background: var(--terra);
-    bottom: -200px;
-    right: -120px;
+    background: radial-gradient(circle, rgba(182, 90, 54, 0.35), transparent 65%);
+    bottom: -360px;
+    right: -280px;
     animation-delay: -7s;
   }
   @keyframes float {
@@ -1433,7 +1480,6 @@ const faqs = [
     stroke: rgba(245, 196, 0, 0.18);
     stroke-width: 1.2;
     stroke-dasharray: 8 10;
-    animation: dash 40s linear infinite;
   }
   @keyframes dash {
     to {
@@ -1466,10 +1512,9 @@ const faqs = [
   .bubble {
     max-width: 520px;
     padding: 14px 18px;
-    border-radius: 22px 22px 6px 22px;
+    border-radius: 14px 14px 4px 14px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(10px);
     font-size: 1.02rem;
   }
   .msg-avatar {
@@ -1492,7 +1537,7 @@ const faqs = [
     font-weight: 600;
   }
   .bubble-ale {
-    border-radius: 22px 22px 22px 6px;
+    border-radius: 14px 14px 14px 4px;
     background: var(--accent);
     color: var(--ink);
     border: 0;
@@ -1502,7 +1547,7 @@ const faqs = [
     display: inline-flex;
     gap: 5px;
     padding: 16px 18px;
-    border-radius: 22px 22px 22px 6px;
+    border-radius: 14px 14px 14px 4px;
     background: rgba(255, 255, 255, 0.1);
   }
   .typing span {
@@ -1594,7 +1639,7 @@ const faqs = [
     align-items: center;
     gap: 8px;
     padding: 7px 16px;
-    border-radius: 999px;
+    border-radius: var(--r-sm);
     background: rgba(245, 196, 0, 0.14);
     color: var(--accent);
     font-family: var(--font-display);
@@ -1655,8 +1700,10 @@ const faqs = [
     position: relative;
   }
   .testi-track {
-    gap: 18px;
     padding: 6px 0;
+  }
+  .testi-track > * {
+    margin-right: 18px;
   }
   .t-card {
     flex: none;
@@ -1667,7 +1714,6 @@ const faqs = [
     border-radius: var(--r-md);
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
   }
   .t-card p {
     flex: 1;
@@ -1744,7 +1790,7 @@ const faqs = [
     flex-direction: column;
     justify-content: space-between;
     padding: 26px;
-    border-radius: 6px 18px 18px 6px;
+    border-radius: 4px 10px 10px 4px;
     background: var(--accent);
     color: var(--ink);
     box-shadow:
@@ -1895,19 +1941,29 @@ const faqs = [
 
   /* ================= GALERIA ================= */
   .galeria {
+    position: relative;
+    overflow: hidden;
     padding: 0 0 clamp(80px, 10vw, 130px);
   }
-  .gal-track {
+  .gal-rows {
+    display: grid;
     gap: 18px;
+  }
+  .gal-track > * {
+    margin-right: 18px;
   }
   .gal-item {
     flex: none;
-    width: 260px;
-    aspect-ratio: 3 / 4;
+    width: clamp(280px, 30vw, 440px);
+    aspect-ratio: 4 / 5;
     margin: 0;
     border-radius: var(--r-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
+  }
+  .gal-item--wide {
+    width: clamp(360px, 42vw, 620px);
+    aspect-ratio: 16 / 10;
   }
   .gal-item img {
     width: 100%;
@@ -1981,7 +2037,7 @@ const faqs = [
     font: inherit;
     font-family: var(--font-body);
     padding: 14px 16px;
-    border-radius: 12px;
+    border-radius: var(--r-sm);
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.92);
     color: var(--ink);
