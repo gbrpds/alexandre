@@ -220,3 +220,9 @@ Base de conhecimento para o site e o blog. Tudo aqui foi extraído das falas do 
 - [ ] Fotos, logo, cores, redes sociais, WhatsApp
 - [ ] Autorização do Rafael e da Luciana para uso no site
 - [ ] Destino do lead (WhatsApp direto ou formulário de qualificação)
+
+## 12. Identidade visual
+
+- **Amarelo de destaque** (já usado nas thumbnails dos reels): amarelo-ouro vibrante, aprox. `#F5C400` [CONFIRMAR código exato]. Nas thumbs: texto branco em caixa alta, palavra-chave em amarelo, emoji da bandeira italiana.
+- Referências de LP: estilo editorial com bordas de papel rasgado, polaroids, fotos sobrepostas, títulos serifados com palavra em destaque, etapas com números grandes, caixa de oferta destacada.
+- Cuidado de contraste: amarelo funciona sobre fundo escuro ou foto, ou como "marca-texto" atrás de palavras escuras. Nunca texto amarelo sobre fundo creme ou branco.
