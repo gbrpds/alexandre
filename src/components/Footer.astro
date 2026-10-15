@@ -1,68 +1,161 @@
 ---
-import { SITE } from '../config';
+import Icon from './Icon.astro';
+import { SITE, waLink } from '../config';
 const year = new Date().getFullYear();
 ---
-<footer class="site-footer">
-  <div class="container inner">
-    <div>
-      <p class="name">Vida Italiana <em>na Prática</em></p>
-      <p class="tag">Mentoria para famílias brasileiras que querem imigrar para a Itália com segurança. Direto de Monza, há 23 anos vivendo o chão real.</p>
+<footer class="ft on-dark">
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="/" class="ft-logo"><span class="logo-mark">VI</span> Vida Italiana <span class="serif-italic">na Prática</span></a>
+        <p>Mentoria individual para famílias brasileiras que querem imigrar para a Itália com segurança. Direto de Monza, há 23 anos vivendo o chão real.</p>
+        <div class="ft-social">
+          {SITE.instagram && <a href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={18} /></a>}
+          {SITE.youtube && <a href={SITE.youtube} target="_blank" rel="noopener" aria-label="YouTube"><Icon name="youtube" size={18} /></a>}
+        </div>
+      </div>
+      <div>
+        <h3 class="ft-head">A mentoria</h3>
+        <ul>
+          <li><a href="/#historia">Minha história</a></li>
+          <li><a href="/#mentoria">Como funciona</a></li>
+          <li><a href="/#depoimentos">Depoimentos</a></li>
+          <li><a href="/#faq">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ft-head">Conteúdo</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/blog/custo-de-vida-na-italia">Custo de vida na Itália</a></li>
+          <li><a href="/blog/como-alugar-casa-na-italia">Como alugar casa</a></li>
+          <li><a href="/#guia">Guia digital</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ft-head">Contato</h3>
+        <ul>
+          <li><a href={waLink()}><Icon name="whatsapp" size={14} /> WhatsApp</a></li>
+          <li><span><Icon name="pin" size={14} /> Monza, Lombardia, Itália</span></li>
+        </ul>
+      </div>
     </div>
-    <nav aria-label="Rodapé">
-      <a href="/#historia">Minha história</a>
-      <a href="/#mentoria">Mentoria</a>
-      <a href="/#guia">Guia digital</a>
-      <a href="/blog">Blog</a>
-      <a href="/#contato">Contato</a>
-      {SITE.instagram && <a href={SITE.instagram} rel="noopener" target="_blank">Instagram</a>}
-      {SITE.youtube && <a href={SITE.youtube} rel="noopener" target="_blank">YouTube</a>}
-    </nav>
+    <div class="ft-bottom">
+      <p>© {year} Vida Italiana na Prática · Alexandre</p>
+      <p>Feito com cuidado entre o Brasil e a Itália.</p>
+    </div>
   </div>
-  <div class="container legal">© {year} Vida Italiana na Prática · Alexandre</div>
+  <p class="ft-giant" aria-hidden="true">Vida Italiana</p>
 </footer>
 
 <style>
-  .site-footer {
-    background: var(--ink);
-    color: rgba(255, 255, 255, 0.78);
-    padding: 64px 0 28px;
+  .ft {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    padding: 90px 0 0;
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.95rem;
   }
-  .inner {
+  .ft-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .ft-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+  .ft-logo .serif-italic {
+    color: var(--accent);
+  }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+  .ft-brand p {
+    max-width: 40ch;
+  }
+  .ft-social {
+    display: flex;
+    gap: 10px;
+  }
+  .ft-social a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .ft-head {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  ul a,
+  ul span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  ul a:hover {
+    color: var(--accent);
+  }
+  .ft-bottom {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 32px;
-  }
-  .name {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 0.4em;
-  }
-  .name em {
-    color: var(--yellow);
-  }
-  .tag {
-    max-width: 44ch;
-  }
-  nav {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px 40px;
-    align-content: start;
-  }
-  nav a {
-    text-decoration: none;
-  }
-  nav a:hover {
-    color: var(--yellow);
-  }
-  .legal {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    gap: 12px;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .ft-giant {
+    margin: 30px 0 -0.22em;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 15vw, 15rem);
+    letter-spacing: -0.06em;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+  }
+  @media (max-width: 860px) {
+    .ft-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ft-brand {
+      grid-column: 1 / -1;
+    }
   }
 </style>

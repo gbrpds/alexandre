@@ -1,369 +1,591 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
-import Torn from '../components/Torn.astro';
-import { SITE } from '../config';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink } from '../config';
 
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+const temas = [
+  'Aluguel na Itália', 'Codice fiscale', 'Permesso di soggiorno', 'Residência', 'Reserva financeira',
+  'Escolha da cidade', 'Escola dos filhos', 'Médico de família', 'Custo de vida', 'Concurso público',
+  'Monza', 'Milão', 'Lombardia', 'Cidadania italiana', 'Visto',
+];
 
-const dores = [
-  'Nenhum proprietário italiano quer alugar para quem ele não conhece.',
-  'Você não sabe quanto dinheiro precisa levar, e 5 mil euros não bastam.',
-  'Codice fiscale, permesso, residência: ninguém explica a ordem certa.',
-  'A cidade escolhida pelo Instagram nem sempre é a cidade certa para você.',
-  'A dúvida se os filhos vão se adaptar na escola e no idioma.',
-  'O medo de vender tudo e voltar com uma mão na frente e outra atrás.',
+const vitrine = [
+  { img: 'card-aluguel', titulo: 'Aluguel na Itália', texto: 'O proprietário italiano não aluga para quem não conhece. Veja o que ele exige e como chegar com a chave na mão.', href: '/blog/como-alugar-casa-na-italia' },
+  { img: 'card-custo', titulo: 'Custo de vida real', texto: 'Aluguel, contas, mercado e aquecimento: os números de uma família na Lombardia, sem romantismo.', href: '/blog/custo-de-vida-na-italia' },
+  { img: 'card-reserva', titulo: 'Reserva financeira', texto: 'Por que 5 mil euros não bastam, e quanto juntar sozinho, em casal ou com filhos.', href: '/blog/reserva-financeira-para-morar-na-italia' },
+  { img: 'card-documentos', titulo: 'Documentos e residência', texto: 'A ordem certa: contrato, codice fiscale, permesso, residência, médico e identidade.', href: '/blog/residencia-na-italia-primeiros-documentos' },
+  { img: 'card-monza', titulo: 'Morar em Monza', texto: 'Clima de interior e o quintal em Milão. A cidade que me acolheu duas vezes.', href: '/blog/morar-em-monza' },
+  { img: 'card-concurso', titulo: 'Concurso público', texto: 'Estabilidade e tempo com a família: o caminho que pouca gente conhece.', href: '/blog/concurso-publico-na-italia' },
+];
+
+const situacoes = [
+  { titulo: 'Você tem a cidadania, ou está quase, e não sabe por onde começar.', texto: 'O passaporte está chegando, o sonho é antigo, mas ninguém te explicou a ordem certa: cidade, casa, documentos, trabalho.' },
+  { titulo: 'Você já pesquisou demais e está perdido em informação solta.', texto: 'Cada vídeo diz uma coisa. Você quer números reais e alguém que viva o chão da Itália todos os dias.' },
+  { titulo: 'Você já tem um plano e quer validá-lo antes de vender tudo.', texto: 'Antes de colocar o patrimônio da família em jogo, quer que alguém experiente aponte as falhas do seu projeto.' },
 ];
 
 const historia = [
-  { ano: '2003', titulo: 'Eu tinha tudo, menos segurança', texto: 'Um sequestro relâmpago e um assalto à mão armada em São Paulo. Bom emprego, dois carros, escola particular, e o medo de ver meus três filhos crescerem assim.' },
-  { ano: '2003', titulo: 'Cheguei com 2 euros no bolso', texto: 'Deixei todo o dinheiro com a Clarissa e as crianças. A mala se perdeu e passei a primeira noite no saguão do aeroporto de Nice.' },
-  { ano: '2003', titulo: 'Mais de 100 portas fechadas', texto: 'Crise pós-euro. Andei a pé de Monza até Milão batendo em fábricas e restaurantes. Lavei prato, cortei grama, dormi com cinco cobertores num apartamento sem aquecimento.' },
-  { ano: '2004', titulo: 'A família reunida na montanha', texto: 'Depois de sete meses longe, alugamos uma casa de 300 euros numa vila de 90 habitantes. Uma moto velha, o eBay e a comunidade local nos ajudaram a atravessar o primeiro inverno.' },
-  { ano: 'Hoje', titulo: 'A raiz deu frutos', texto: 'Sou funcionário público em Monza. Meus filhos são trilíngues, trabalham e estão comprando suas próprias casas. Agora eu estendo a mão, como alguém um dia fez comigo.' },
+  { ano: '2003', titulo: 'Tinha tudo, menos segurança', texto: 'Um sequestro relâmpago e um assalto à mão armada em São Paulo.' },
+  { ano: '2003', titulo: 'Cheguei com 2 euros', texto: 'Primeira noite no saguão do aeroporto de Nice, mais de 100 portas fechadas.' },
+  { ano: '2004', titulo: 'A casa na montanha', texto: 'A família reunida numa vila de 90 habitantes. Uma moto velha e o eBay.' },
+  { ano: 'Hoje', titulo: 'A raiz deu frutos', texto: 'Funcionário público em Monza. Três filhos trilíngues, construindo a própria vida.' },
+];
+
+const slides = [
+  { img: 'polaroid-2003', legenda: '2003 · Monza, sem falar italiano' },
+  { img: 'polaroid-montanha', legenda: '2004 · A casa na montanha' },
+  { img: 'polaroid-familia', legenda: 'Nós cinco, uma rocha' },
+  { img: 'alexandre-sobre', legenda: 'Hoje · Monza, Lombardia' },
 ];
 
 const etapas = [
-  { titulo: 'Diagnóstico do seu perfil', texto: 'Um questionário e uma conversa sem pressa para entender a sua família, a sua renda, os seus documentos e o seu momento.' },
-  { titulo: 'A cidade certa para você', texto: 'Não a da moda: a que combina com o seu perfil, o seu trabalho e a sua rede de apoio. Às vezes eu digo que não é Monza.' },
-  { titulo: 'Reserva e documentos', texto: 'Quanto juntar, o que tirar ainda no Brasil e a ordem certa da burocracia. Engenharia documental antes da mala.' },
-  { titulo: 'O aluguel antes do embarque', texto: 'Eu faço a ponte com imobiliárias e proprietários que confiam no meu nome, para você embarcar com o contrato encaminhado.' },
-  { titulo: 'Chegada acompanhada', texto: 'Questura, residência, codice fiscale, médico de família. Eu estou do seu lado nos primeiros passos, falando a língua deles.' },
-  { titulo: 'Integração e rede', texto: 'Apresento você a quem importa: corretor, proprietário, vizinhos. Na Itália, as relações se criam assim.' },
+  { icon: 'users', titulo: 'Diagnóstico do perfil', texto: 'Um questionário e uma conversa sem pressa sobre a sua família, renda, documentos e momento.' },
+  { icon: 'compass', titulo: 'A cidade certa', texto: 'Não a da moda: a que combina com o seu perfil, o seu trabalho e a sua rede de apoio.' },
+  { icon: 'wallet', titulo: 'Reserva e documentos', texto: 'Quanto juntar, o que tirar ainda no Brasil e a ordem certa da burocracia.' },
+  { icon: 'key', titulo: 'Aluguel antes do embarque', texto: 'Eu faço a ponte com imobiliárias e proprietários que confiam no meu nome.' },
+  { icon: 'plane', titulo: 'Chegada acompanhada', texto: 'Questura, residência, codice fiscale e médico de família, comigo ao seu lado.' },
+  { icon: 'home', titulo: 'Integração e rede', texto: 'Apresento você a quem importa. Na Itália, as relações se criam assim.' },
+];
+
+const diferenciais = [
+  { icon: 'key', titulo: 'Aluguel encaminhado antes do embarque', texto: 'O proprietário italiano é conservador e desconfiado. Eu pesquiso em média 50 apartamentos por contrato e coloco o meu nome e a minha credibilidade na mesa por famílias preparadas.' },
+  { icon: 'clock', titulo: '23 anos de chão real', texto: 'Eu passei por tudo: frio, solidão, crise, burocracia. Não ensino teoria de internet, ensino o que vivi e o que vejo toda semana com as famílias que acompanho.' },
+  { icon: 'compass', titulo: 'A cidade certa, mesmo que não seja Monza', texto: 'Já recusei uma família que insistia em vir para Monza porque toda a estrutura de apoio dela estava em outra região. A cidade certa é a que combina com você.' },
+  { icon: 'shield', titulo: 'Ao seu lado na burocracia', texto: 'Na Questura, na prefeitura, no codice fiscale. Falando a língua deles e do mesmo nível. Com alguém ao lado, a porta que estava fechada se abre.' },
+];
+
+const conversas = [
+  { p: 'Tenho medo de vender tudo, chegar aí e não dar certo.', a: 'Esse medo é sinal de responsabilidade, e eu senti o mesmo. Por isso a gente começa pelo planejamento: reserva, documentos e casa antes da mala. Ninguém que respeita a sua família vai te mandar vir no susto.' },
+  { p: 'Dá mesmo para alugar um apartamento ainda estando no Brasil?', a: 'É o que eu mais faço. Converso com imobiliárias e proprietários, explico quem é a sua família e coloco o meu nome na mesa. O Rafael e a Luciana embarcaram com o contrato encaminhado.' },
+  { p: 'E se a cidade que eu escolhi não for a certa para nós?', a: 'Então eu vou te dizer, com toda a sinceridade. A escolha parte do seu perfil, do seu trabalho e da sua rede de apoio, não do que está na moda no Instagram.' },
+];
+
+const depoimentos = [
+  'Quando você falou que o apartamento era nosso, em quatro horas eu já tinha comprado a passagem. Sem isso, a gente não embarcaria.',
+  'Se não tivesse encontrado você, a gente estaria ainda no Brasil, ainda estudando como viabilizar tudo.',
+  'O teu trabalho é humanizado, é sério, tem um lado emocional. Você tem a impressão de que está com uma mão te ajudando a caminhar.',
+  'A nossa família olha para você e sente confiança. Parece um tio, um pai ou um irmão que está lá para te receber.',
+  'A segurança não é só para quem vem. É para quem fica também.',
+  'As portas que você está abrindo para a gente, isso é impagável.',
+  'Achei que o trem de Monza para Milão custaria uns 12 euros. Paguei 2,60.',
 ];
 
 const faqs = [
   { q: 'A mentoria é em grupo ou individual?', a: 'Individual. Cada família tem as suas chamadas comigo, desde o planejamento no Brasil até os primeiros passos na Itália.' },
   { q: 'Preciso ter cidadania italiana?', a: 'Não necessariamente. Existem dois caminhos legais: a cidadania ou um visto bem amarrado. O que não dá é vir sem chão jurídico, porque aluguel, escola e saúde exigem residência legal.' },
-  { q: 'Você garante o aluguel?', a: 'Eu não prometo milagre: eu coloco o meu nome e a minha credibilidade na mesa por famílias preparadas. Por isso a preparação, com reserva e documentos em ordem, é parte da mentoria.' },
-  { q: 'Só atende quem quer morar em Monza?', a: 'Não. Eu conheço muito bem o norte da Itália e indico a cidade pelo seu perfil. Se a sua estrutura de apoio estiver em outra região, eu vou te dizer para ir para lá.' },
+  { q: 'Você garante o aluguel?', a: 'Eu não prometo milagre: eu coloco o meu nome e a minha credibilidade na mesa por famílias preparadas. Por isso a preparação, com reserva e documentos em ordem, faz parte da mentoria.' },
+  { q: 'Só atende quem quer morar em Monza?', a: 'Não. Eu conheço bem o norte da Itália e indico a cidade pelo seu perfil. Se a sua estrutura de apoio estiver em outra região, eu vou te dizer para ir para lá.' },
   { q: 'Quanto dinheiro preciso para me mudar?', a: 'Como meta mínima: 10 mil euros sozinho, 15 mil em casal e 20 mil com filhos. Na mentoria, a gente calcula a reserva exata da sua família.' },
   { q: 'Já tenho um plano. A mentoria serve para mim?', a: 'Sim. Além de construir o plano do zero, eu faço o ajuste fino: valido cada etapa do projeto que você já tem para zerar as falhas antes do embarque.' },
 ];
-
-const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
 <Base
   title="Vida Italiana na Prática | Mentoria para imigrar para a Itália com segurança"
   description="Mentoria individual com o Alexandre, há 23 anos na Itália, para famílias brasileiras que querem imigrar com segurança: cidade certa, reserva, documentos e aluguel."
 >
-  <!-- HERO -->
-  <section class="hero on-dark">
-    <Header />
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Mentoria individual · Direto de Monza</p>
-        <h1>Sua família na Itália, <em class="hl">do jeito certo</em>: com casa, documentos e segurança.</h1>
-        <p class="lead">Eu vivo há 23 anos o chão real da Itália. Cheguei com 2 euros no bolso e sem falar italiano. Hoje eu acompanho famílias brasileiras do planejamento no Brasil até a chave na mão.</p>
-        <div class="hero-actions">
-          <a href="#contato" class="btn btn-primary">Quero desenhar minha travessia</a>
-          <a href="#historia" class="btn btn-ghost">Conheça minha história</a>
+  <Header />
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero on-dark">
+      <img class="hero-photo" src="/fotos/hero-bg.jpg" alt="" fetchpriority="high" width="1920" height="1200" />
+      <span class="hero-veil" aria-hidden="true"></span>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <p class="hero-eyebrow fx-up" style="--i:0"><Icon name="pin" size={16} /> Direto de Monza, Itália</p>
+          <h1 class="hero-title">
+            <span class="hero-line"><span style="--i:1"><span class="serif-italic">Imigrar</span> para a Itália,</span></span>
+            <span class="hero-line"><span style="--i:2">com os <span class="grifo">pés no chão</span></span></span>
+          </h1>
+          <div class="hero-lede fx-up" style="--i:3">
+            <p>Cada família tem o seu <span class="hero-word" data-rotate="tempo,caminho,cidade,plano">tempo</span>.</p>
+            <p>Mentoria individual para quem quer recomeçar na Itália <strong>com segurança</strong>, guiado por quem vive lá há 23 anos.</p>
+          </div>
+          <div class="hero-cta fx-up" style="--i:4">
+            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" /> Quero desenhar minha travessia</a>
+            <a href="#historia" class="btn btn-ghost">Conheça o Alexandre <Icon name="arrow" size={16} /></a>
+          </div>
+          <p class="hero-filtro fx-up" style="--i:5">
+            <Icon name="badge" size={16} />
+            <span><strong>Acompanhamento individual.</strong> Do Brasil até a chave na mão.</span>
+          </p>
+        </div>
+        <aside class="hero-creds fx-up" style="--i:5" aria-label="Credenciais">
+          <div class="hc-card">
+            <span class="hc-num">23</span>
+            <span class="hc-label">anos vivendo na Itália</span>
+          </div>
+          <div class="hc-card">
+            <span class="hc-num">~50</span>
+            <span class="hc-label">apartamentos pesquisados por contrato</span>
+          </div>
+          <div class="hc-card">
+            <span class="hc-row"><Icon name="badge" size={16} /> Funcionário público em Monza</span>
+            <span class="hc-row"><Icon name="users" size={16} /> Pai de 3 filhos criados aqui</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FAIXA DE TEMAS -->
+    <div class="topics" data-marquee="48" role="group" aria-label="Temas da mentoria">
+      <div class="mq-track topics-track" aria-hidden="true">
+        {[...temas, ...temas].map((t) => <span class="topic">{t}<span class="topic-sep">◆</span></span>)}
+      </div>
+    </div>
+
+    <!-- VITRINE -->
+    <section class="vitrine">
+      <div class="container sec-head center reveal">
+        <p class="std-tag"><span class="std-dot"></span> A Itália real em evidência</p>
+        <h2 class="sec-title">Tudo o que ninguém te conta <span class="grifo">no Instagram</span>.</h2>
+        <p class="sec-lede">Números, documentos e histórias de quem vive o chão italiano há mais de duas décadas.</p>
+      </div>
+      <div class="mq vitrine-mq" data-marquee="38">
+        <div class="mq-track vitrine-track">
+          {[...vitrine, ...vitrine].map((c, i) => (
+            <a class="v-card" href={c.href} aria-hidden={i >= vitrine.length ? 'true' : undefined} tabindex={i >= vitrine.length ? -1 : undefined}>
+              <img src={`/fotos/${c.img}.jpg`} alt="" loading="lazy" width="900" height="1200" />
+              <span class="v-veil"></span>
+              <div class="v-text">
+                <h3>{c.titulo}</h3>
+                <p>{c.texto}</p>
+                <span class="v-link">Ler artigo <Icon name="arrow" size={15} /></span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
-      <div class="hero-photo">
-        <img src="/fotos/alexandre-hero.jpg" alt="Alexandre, mentor do Vida Italiana na Prática" width="900" height="1200" fetchpriority="high" />
-        <div class="hero-badge">
-          <strong>23</strong>
-          <span>anos vivendo<br />na Itália</span>
+    </section>
+
+    <!-- QUEM CHEGA AQUI -->
+    <section class="sec quem">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="std-tag"><span class="std-dot"></span> Quem chega até mim</p>
+          <h2 class="sec-title">Talvez você se reconheça em <span class="grifo">alguma dessas situações</span>.</h2>
+        </div>
+        <div class="quem-grid">
+          {situacoes.map((s, i) => (
+            <article class="quem-card reveal" style={`--d:${i * 0.1}s`}>
+              <div class="quem-top">
+                <span class="quem-num">0{i + 1}</span>
+                <span class="quem-sit">Situação {['I', 'II', 'III'][i]}</span>
+              </div>
+              <h3>{s.titulo}</h3>
+              <p>{s.texto}</p>
+              <a href={waLink()} class="quem-cta"><Icon name="whatsapp" size={16} /> Quero conversar</a>
+            </article>
+          ))}
         </div>
       </div>
-    </div>
-    <Torn color="var(--cream)" position="bottom" seed={3} />
-  </section>
+    </section>
 
-  <!-- NÚMEROS -->
-  <section class="stats cream">
-    <div class="container stats-grid">
-      <div><strong>23</strong><span>anos morando na Itália</span></div>
-      <div><strong>3</strong><span>filhos criados aqui, hoje adultos e trilíngues</span></div>
-      <div><strong>~50</strong><span>apartamentos pesquisados por contrato fechado</span></div>
-      <div><strong>1:1</strong><span>mentoria individual, do Brasil até a chegada</span></div>
-    </div>
-  </section>
-
-  <!-- DOR -->
-  <section class="section dor">
-    <div class="container">
-      <div class="center reveal">
-        <p class="eyebrow">A Itália real</p>
-        <h2>Planejar a mudança parece simples. <span class="mark">Até você começar a pesquisar.</span></h2>
-        <p class="lead">Informação solta no Instagram, gente vendendo sonho e ninguém te dizendo a conta exata. O resultado é uma família ansiosa, com medo de errar no passo mais importante da vida.</p>
-      </div>
-      <ul class="dor-grid">
-        {dores.map((d) => (
-          <li class="reveal">
-            <span class="dor-icon" aria-hidden="true">✕</span>
-            {d}
-          </li>
-        ))}
-      </ul>
-      <blockquote class="big-quote reveal">
-        “A Itália não é um país para amadores. Ela é generosa com quem se prepara, mas <span class="mark">implacável com quem vem na ilusão.</span>”
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- HISTÓRIA -->
-  <section id="historia" class="section dark on-dark historia">
-    <Torn color="var(--olive)" position="top" seed={7} />
-    <div class="container historia-grid">
-      <div class="historia-head reveal">
-        <p class="eyebrow">Minha história</p>
-        <h2>Eu já fiz essa travessia. <em class="hl">Sem ninguém para me guiar.</em></h2>
-        <p class="lead">Meu nome é Alexandre. Em 2003, eu deixei uma vida estável em São Paulo para construir o futuro dos meus filhos com segurança. A família inteira disse que era loucura.</p>
-        <div class="polaroids" aria-hidden="false">
-          <figure class="polaroid tape p1"><img src="/fotos/polaroid-2003.jpg" alt="Alexandre em 2003, recém-chegado à Itália" loading="lazy" width="800" height="800" /><figcaption>Monza, 2003</figcaption></figure>
-          <figure class="polaroid p2"><img src="/fotos/polaroid-montanha.jpg" alt="A primeira casa da família, na montanha da Ligúria" loading="lazy" width="800" height="800" /><figcaption>A casa na montanha</figcaption></figure>
-          <figure class="polaroid tape p3"><img src="/fotos/polaroid-familia.jpg" alt="Alexandre com a esposa Clarissa e os três filhos" loading="lazy" width="800" height="800" /><figcaption>Nós cinco</figcaption></figure>
+    <!-- SOBRE -->
+    <section class="sec sobre" id="historia">
+      <div class="container sobre-grid">
+        <div class="sobre-card reveal">
+          <span class="sobre-dots" aria-hidden="true"></span>
+          <p class="std-tag"><span class="std-dot"></span> Quem conduz a mentoria</p>
+          <h2 class="sobre-title"><span class="serif-italic">Prazer,</span> <span class="grifo">Alexandre</span></h2>
+          <p class="sobre-cred"><Icon name="badge" size={16} /> <strong>23 anos na Itália</strong> · Funcionário público em Monza · Pai de 3</p>
+          <p>Em 2003, eu tinha a vida que a classe média brasileira considera ideal: ótimo emprego, apartamento, dois carros e escola particular. Até que um sequestro relâmpago e um assalto à mão armada me mostraram que eu tinha tudo, menos segurança.</p>
+          <p>Vim sozinho, sem falar italiano, com 2 euros no bolso. Bati em mais de cem portas, passei frio e solidão, e reuni a minha família numa casa de 300 euros na montanha. Hoje, meus três filhos são adultos realizados na Itália. <strong>Eu estendo a mão para você, como alguém um dia fez comigo.</strong></p>
+          <div class="sobre-cta">
+            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" size={16} /> Falar com o Alexandre</a>
+            <a href="/blog" class="btn btn-ghost">Ler o blog <Icon name="arrow" size={16} /></a>
+          </div>
+        </div>
+        <div class="story reveal" style="--d:.15s" data-story>
+          <div class="story-bars" aria-hidden="true">
+            {slides.map(() => <span><i></i></span>)}
+          </div>
+          {slides.map((s, i) => (
+            <figure class:list={['story-slide', i === 0 && 'is-on']}>
+              <img src={`/fotos/${s.img}.jpg`} alt={s.legenda} loading="lazy" width="800" height="800" />
+              <figcaption>{s.legenda}</figcaption>
+            </figure>
+          ))}
+          <div class="story-head">
+            <img src="/fotos/alexandre-avatar.jpg" alt="" width="40" height="40" />
+            <span class="story-name">Alexandre <Icon name="badge" size={14} /></span>
+            <span class="story-meta">Monza, Itália</span>
+          </div>
         </div>
       </div>
-      <ol class="timeline">
-        {historia.map((h) => (
-          <li class="reveal">
-            <span class="t-ano">{h.ano}</span>
-            <h3>{h.titulo}</h3>
-            <p>{h.texto}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-    <blockquote class="historia-quote container reveal">
-      “Migrar não é somente sobre você. <em class="hl">É sobre quem vem depois de você.</em>”
-    </blockquote>
-    <Torn color="var(--cream)" position="bottom" seed={11} />
-  </section>
-
-  <!-- ALUGUEL -->
-  <section class="section cream aluguel">
-    <div class="container aluguel-grid">
-      <div class="aluguel-photo reveal">
-        <figure class="polaroid tape">
-          <img src="/fotos/aluguel.jpg" alt="Prédio residencial em Monza" loading="lazy" width="1200" height="1500" />
-          <figcaption>A chave na mão</figcaption>
-        </figure>
-        <div class="stamp" aria-hidden="true">Contrato<br />antes do<br />embarque</div>
+      <div class="container">
+        <ol class="linha">
+          {historia.map((h, i) => (
+            <li class="reveal" style={`--d:${i * 0.1}s`}>
+              <span class="linha-ano">{h.ano}</span>
+              <h3>{h.titulo}</h3>
+              <p>{h.texto}</p>
+            </li>
+          ))}
+        </ol>
       </div>
-      <div class="reveal">
-        <p class="eyebrow">O meu diferencial</p>
-        <h2>O maior gargalo do brasileiro na Itália <span class="mark">é o teto.</span></h2>
-        <p>O proprietário italiano é conservador. Sem histórico no país, sem contrato de trabalho italiano e sem ninguém que responda por você, a porta simplesmente não abre. E sem casa não existe residência. Sem residência, o resto não anda.</p>
-        <p>É aqui que os meus 23 anos fazem diferença. Eu conheço imobiliárias e proprietários, falo a língua deles e <strong>coloco o meu nome e a minha credibilidade na mesa</strong> por famílias preparadas.</p>
-        <div class="big-number">
-          <strong>50</strong>
-          <span>apartamentos, em média, eu pesquiso para conseguir um contrato. Você não precisa fazer isso sozinho, do outro lado do oceano.</span>
+    </section>
+
+    <!-- JORNADA -->
+    <section class="sec jornada" id="mentoria">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="std-tag"><span class="std-dot"></span> Como a mentoria funciona</p>
+          <h2 class="sec-title">Seis passos. <span class="grifo">Nenhum no escuro.</span></h2>
+          <p class="sec-lede">Acompanhamento individual, em chamadas, do planejamento no Brasil à chave na mão. Eu sou as suas pernas e os seus olhos no solo italiano.</p>
         </div>
-        <a href="#contato" class="btn btn-dark">Quero chegar com a chave na mão</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MENTORIA -->
-  <section id="mentoria" class="section mentoria">
-    <Torn color="var(--paper)" position="top" seed={19} />
-    <div class="container">
-      <div class="center reveal">
-        <p class="eyebrow">Como funciona a mentoria</p>
-        <h2>Do Brasil até a chave na mão, <span class="mark">passo a passo.</span></h2>
-        <p class="lead">Acompanhamento individual, em chamadas, com a sua família. Eu sou as suas pernas e os seus olhos no solo italiano.</p>
-      </div>
-      <ol class="etapas">
-        {etapas.map((e, i) => (
-          <li class="reveal">
-            <span class="etapa-n">{i + 1}</span>
-            <div>
+        <ol class="jor-grid">
+          {etapas.map((e, i) => (
+            <li class="jor-card reveal" style={`--d:${(i % 3) * 0.1}s`}>
+              <div class="jor-top">
+                <span class="jor-ico"><Icon name={e.icon} /></span>
+                <span class="jor-num">0{i + 1}</span>
+              </div>
               <h3>{e.titulo}</h3>
               <p>{e.texto}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <div class="modalidades">
-        <article class="modalidade reveal">
-          <p class="tag">Plano do zero</p>
-          <h3>Ainda estou no começo</h3>
-          <p>Para quem tem o sonho, mas não sabe por onde começar. Construímos juntos todo o projeto: caminho legal, cidade, reserva, documentos e chegada.</p>
-        </article>
-        <article class="modalidade reveal">
-          <p class="tag">Ajuste fino</p>
-          <h3>Já tenho um plano</h3>
-          <p>Para quem já estudou e se organizou. Eu valido cada etapa do seu projeto, aponto os riscos e ajusto o que for preciso para zerar as falhas.</p>
-        </article>
+            </li>
+          ))}
+        </ol>
+        <div class="modos">
+          <article class="modo modo-dark on-dark reveal">
+            <span class="modo-tag">Plano do zero</span>
+            <h3>Ainda estou no começo</h3>
+            <p>Para quem tem o sonho, mas não sabe por onde começar. Construímos juntos o caminho legal, a cidade, a reserva, os documentos e a chegada.</p>
+            <a href={waLink()} class="btn btn-accent btn-sm">Começar do zero <Icon name="arrow" size={15} /></a>
+          </article>
+          <article class="modo reveal" style="--d:.1s">
+            <span class="modo-tag">Ajuste fino</span>
+            <h3>Já tenho um plano</h3>
+            <p>Para quem já estudou e se organizou. Eu valido cada etapa do seu projeto, aponto os riscos e ajusto o que for preciso para zerar as falhas.</p>
+            <a href={waLink()} class="btn btn-sm">Validar meu plano <Icon name="arrow" size={15} /></a>
+          </article>
+        </div>
       </div>
-      <div class="center">
-        <a href="#contato" class="btn btn-primary">Quero minha análise de perfil</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- DEPOIMENTO -->
-  <section id="depoimento" class="section dark on-dark depoimento">
-    <Torn color="var(--olive)" position="top" seed={23} />
-    <div class="container">
-      <div class="center reveal">
-        <p class="eyebrow">Quem já fez o caminho</p>
-        <h2>Nove anos esperando a cidadania. <em class="hl">Três meses até a Itália.</em></h2>
-        <p class="lead">Rafael e Luciana me conheceram em janeiro. Em 1º de abril desembarcaram com um apartamento esperando por eles no centro histórico de Monza. Eu gravei com eles seis dias depois da chegada.</p>
-      </div>
-      <div class="video reveal">
-        {SITE.videoDepoimento ? (
-          <button class="video-facade" data-id={SITE.videoDepoimento} aria-label="Assistir à entrevista com Rafael e Luciana">
-            <img src="/fotos/rafael-luciana.jpg" alt="" loading="lazy" width="1280" height="720" />
-            <span class="play" aria-hidden="true"></span>
-          </button>
-        ) : (
-          <div class="video-facade is-pending">
-            <img src="/fotos/rafael-luciana.jpg" alt="Rafael e Luciana em Monza" loading="lazy" width="1280" height="720" />
-            <span class="play" aria-hidden="true"></span>
+    <!-- DIFERENCIAIS -->
+    <section class="sec dif">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="std-tag"><span class="std-dot"></span> O que distingue</p>
+          <h2 class="sec-title">O que só quem vive aqui <span class="grifo">consegue fazer</span>.</h2>
+        </div>
+        <div class="dif-grid">
+          <div class="dif-acc" data-acc>
+            {diferenciais.map((d, i) => (
+              <article class:list={['dif-item', i === 0 && 'is-open']}>
+                <button class="dif-q" type="button" aria-expanded={i === 0 ? 'true' : 'false'}>
+                  <span class="dif-ico"><Icon name={d.icon} /></span>
+                  <span class="dif-titulo">{d.titulo}</span>
+                  <span class="dif-mark" aria-hidden="true"></span>
+                </button>
+                <div class="dif-a"><div><p>{d.texto}</p></div></div>
+              </article>
+            ))}
+            <a href={waLink()} class="btn btn-accent dif-btn">Quero chegar com a chave na mão <Icon name="arrow" size={16} /></a>
           </div>
-        )}
-      </div>
-      <div class="quotes">
-        <figure class="note reveal">
-          <blockquote>“Quando você falou que o apartamento era nosso, em quatro horas eu comprei a passagem. Sem isso, a gente não embarcaria.”</blockquote>
-          <figcaption>Rafael</figcaption>
-        </figure>
-        <figure class="note reveal">
-          <blockquote>“O teu trabalho é humanizado, é sério, tem um lado emocional. Você tem a impressão de que está com uma mão te ajudando a caminhar.”</blockquote>
-          <figcaption>Luciana</figcaption>
-        </figure>
-        <figure class="note reveal">
-          <blockquote>“A nossa família olha para você e sente confiança. Parece um tio, um pai ou um irmão que está lá para te receber.”</blockquote>
-          <figcaption>Rafael</figcaption>
-        </figure>
-      </div>
-    </div>
-    <Torn color="var(--cream)" position="bottom" seed={29} />
-  </section>
-
-  <!-- GUIA -->
-  <section id="guia" class="section cream guia">
-    <div class="container">
-      <div class="guia-box reveal">
-        <div class="guia-copy">
-          <p class="eyebrow">Para começar hoje</p>
-          <h2>Guia digital <em>Vida Italiana na Prática</em></h2>
-          <p>Ainda não é a hora da mentoria? Comece pelo meu guia. Eu organizei o que aprendi em 23 anos para você se planejar com os pés no chão, no seu ritmo.</p>
-          <ul class="checks">
-            <li>Os primeiros passos para planejar a mudança</li>
-            <li>Custos reais de quem vive na Itália</li>
-            <li>A ordem dos documentos e da burocracia</li>
-            <li>Os erros que fazem famílias voltarem ao Brasil</li>
-          </ul>
-          <a href={SITE.guiaUrl} class="btn btn-primary" rel="noopener" target="_blank">Quero o guia digital</a>
-        </div>
-        <div class="guia-side">
-          <div class="guia-stat"><strong>23</strong><span>anos de chão real</span></div>
-          <div class="guia-stat"><strong>100%</strong><span>online, no seu ritmo</span></div>
-          <div class="guia-stat"><strong>PT</strong><span>em português, de brasileiro para brasileiro</span></div>
+          <div class="dif-figure reveal">
+            <img src="/fotos/aluguel.jpg" alt="Prédio residencial em Monza" loading="lazy" width="1200" height="1500" />
+            <div class="dif-stat">
+              <strong>~50</strong>
+              <span>apartamentos pesquisados, em média, para cada contrato fechado</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- BLOG -->
-  <section class="section blog-teaser">
-    <Torn color="var(--paper)" position="top" seed={31} />
-    <div class="container">
-      <div class="blog-head reveal">
-        <div>
-          <p class="eyebrow">Do blog</p>
-          <h2>A Itália real, <span class="mark">em números e histórias.</span></h2>
+    <!-- CONVERSAS (OBJEÇÕES) -->
+    <section class="obj on-dark">
+      <div class="obj-fx" aria-hidden="true">
+        <span class="obj-grid"></span>
+        <span class="obj-glow obj-glow-1"></span>
+        <span class="obj-glow obj-glow-2"></span>
+        <svg class="obj-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <path d="M-100 220 C 360 60, 720 380, 1080 200 S 1640 120, 1640 320" />
+          <path d="M-100 520 C 320 360, 760 700, 1140 480 S 1700 420, 1700 640" />
+          <path d="M-100 740 C 420 600, 800 920, 1200 720 S 1680 660, 1700 860" />
+        </svg>
+      </div>
+      <div class="container obj-inner">
+        <div class="sec-head center reveal">
+          <p class="std-tag"><span class="std-dot"></span> Antes da sua decisão</p>
+          <h2 class="sec-title">Três conversas que talvez você esteja <span class="grifo">tendo agora</span>.</h2>
         </div>
-        <a href="/blog" class="btn btn-ghost">Ver todos os artigos</a>
+        <div class="chat">
+          {conversas.map((c) => (
+            <>
+              <div class="msg msg-eu" data-msg><div class="bubble">{c.p}</div></div>
+              <div class="msg msg-ale" data-msg data-typing>
+                <img class="msg-avatar" src="/fotos/alexandre-avatar.jpg" alt="Alexandre" loading="lazy" width="40" height="40" />
+                <div class="msg-col">
+                  <span class="msg-nome">Alexandre</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="bubble bubble-ale">{c.a}</div>
+                </div>
+              </div>
+            </>
+          ))}
+          <div class="msg msg-cta" data-msg>
+            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" /> Conversar no WhatsApp</a>
+          </div>
+        </div>
       </div>
-      <div class="posts">
-        {posts.map((p) => (
-          <a href={`/blog/${p.id}`} class="post-card reveal">
-            <span class="post-cat">{p.data.category}</span>
-            <h3>{p.data.title}</h3>
-            <p>{p.data.description}</p>
-            <span class="post-more">Ler artigo →</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section class="section faq cream">
-    <Torn color="var(--cream)" position="top" seed={37} />
-    <div class="container faq-grid">
-      <div class="reveal">
-        <p class="eyebrow">Perguntas frequentes</p>
-        <h2>Antes de você me chamar.</h2>
-        <p class="lead">Se a sua dúvida não estiver aqui, me escreva. Eu respondo pessoalmente.</p>
+    <!-- DEPOIMENTOS -->
+    <section class="testi" id="depoimentos">
+      <div class="testi-box on-dark">
+        <div class="testi-bg" aria-hidden="true">
+          <img src="/fotos/testi-bg.jpg" alt="" loading="lazy" width="1920" height="1100" />
+          <span></span>
+        </div>
+        <div class="testi-head reveal">
+          <span class="testi-badge"><Icon name="star" size={14} /> Quem já fez o caminho</span>
+          <h2 class="sec-title">Nove anos esperando a cidadania. <span class="serif-italic">Três meses até a Itália.</span></h2>
+          <p class="sec-lede">Rafael e Luciana me conheceram em janeiro. Em 1º de abril, desembarcaram com um apartamento esperando por eles no centro histórico de Monza.</p>
+        </div>
+        <div class="video reveal">
+          {SITE.videoDepoimento ? (
+            <button class="video-facade" data-video={SITE.videoDepoimento} aria-label="Assistir à entrevista com Rafael e Luciana">
+              <img src="/fotos/rafael-luciana.jpg" alt="" loading="lazy" width="1280" height="720" />
+              <span class="play" aria-hidden="true"></span>
+            </button>
+          ) : (
+            <div class="video-facade">
+              <img src="/fotos/rafael-luciana.jpg" alt="Rafael e Luciana em Monza" loading="lazy" width="1280" height="720" />
+              <span class="play" aria-hidden="true"></span>
+            </div>
+          )}
+        </div>
+        <div class="mq testi-mq" data-marquee="40">
+          <div class="mq-track testi-track">
+            {[...depoimentos, ...depoimentos].map((d, i) => (
+              <article class="t-card" aria-hidden={i >= depoimentos.length ? 'true' : undefined}>
+                <p>“{d}”</p>
+                <span class="t-div"></span>
+                <div class="t-foot">
+                  <div>
+                    <span class="t-name">Rafael & Luciana</span>
+                    <span class="t-role">Mentorados · Monza</span>
+                  </div>
+                  <Icon name="quote" size={28} class="t-quote" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-      <div class="faq-list">
-        {faqs.map((f) => (
-          <details class="reveal">
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTATO -->
-  <section id="contato" class="section dark on-dark contato">
-    <Torn color="var(--olive)" position="top" seed={41} />
-    <div class="container contato-grid">
-      <div class="reveal">
-        <p class="eyebrow">Vamos conversar</p>
-        <h2>Me conta a sua história. <em class="hl">Eu te mostro o caminho seguro.</em></h2>
-        <p class="lead">Responda três perguntas rápidas. A sua mensagem chega direto no meu WhatsApp e eu te respondo pessoalmente.</p>
-        <p class="assinatura">Um abraço forte aqui de Monza,<br /><span>Alexandre</span></p>
+    <!-- GUIA -->
+    <section class="sec guia" id="guia">
+      <div class="container">
+        <div class="guia-box reveal">
+          <div class="guia-copy">
+            <p class="std-tag"><span class="std-dot"></span> Para começar hoje</p>
+            <h2 class="sec-title">Ainda não é a hora da mentoria? <span class="grifo">Comece pelo guia.</span></h2>
+            <p class="sec-lede">Organizei o que aprendi em 23 anos num guia digital para você se planejar com os pés no chão, no seu ritmo.</p>
+            <ul class="checks">
+              <li><Icon name="check" size={16} /> Os primeiros passos para planejar a mudança</li>
+              <li><Icon name="check" size={16} /> Custos reais de quem vive na Itália</li>
+              <li><Icon name="check" size={16} /> A ordem dos documentos e da burocracia</li>
+              <li><Icon name="check" size={16} /> Os erros que fazem famílias voltarem ao Brasil</li>
+            </ul>
+            <a href={SITE.guiaUrl} class="btn btn-accent" target="_blank" rel="noopener"><Icon name="book" /> Quero o guia digital</a>
+          </div>
+          <div class="guia-visual" aria-hidden="true">
+            <div class="livro">
+              <span class="livro-tag">Guia digital</span>
+              <span class="livro-titulo">Vida Italiana <span class="serif-italic">na Prática</span></span>
+              <span class="livro-autor">Alexandre · 23 anos de Itália</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <form class="lead-form reveal" id="lead-form" data-whatsapp={SITE.whatsapp}>
-        <label>
-          Seu nome
-          <input name="nome" required autocomplete="name" placeholder="Como posso te chamar?" />
-        </label>
-        <label>
-          Quem vem para a Itália?
-          <select name="quem" required>
-            <option value="">Selecione</option>
-            <option>Só eu</option>
-            <option>Eu e meu cônjuge</option>
-            <option>Família com filhos</option>
-          </select>
-        </label>
-        <label>
-          Como está a sua documentação?
-          <select name="doc" required>
-            <option value="">Selecione</option>
-            <option>Já tenho cidadania italiana</option>
-            <option>A cidadania está em processo</option>
-            <option>Não tenho, vou precisar de visto</option>
-            <option>Ainda não sei qual é o meu caminho</option>
-          </select>
-        </label>
-        <label>
-          Qual é o seu momento?
-          <select name="momento" required>
-            <option value="">Selecione</option>
-            <option>Estou começando a planejar</option>
-            <option>Já tenho um plano e quero validá-lo</option>
-            <option>Quero me mudar nos próximos meses</option>
-            <option>Já moro na Itália e quero orientação</option>
-          </select>
-        </label>
-        <button type="submit" class="btn btn-primary">Enviar pelo WhatsApp</button>
-        <p class="form-note" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sec faq" id="faq">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="std-tag"><span class="std-dot"></span> Dúvidas frequentes</p>
+          <h2 class="sec-title">Perguntas <span class="grifo">mais comuns</span>.</h2>
+        </div>
+        <div class="faq-grid">
+          <aside class="faq-aside reveal">
+            <div>
+              <p class="faq-aside-title">Não encontrou o que procurava?</p>
+              <p class="faq-aside-desc">Me escreva quando quiser. Eu respondo pessoalmente, com calma, antes de você decidir qualquer coisa.</p>
+              <div class="faq-person">
+                <img src="/fotos/alexandre-avatar.jpg" alt="" width="48" height="48" loading="lazy" />
+                <div>
+                  <span class="faq-person-name">Alexandre</span>
+                  <span class="faq-person-role">Mentor · Vida Italiana na Prática</span>
+                </div>
+              </div>
+            </div>
+            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" size={16} /> Falar no WhatsApp</a>
+          </aside>
+          <div class="faq-list">
+            {faqs.map((f) => (
+              <details class="faq-item reveal" name="faq">
+                <summary>
+                  <span>{f.q}</span>
+                  <span class="faq-toggle" aria-hidden="true"><i></i><i></i></span>
+                </summary>
+                <div class="faq-a"><p>{f.a}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="galeria">
+      <div class="container sec-head center reveal">
+        <p class="std-tag"><span class="std-dot"></span> O chão real</p>
+        <h2 class="sec-title">A Itália que <span class="grifo">espera por você</span>.</h2>
+      </div>
+      <div class="mq gal-mq" data-marquee="44">
+        <div class="mq-track gal-track">
+          {[...Array(16)].map((_, i) => (
+            <figure class="gal-item" aria-hidden={i >= 8 ? 'true' : undefined}>
+              <img src={`/fotos/galeria-0${(i % 8) + 1}.jpg`} alt="" loading="lazy" width="900" height="1200" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL + FORMULÁRIO -->
+    <section class="cta on-dark" id="contato">
+      <div class="cta-bg" aria-hidden="true">
+        <img src="/fotos/cta-bg.jpg" alt="" loading="lazy" width="1920" height="1100" />
+        <span></span>
+      </div>
+      <div class="container cta-inner">
+        <div class="cta-left reveal">
+          <p class="std-tag"><span class="std-dot"></span> O primeiro passo</p>
+          <h2 class="cta-title">Não começa com uma mala. <span class="serif-italic">Começa com uma conversa.</span></h2>
+          <p class="sec-lede">Responda três perguntas rápidas. A sua mensagem chega direto no meu WhatsApp e eu te respondo pessoalmente.</p>
+          <p class="assinatura">Um abraço forte aqui de Monza,<br /><span class="serif-italic">Alexandre</span></p>
+        </div>
+        <form class="lead-form reveal" style="--d:.15s" id="lead-form" data-whatsapp={SITE.whatsapp}>
+          <label>
+            Seu nome
+            <input name="nome" required autocomplete="name" placeholder="Como posso te chamar?" />
+          </label>
+          <label>
+            Quem vem para a Itália?
+            <select name="quem" required>
+              <option value="">Selecione</option>
+              <option>Só eu</option>
+              <option>Eu e meu cônjuge</option>
+              <option>Família com filhos</option>
+            </select>
+          </label>
+          <label>
+            Como está a sua documentação?
+            <select name="doc" required>
+              <option value="">Selecione</option>
+              <option>Já tenho cidadania italiana</option>
+              <option>A cidadania está em processo</option>
+              <option>Não tenho, vou precisar de visto</option>
+              <option>Ainda não sei qual é o meu caminho</option>
+            </select>
+          </label>
+          <label>
+            Qual é o seu momento?
+            <select name="momento" required>
+              <option value="">Selecione</option>
+              <option>Estou começando a planejar</option>
+              <option>Já tenho um plano e quero validá-lo</option>
+              <option>Quero me mudar nos próximos meses</option>
+              <option>Já moro na Itália e quero orientação</option>
+            </select>
+          </label>
+          <button type="submit" class="btn btn-accent"><Icon name="whatsapp" /> Enviar pelo WhatsApp</button>
+          <p class="form-note" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="cta-mq" data-marquee="52">
+        <div class="mq-track cta-track" aria-hidden="true">
+          {[...temas, ...temas].map((t) => <span class="cta-item">{t}<span>◆</span></span>)}
+        </div>
+      </div>
+    </section>
+  </main>
 </Base>
 
 <script>
-  document.querySelectorAll<HTMLButtonElement>('.video-facade[data-id]').forEach((btn) => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Palavra que troca no hero
+  const word = document.querySelector<HTMLElement>('[data-rotate]');
+  if (word && !reduced) {
+    const words = (word.dataset.rotate || '').split(',');
+    let i = 0;
+    setInterval(() => {
+      word.classList.add('is-out');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        word.textContent = words[i];
+        word.classList.remove('is-out');
+      }, 380);
+    }, 2600);
+  }
+
+  // Story com fotos que avançam sozinhas
+  const story = document.querySelector<HTMLElement>('[data-story]');
+  if (story) {
+    const slides = [...story.querySelectorAll('.story-slide')];
+    const bars = [...story.querySelectorAll('.story-bars span')];
+    let cur = 0;
+    const show = (n: number) => {
+      slides.forEach((s, k) => s.classList.toggle('is-on', k === n));
+      bars.forEach((b, k) => {
+        b.classList.toggle('is-done', k < n);
+        b.classList.toggle('is-active', k === n);
+      });
+    };
+    show(0);
+    if (!reduced) setInterval(() => show((cur = (cur + 1) % slides.length)), 4200);
+  }
+
+  // Acordeão dos diferenciais (um aberto por vez)
+  document.querySelectorAll<HTMLElement>('[data-acc] .dif-item').forEach((item, _, all) => {
+    item.querySelector('button')?.addEventListener('click', () => {
+      all.forEach((o) => {
+        const open = o === item;
+        o.classList.toggle('is-open', open);
+        o.querySelector('button')?.setAttribute('aria-expanded', String(open));
+      });
+    });
+  });
+
+  // Conversa: mensagens surgem ao entrar na tela, com "digitando..."
+  const msgs = document.querySelectorAll<HTMLElement>('[data-msg]');
+  const chatIo = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target as HTMLElement;
+        el.classList.add('is-in');
+        if (el.hasAttribute('data-typing')) setTimeout(() => el.classList.add('is-typed'), reduced ? 0 : 1100);
+        chatIo.unobserve(el);
+      });
+    },
+    { threshold: 0.6 },
+  );
+  msgs.forEach((m) => chatIo.observe(m));
+
+  // Vídeo só carrega ao clicar
+  document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1`;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.video}?autoplay=1`;
       iframe.title = 'Entrevista com Rafael e Luciana';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
       iframe.allowFullscreen = true;
@@ -371,6 +593,7 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
     });
   });
 
+  // Formulário abre o WhatsApp com a mensagem pronta
   const form = document.getElementById('lead-form') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -392,368 +615,1009 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
 </script>
 
 <style>
-  .center {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 56px;
-  }
-  .center .lead {
-    margin: 0 auto;
-  }
-
-  /* HERO */
+  /* ================= HERO ================= */
   .hero {
-    color: #fff;
-    background: var(--ink);
+    position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
-    padding: 130px 0 110px;
+    align-items: flex-end;
+    padding: 140px 0 clamp(48px, 7vw, 88px);
     overflow: hidden;
+    background: var(--dark);
   }
-  .hero-bg {
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    animation: heroZoom 2.4s var(--ease) forwards;
+  }
+  @keyframes heroZoom {
+    to {
+      transform: scale(1);
+    }
+  }
+  .hero-veil {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(20, 28, 18, 0.92) 0%, rgba(20, 28, 18, 0.7) 45%, rgba(20, 28, 18, 0.25) 100%),
-      url('/fotos/hero-bg.jpg') center / cover no-repeat;
+      linear-gradient(180deg, rgba(30, 26, 21, 0.55) 0%, rgba(30, 26, 21, 0) 30%),
+      linear-gradient(90deg, rgba(30, 26, 21, 0.9) 0%, rgba(30, 26, 21, 0.55) 50%, rgba(30, 26, 21, 0.15) 100%),
+      linear-gradient(0deg, rgba(30, 26, 21, 0.85) 0%, rgba(30, 26, 21, 0) 45%);
   }
-  .hero-grid {
+  .hero-inner {
     position: relative;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr auto;
     gap: 48px;
+    align-items: end;
+  }
+  .hero-content {
+    max-width: 880px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 26px;
   }
-  .hero h1 {
-    margin-bottom: 0.45em;
+  .hero-title {
+    font-size: clamp(2.6rem, 6vw, 5.3rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    margin-bottom: 28px;
   }
-  .hero-actions {
+  .hero-title .serif-italic {
+    font-size: 1.08em;
+    color: var(--accent);
+  }
+  .hero-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+  .hero-line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: lineUp 1.1s var(--ease) forwards;
+    animation-delay: calc(0.15s + var(--i) * 0.12s);
+  }
+  @keyframes lineUp {
+    to {
+      transform: none;
+    }
+  }
+  .fx-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fxUp 1s var(--ease) forwards;
+    animation-delay: calc(0.3s + var(--i) * 0.12s);
+  }
+  @keyframes fxUp {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero-lede {
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 560px;
+  }
+  .hero-lede p {
+    margin: 0 0 0.4em;
+  }
+  .hero-lede strong {
+    color: #fff;
+  }
+  .hero-word {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.25em;
+    color: var(--accent);
+    transition: opacity 0.38s var(--ease), transform 0.38s var(--ease), filter 0.38s;
+  }
+  .hero-word.is-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: blur(4px);
+  }
+  .hero-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 32px;
+    gap: 12px;
+    margin: 32px 0 26px;
   }
-  .hero-photo {
-    position: relative;
-    justify-self: end;
-    width: min(100%, 440px);
-  }
-  .hero-photo img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: 220px 220px 18px 18px;
-    border: 6px solid rgba(255, 255, 255, 0.92);
-    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
-  }
-  .hero-badge {
-    position: absolute;
-    left: -36px;
-    bottom: 40px;
+  .hero-filtro {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--yellow);
-    color: var(--ink);
-    padding: 14px 20px;
-    border-radius: 14px;
-    transform: rotate(-4deg);
-    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
-    font-family: var(--font-impact);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    line-height: 1.2;
-  }
-  .hero-badge strong {
-    font-size: 2.6rem;
-    line-height: 1;
-  }
-
-  /* STATS */
-  .stats {
-    padding: 72px 0 56px;
-  }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-  .stats-grid div {
-    border-left: 3px solid var(--yellow);
-    padding-left: 18px;
-  }
-  .stats-grid strong {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stats-grid span {
     font-size: 0.95rem;
-    color: var(--ink-soft);
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0;
+  }
+  .hero-filtro strong {
+    color: #fff;
+  }
+  .hero-filtro :global(svg) {
+    color: var(--accent);
+  }
+  .hero-creds {
+    display: grid;
+    gap: 12px;
+    width: 280px;
+  }
+  .hc-card {
+    padding: 18px 20px;
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: grid;
+    gap: 6px;
+  }
+  .hc-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+  .hc-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .hc-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+  .hc-row :global(svg) {
+    color: var(--accent);
   }
 
-  /* DOR */
-  .dor-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 72px;
+  /* ================= FAIXA DE TEMAS ================= */
+  .topics {
+    background: var(--accent);
+    overflow: hidden;
+    padding: 18px 0;
+  }
+  .topics-track {
+    gap: 0;
+  }
+  .topic {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .topic-sep {
+    font-size: 0.7em;
+  }
+
+  /* ================= VITRINE ================= */
+  .vitrine {
+    padding: clamp(80px, 11vw, 140px) 0 clamp(60px, 8vw, 100px);
+  }
+  .vitrine-track {
+    gap: 20px;
+    padding: 10px 0;
+  }
+  .v-card {
+    position: relative;
+    flex: none;
+    width: clamp(260px, 26vw, 340px);
+    aspect-ratio: 3 / 4;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    box-shadow: var(--shadow-md);
+  }
+  .v-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease);
+  }
+  .v-card:hover img {
+    transform: scale(1.06);
+  }
+  .v-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 26, 21, 0) 35%, rgba(30, 26, 21, 0.92) 100%);
+  }
+  .v-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 24px;
+  }
+  .v-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .v-text p {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 14px;
+  }
+  .v-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+
+  /* ================= QUEM ================= */
+  .quem {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .quem-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 20px;
   }
-  .dor-grid li {
+  .quem-card {
     display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    background: #fff;
+    flex-direction: column;
+    padding: 32px;
+    border-radius: var(--r-lg);
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px;
-    box-shadow: 0 10px 30px -24px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
   }
-  .dor-icon {
+  .quem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .quem-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 36px;
+  }
+  .quem-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 3.4rem;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--accent);
+    -webkit-text-stroke: 1px var(--ink);
+  }
+  .quem-sit {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .quem-card h3 {
+    font-size: 1.45rem;
+  }
+  .quem-card p {
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .quem-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--sand);
+    transition: background 0.3s;
+  }
+  .quem-cta:hover {
+    background: var(--accent);
+  }
+
+  /* ================= SOBRE ================= */
+  .sobre {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 20px;
+  }
+  .sobre-card {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(32px, 5vw, 64px);
+    border-radius: var(--r-xl);
+    background: var(--sand);
+  }
+  .sobre-dots {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 280px;
+    height: 280px;
+    background-image: radial-gradient(rgba(30, 26, 21, 0.18) 1.2px, transparent 1.2px);
+    background-size: 16px 16px;
+    -webkit-mask-image: radial-gradient(circle, #000, transparent 70%);
+    mask-image: radial-gradient(circle, #000, transparent 70%);
+  }
+  .sobre-title {
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    margin-bottom: 18px;
+  }
+  .sobre-title .serif-italic {
+    font-size: 1.05em;
+  }
+  .sobre-cred {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .sobre-card > p:not(.std-tag):not(.sobre-cred) {
+    color: var(--ink-2);
+    font-size: 1.08rem;
+    max-width: 62ch;
+  }
+  .sobre-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .story {
+    position: relative;
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    background: var(--dark);
+    min-height: 520px;
+    box-shadow: var(--shadow-lg);
+  }
+  .story-slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.9s var(--ease);
+  }
+  .story-slide.is-on {
+    opacity: 1;
+  }
+  .story-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+    transition: transform 5s linear;
+  }
+  .story-slide.is-on img {
+    transform: scale(1);
+  }
+  .story-slide figcaption {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 22px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(30, 26, 21, 0.55);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .story-bars {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    z-index: 3;
+    display: flex;
+    gap: 5px;
+  }
+  .story-bars span {
+    flex: 1;
+    height: 3px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.35);
+    overflow: hidden;
+  }
+  .story-bars i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #fff;
+  }
+  .story-bars .is-done i {
+    width: 100%;
+  }
+  .story-bars .is-active i {
+    animation: bar 4.2s linear forwards;
+  }
+  @keyframes bar {
+    to {
+      width: 100%;
+    }
+  }
+  .story-head {
+    position: absolute;
+    top: 30px;
+    left: 16px;
+    right: 16px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: 10px;
+    color: #fff;
+  }
+  .story-head img {
+    grid-row: span 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+  }
+  .story-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .story-name :global(svg) {
+    color: var(--accent);
+  }
+  .story-meta {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+  .linha {
+    list-style: none;
+    padding: 0;
+    margin: 64px 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+  .linha::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .linha li {
+    position: relative;
+    padding-top: 40px;
+  }
+  .linha li::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px var(--bg), 0 0 0 6px var(--line-strong);
+  }
+  .linha-ano {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--terra);
+  }
+  .linha h3 {
+    font-size: 1.2rem;
+    margin: 6px 0;
+  }
+  .linha p {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* ================= JORNADA ================= */
+  .jornada {
+    background: var(--surface);
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+  }
+  .jor-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .jor-card {
+    padding: 28px;
+    border-radius: var(--r-lg);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    transition: background 0.4s, transform 0.5s var(--ease);
+  }
+  .jor-card:hover {
+    background: var(--accent-soft);
+    transform: translateY(-4px);
+  }
+  .jor-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .jor-ico {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--accent);
+  }
+  .jor-num {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .jor-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+  }
+  .jor-card p {
+    color: var(--ink-2);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+  .modos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .modo {
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: var(--r-lg);
+    background: var(--accent);
+  }
+  .modo-dark {
+    background: var(--dark);
+  }
+  .modo-tag {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .modo-dark .modo-tag {
+    color: var(--accent);
+  }
+  .modo h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  .modo p {
+    max-width: 46ch;
+    margin-bottom: 24px;
+  }
+  .modo-dark p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* ================= DIFERENCIAIS ================= */
+  .dif {
+    background: var(--surface);
+    padding-top: 0;
+  }
+  .dif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+  .dif-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .dif-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .dif-ico {
     flex: none;
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: var(--terracotta);
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 700;
+    border: 1px solid var(--line-strong);
+    transition: background 0.4s, color 0.4s, border-color 0.4s;
   }
-  .big-quote {
-    margin: 0 auto;
-    max-width: 880px;
-    text-align: center;
-    font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    line-height: 1.3;
+  .dif-item.is-open .dif-ico {
+    background: var(--accent);
+    border-color: var(--accent);
   }
-
-  /* HISTÓRIA */
-  .historia-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
+  .dif-titulo {
+    flex: 1;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
   }
-  .historia-head {
-    position: sticky;
-    top: 40px;
-  }
-  .polaroids {
+  .dif-mark {
     position: relative;
-    height: 360px;
-    margin-top: 40px;
+    width: 14px;
+    height: 14px;
   }
-  .polaroids .polaroid {
-    position: absolute;
-    width: 52%;
-    margin: 0;
-  }
-  .p1 {
-    left: 0;
-    top: 10px;
-    transform: rotate(-6deg);
-  }
-  .p2 {
-    left: 26%;
-    top: 60px;
-    transform: rotate(4deg);
-    z-index: 2;
-  }
-  .p3 {
-    right: 0;
-    top: 0;
-    transform: rotate(-2deg);
-  }
-  .timeline {
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 32px;
-    border-left: 2px dashed rgba(245, 196, 0, 0.5);
-  }
-  .timeline li {
-    position: relative;
-    padding-bottom: 40px;
-  }
-  .timeline li::before {
+  .dif-mark::before,
+  .dif-mark::after {
     content: '';
     position: absolute;
-    left: -41px;
-    top: 4px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--yellow);
-    box-shadow: 0 0 0 5px rgba(245, 196, 0, 0.2);
+    left: 0;
+    top: 6px;
+    width: 14px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.4s var(--ease);
   }
-  .t-ano {
-    font-family: var(--font-impact);
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--yellow);
-    font-size: 0.85rem;
+  .dif-mark::after {
+    transform: rotate(90deg);
   }
-  .timeline h3 {
-    margin: 4px 0 8px;
+  .dif-item.is-open .dif-mark::after {
+    transform: rotate(0);
   }
-  .timeline p {
-    color: rgba(255, 255, 255, 0.78);
-    margin: 0;
-  }
-  .historia-quote {
-    margin-top: 40px;
-    text-align: center;
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
-    line-height: 1.25;
-  }
-
-  /* ALUGUEL */
-  .aluguel-grid {
+  .dif-a {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 72px;
-    align-items: center;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.55s var(--ease);
   }
-  .aluguel-photo {
-    position: relative;
+  .dif-a > div {
+    overflow: hidden;
   }
-  .aluguel-photo .polaroid {
+  .dif-item.is-open .dif-a {
+    grid-template-rows: 1fr;
+  }
+  .dif-a p {
+    color: var(--ink-2);
+    padding: 0 0 22px 60px;
     margin: 0;
-    transform: rotate(-3deg);
   }
-  .aluguel-photo .polaroid img {
+  .dif-btn {
+    margin-top: 32px;
+  }
+  .dif-figure {
+    position: relative;
+    border-radius: var(--r-xl);
+    overflow: hidden;
     aspect-ratio: 4 / 5;
   }
-  .stamp {
+  .dif-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dif-stat {
     position: absolute;
-    right: -24px;
-    bottom: 60px;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 3px solid var(--terracotta);
-    color: var(--terracotta);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    font-family: var(--font-impact);
-    font-weight: 800;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    line-height: 1.3;
-    transform: rotate(12deg);
-    background: rgba(244, 236, 221, 0.9);
-  }
-  .big-number {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
     display: flex;
-    gap: 20px;
     align-items: center;
-    margin: 28px 0 32px;
-    padding: 22px 24px;
-    background: var(--ink);
-    color: #fff;
-    border-radius: var(--radius);
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--r-md);
+    background: rgba(250, 248, 245, 0.88);
+    backdrop-filter: blur(14px);
   }
-  .big-number strong {
-    font-family: var(--font-serif);
-    font-size: 4rem;
+  .dif-stat strong {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
     line-height: 1;
-    color: var(--yellow);
+    letter-spacing: -0.05em;
   }
-  .big-number span {
-    font-size: 0.98rem;
-    color: rgba(255, 255, 255, 0.85);
+  .dif-stat span {
+    font-size: 0.92rem;
+    color: var(--ink-2);
   }
 
-  /* MENTORIA */
-  .mentoria {
-    background: var(--paper);
+  /* ================= CONVERSAS ================= */
+  .obj {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    padding: clamp(90px, 12vw, 160px) 0;
   }
-  .etapas {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 64px;
+  .obj-fx {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .obj-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+    animation: gridMove 30s linear infinite;
+  }
+  @keyframes gridMove {
+    to {
+      background-position: 64px 64px;
+    }
+  }
+  .obj-glow {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    animation: float 14s ease-in-out infinite alternate;
+  }
+  .obj-glow-1 {
+    background: var(--accent);
+    top: -160px;
+    left: -120px;
+  }
+  .obj-glow-2 {
+    background: var(--terra);
+    bottom: -200px;
+    right: -120px;
+    animation-delay: -7s;
+  }
+  @keyframes float {
+    to {
+      transform: translate(80px, 60px) scale(1.1);
+    }
+  }
+  .obj-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .obj-lines path {
+    fill: none;
+    stroke: rgba(245, 196, 0, 0.18);
+    stroke-width: 1.2;
+    stroke-dasharray: 8 10;
+    animation: dash 40s linear infinite;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -600;
+    }
+  }
+  .obj-inner {
+    position: relative;
+  }
+  .chat {
+    max-width: 760px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px 40px;
-  }
-  .etapas li {
-    display: flex;
     gap: 16px;
   }
-  .etapa-n {
-    font-family: var(--font-serif);
-    font-size: 5rem;
-    line-height: 0.85;
-    font-weight: 600;
-    color: var(--ink);
-    text-shadow: 4px 4px 0 var(--yellow);
+  .msg {
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
   }
-  .etapas h3 {
-    margin-bottom: 6px;
+  .msg.is-in {
+    opacity: 1;
+    transform: none;
   }
-  .etapas p {
-    color: var(--ink-soft);
-    margin: 0;
-    font-size: 0.98rem;
+  .msg-eu {
+    justify-content: flex-end;
   }
-  .modalidades {
+  .bubble {
+    max-width: 520px;
+    padding: 14px 18px;
+    border-radius: 22px 22px 6px 22px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    font-size: 1.02rem;
+  }
+  .msg-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    align-self: flex-end;
+  }
+  .msg-col {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 48px;
+    gap: 6px;
+    justify-items: start;
   }
-  .modalidade {
-    border: 2px solid var(--ink);
-    border-radius: var(--radius);
-    padding: 32px;
-    background: #fff;
-    box-shadow: 8px 8px 0 var(--yellow);
+  .msg-nome {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
   }
-  .modalidade .tag {
-    display: inline-block;
-    font-family: var(--font-impact);
-    font-weight: 800;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    background: var(--ink);
-    color: var(--yellow);
-    padding: 6px 12px;
-    border-radius: 999px;
+  .bubble-ale {
+    border-radius: 22px 22px 22px 6px;
+    background: var(--accent);
+    color: var(--ink);
+    border: 0;
+    display: none;
   }
-  .modalidade p:last-child {
-    margin: 0;
-    color: var(--ink-soft);
+  .typing {
+    display: inline-flex;
+    gap: 5px;
+    padding: 16px 18px;
+    border-radius: 22px 22px 22px 6px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    animation: blink 1.2s infinite;
+  }
+  .typing span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .typing span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes blink {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+  }
+  .msg.is-typed .typing {
+    display: none;
+  }
+  .msg.is-typed .bubble-ale {
+    display: block;
+    animation: pop 0.5s var(--ease);
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+  }
+  .msg-cta {
+    justify-content: center;
+    margin-top: 24px;
   }
 
-  /* DEPOIMENTO */
+  /* ================= DEPOIMENTOS ================= */
+  .testi {
+    padding: 20px var(--gutter);
+    background: var(--bg);
+  }
+  .testi-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-xl);
+    background: var(--dark-2);
+    padding: clamp(64px, 9vw, 120px) 0 clamp(48px, 6vw, 80px);
+  }
+  .testi-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .testi-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+  }
+  .testi-bg span {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--dark-2) 0%, rgba(43, 37, 30, 0.6) 50%, var(--dark-2) 100%);
+  }
+  .testi-head,
   .video {
-    max-width: 900px;
-    margin: 0 auto 56px;
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    text-align: center;
+  }
+  .testi-head .sec-title .serif-italic {
+    color: var(--accent);
+  }
+  .testi-head .sec-lede {
+    margin: 0 auto;
+  }
+  .testi-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(245, 196, 0, 0.14);
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .video {
+    margin-top: 48px;
+    margin-bottom: 48px;
   }
   .video-facade,
   .video :global(iframe) {
+    position: relative;
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     border: 0;
-    border-radius: 18px;
-    overflow: hidden;
-    position: relative;
     padding: 0;
+    border-radius: var(--r-lg);
+    overflow: hidden;
     background: #000;
-    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+    box-shadow: var(--shadow-lg);
   }
   button.video-facade {
     cursor: pointer;
@@ -762,280 +1626,371 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.85;
+    transition: transform 1s var(--ease);
+  }
+  .video-facade:hover img {
+    transform: scale(1.04);
   }
   .play {
     position: absolute;
     inset: 0;
     margin: auto;
-    width: 86px;
-    height: 86px;
+    width: 88px;
+    height: 88px;
     border-radius: 50%;
-    background: var(--yellow);
-    box-shadow: 0 0 0 12px rgba(245, 196, 0, 0.25);
+    background: var(--accent);
+    box-shadow: 0 0 0 14px rgba(245, 196, 0, 0.22);
+    animation: pulse 2.4s infinite;
   }
   .play::after {
     content: '';
     position: absolute;
-    left: 34px;
-    top: 26px;
+    left: 35px;
+    top: 27px;
     border-left: 24px solid var(--ink);
     border-top: 17px solid transparent;
     border-bottom: 17px solid transparent;
   }
-  .quotes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
-  .note {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 28px 24px 22px;
+  .testi-mq {
     position: relative;
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
   }
-  .note:nth-child(1) {
-    transform: rotate(-1.5deg);
+  .testi-track {
+    gap: 18px;
+    padding: 6px 0;
   }
-  .note:nth-child(2) {
-    transform: rotate(1deg);
+  .t-card {
+    flex: none;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
   }
-  .note:nth-child(3) {
-    transform: rotate(-0.5deg);
+  .t-card p {
+    flex: 1;
+    font-size: 1.02rem;
+    color: rgba(255, 255, 255, 0.88);
   }
-  .note::before {
-    content: '';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    width: 80px;
-    height: 24px;
-    transform: translateX(-50%) rotate(2deg);
-    background: rgba(245, 196, 0, 0.6);
+  .t-div {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 6px 0 16px;
   }
-  .note blockquote {
-    margin: 0 0 14px;
-    font-family: var(--font-serif);
-    font-size: 1.12rem;
-    line-height: 1.45;
+  .t-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .note figcaption {
-    font-family: 'Caveat', cursive;
-    font-size: 1.5rem;
-    color: var(--terracotta);
+  .t-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .t-role {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .t-foot :global(.t-quote) {
+    color: var(--accent);
+    opacity: 0.8;
   }
 
-  /* GUIA */
+  /* ================= GUIA ================= */
   .guia-box {
     display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    background: var(--paper);
-    border-radius: 22px;
+    grid-template-columns: 1.2fr 0.8fr;
+    border-radius: var(--r-xl);
     overflow: hidden;
-    border: 1px solid var(--line);
-    box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.5);
+    background: var(--sand);
   }
   .guia-copy {
-    padding: clamp(28px, 5vw, 56px);
-  }
-  .guia-copy h2 em {
-    font-style: italic;
-    color: var(--terracotta);
+    padding: clamp(32px, 5vw, 64px);
   }
   .checks {
     list-style: none;
     padding: 0;
-    margin: 24px 0 32px;
+    margin: 28px 0 32px;
     display: grid;
     gap: 12px;
   }
   .checks li {
-    position: relative;
-    padding-left: 34px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-  .checks li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 1px;
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-    background: var(--yellow);
-    color: var(--ink);
+  .checks :global(svg) {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    padding: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .guia-visual {
     display: grid;
     place-items: center;
-    font-weight: 800;
-    font-size: 0.8rem;
+    padding: 40px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(245, 196, 0, 0.35), transparent 60%),
+      var(--dark);
   }
-  .guia-side {
-    background: var(--ink);
-    color: #fff;
-    display: grid;
-    align-content: center;
-    gap: 28px;
-    padding: 40px 32px;
-  }
-  .guia-stat strong {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 2.6rem;
-    color: var(--yellow);
-    line-height: 1;
-  }
-  .guia-stat span {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  /* BLOG */
-  .blog-teaser {
-    background: var(--paper);
-  }
-  .blog-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-  .blog-head h2 {
-    margin: 0;
-  }
-  .posts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .post-card {
+  .livro {
+    width: min(100%, 260px);
+    aspect-ratio: 3 / 4;
     display: flex;
     flex-direction: column;
-    text-decoration: none;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    justify-content: space-between;
+    padding: 26px;
+    border-radius: 6px 18px 18px 6px;
+    background: var(--accent);
+    color: var(--ink);
+    box-shadow:
+      inset 8px 0 0 rgba(0, 0, 0, 0.12),
+      30px 40px 60px -20px rgba(0, 0, 0, 0.6);
+    transform: perspective(900px) rotateY(-14deg) rotateX(4deg);
+    transition: transform 0.8s var(--ease);
   }
-  .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.5);
+  .guia-box:hover .livro {
+    transform: perspective(900px) rotateY(-4deg) rotateX(0);
   }
-  .post-cat {
-    font-family: var(--font-impact);
-    font-weight: 800;
-    font-size: 0.72rem;
+  .livro-tag {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 12px;
   }
-  .post-card h3 {
-    font-size: 1.3rem;
-  }
-  .post-card p {
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-    flex: 1;
-  }
-  .post-more {
+  .livro-titulo {
+    font-family: var(--font-display);
     font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .livro-titulo .serif-italic {
+    display: block;
+    font-weight: 400;
+  }
+  .livro-autor {
+    font-size: 0.85rem;
   }
 
-  /* FAQ */
+  /* ================= FAQ ================= */
+  .faq {
+    padding-top: 0;
+  }
   .faq-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 64px;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 20px;
+    align-items: start;
   }
-  .faq-list details {
-    border-bottom: 1px solid var(--line);
-    padding: 20px 0;
-  }
-  .faq-list summary {
-    cursor: pointer;
-    list-style: none;
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 600;
+  .faq-aside {
+    position: sticky;
+    top: 110px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 16px;
+    gap: 32px;
+    padding: 32px;
+    border-radius: var(--r-lg);
+    background: var(--dark);
+    color: #fff;
+    min-height: 340px;
   }
-  .faq-list summary::-webkit-details-marker {
-    display: none;
+  .faq-aside-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
   }
-  .faq-list summary::after {
-    content: '+';
-    flex: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--yellow);
-    display: grid;
-    place-items: center;
-    font-family: var(--font-sans);
-    font-weight: 700;
-    transition: transform 0.2s ease;
-  }
-  .faq-list details[open] summary::after {
-    transform: rotate(45deg);
-  }
-  .faq-list p {
-    margin: 12px 0 0;
-    color: var(--ink-soft);
-  }
-
-  /* CONTATO */
-  .contato-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  .assinatura {
-    margin-top: 32px;
+  .faq-aside-desc {
     color: rgba(255, 255, 255, 0.7);
   }
-  .assinatura span {
-    font-family: 'Caveat', cursive;
+  .faq-person {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .faq-person img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+  .faq-person-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .faq-person-role {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .faq-list {
+    display: grid;
+    gap: 10px;
+  }
+  .faq-item {
+    border-radius: var(--r-md);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: box-shadow 0.4s;
+  }
+  .faq-item[open] {
+    box-shadow: var(--shadow-sm);
+  }
+  .faq-item summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 24px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.12rem;
+    letter-spacing: -0.02em;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-toggle {
+    position: relative;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--sand);
+    transition: background 0.3s, transform 0.5s var(--ease);
+  }
+  .faq-toggle i {
+    position: absolute;
+    left: 10px;
+    top: 15.25px;
+    width: 12px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+  .faq-toggle i:last-child {
+    transform: rotate(90deg);
+  }
+  .faq-item[open] .faq-toggle {
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    padding: 0 24px 22px;
+    color: var(--ink-2);
+  }
+  .faq-a p {
+    margin: 0;
+  }
+
+  /* ================= GALERIA ================= */
+  .galeria {
+    padding: 0 0 clamp(80px, 10vw, 130px);
+  }
+  .gal-track {
+    gap: 18px;
+  }
+  .gal-item {
+    flex: none;
+    width: 260px;
+    aspect-ratio: 3 / 4;
+    margin: 0;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .gal-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ================= CTA FINAL ================= */
+  .cta {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    padding: clamp(90px, 12vw, 150px) 0 0;
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .cta-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .cta-bg span {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(30, 26, 21, 0.92) 0%, rgba(30, 26, 21, 0.7) 60%, rgba(30, 26, 21, 0.55) 100%);
+  }
+  .cta-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .cta-title {
+    font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  }
+  .cta-title .serif-italic {
+    display: block;
+    color: var(--accent);
+    font-size: 1.06em;
+  }
+  .assinatura {
+    margin-top: 36px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .assinatura .serif-italic {
     font-size: 2.2rem;
-    color: var(--yellow);
+    color: var(--accent);
   }
   .lead-form {
-    background: var(--paper);
-    color: var(--ink);
-    border-radius: 20px;
-    padding: clamp(24px, 4vw, 40px);
     display: grid;
-    gap: 18px;
-    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.6);
+    gap: 16px;
+    padding: clamp(24px, 4vw, 36px);
+    border-radius: var(--r-lg);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
   .lead-form label {
     display: grid;
     gap: 6px;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 500;
     font-size: 0.92rem;
   }
   .lead-form input,
   .lead-form select {
     font: inherit;
-    font-weight: 400;
+    font-family: var(--font-body);
     padding: 14px 16px;
-    border-radius: 10px;
-    border: 1.5px solid var(--line);
-    background: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.92);
     color: var(--ink);
     width: 100%;
   }
   .lead-form input:focus,
   .lead-form select:focus {
     outline: none;
-    border-color: var(--ink);
-    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.6);
   }
   .lead-form .btn {
     width: 100%;
@@ -1043,82 +1998,126 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
   }
   .form-note {
     margin: 0;
-    font-size: 0.9rem;
-    color: var(--terracotta);
     min-height: 1.2em;
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+  .cta-mq {
+    position: relative;
+    overflow: hidden;
+    margin-top: clamp(64px, 8vw, 110px);
+    padding: 26px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .cta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 36px;
+    padding-right: 36px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  }
+  .cta-item span {
+    font-size: 0.5em;
+    color: var(--accent);
+    -webkit-text-stroke: 0;
   }
 
-  /* RESPONSIVO */
-  @media (max-width: 960px) {
-    .hero-grid,
-    .historia-grid,
-    .aluguel-grid,
-    .faq-grid,
-    .contato-grid {
+  /* ================= RESPONSIVO ================= */
+  @media (max-width: 1020px) {
+    .hero-inner {
       grid-template-columns: 1fr;
     }
-    .hero-photo {
-      justify-self: center;
-      width: min(80%, 360px);
+    .hero-creds {
+      width: 100%;
+      grid-template-columns: repeat(3, 1fr);
     }
-    .historia-head {
-      position: static;
+    .quem-grid,
+    .jor-grid {
+      grid-template-columns: 1fr 1fr;
     }
-    .stats-grid,
-    .dor-grid,
-    .etapas,
-    .quotes,
-    .posts {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .sobre-grid,
+    .dif-grid,
+    .faq-grid,
+    .cta-inner,
     .guia-box {
       grid-template-columns: 1fr;
     }
-    .guia-side {
-      grid-template-columns: repeat(3, 1fr);
-      padding: 28px;
+    .story {
+      min-height: 560px;
     }
-    .aluguel-photo {
-      max-width: 420px;
-      margin: 0 auto;
+    .linha {
+      grid-template-columns: 1fr 1fr;
+    }
+    .faq-aside {
+      position: static;
+      min-height: 0;
     }
   }
-  @media (max-width: 640px) {
+  @media (max-width: 680px) {
     .hero {
-      padding-top: 110px;
+      padding-top: 120px;
     }
-    .hero-badge {
-      left: -10px;
+    .hero-creds {
+      grid-template-columns: 1fr 1fr;
     }
-    .stats-grid,
-    .dor-grid,
-    .etapas,
-    .quotes,
-    .posts,
-    .modalidades {
-      grid-template-columns: 1fr;
+    .hero-creds .hc-card:last-child {
+      grid-column: 1 / -1;
     }
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .hc-num {
+      font-size: 2rem;
     }
-    .polaroids {
-      height: 260px;
-    }
-    .stamp {
-      right: -6px;
-      width: 104px;
-      height: 104px;
-      font-size: 0.62rem;
-    }
-    .big-number {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .guia-side {
-      grid-template-columns: 1fr;
-    }
-    .hero-actions .btn {
+    .hero-cta .btn {
       width: 100%;
+    }
+    .quem-grid,
+    .jor-grid,
+    .modos,
+    .linha {
+      grid-template-columns: 1fr;
+    }
+    .linha::before {
+      top: 0;
+      bottom: 0;
+      left: 6px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+    .linha li {
+      padding: 0 0 0 36px;
+    }
+    .linha li::before {
+      top: 4px;
+    }
+    .t-card {
+      width: 290px;
+    }
+    .gal-item {
+      width: 200px;
+    }
+    .dif-a p {
+      padding-left: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-photo,
+    .hero-line > span,
+    .fx-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .obj-grid,
+    .obj-glow,
+    .obj-lines path,
+    .play {
+      animation: none;
     }
   }
 </style>

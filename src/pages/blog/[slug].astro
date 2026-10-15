@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, waLink } from '../../config';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -9,11 +11,12 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const { title, description, date, category, cta } = post.data;
 
 const outros = (await getCollection('blog')).filter((p) => p.id !== post.id).slice(0, 3);
 const dataFmt = date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+const indice = headings.filter((h) => h.depth === 2);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -29,205 +32,330 @@ const jsonLd = {
 ---
 <Base title={`${title} | Vida Italiana na Prática`} description={description} type="article">
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
-  <Header solid />
-  <article>
-    <header class="post-hero on-dark">
-      <div class="container narrow">
-        <a href="/blog" class="back">← Blog</a>
-        <p class="eyebrow">{category}</p>
-        <h1>{title}</h1>
-        <p class="meta">Por <strong>Alexandre</strong> · {dataFmt}</p>
+  <Header variant="solid" />
+  <main id="main" class="post">
+    <header class="container post-head">
+      <a href="/blog" class="back"><Icon name="arrow" size={15} class="flip" /> Blog</a>
+      <p class="std-tag"><span class="std-dot"></span> {category}</p>
+      <h1>{title}</h1>
+      <div class="author">
+        <img src="/fotos/alexandre-avatar.jpg" alt="" width="44" height="44" />
+        <div>
+          <strong>Alexandre</strong>
+          <span>{dataFmt} · 23 anos vivendo na Itália</span>
+        </div>
       </div>
     </header>
-    <div class="container narrow prose">
-      <Content />
+
+    <div class="container post-grid">
+      <aside class="toc">
+        {indice.length > 0 && (
+          <nav aria-label="Neste artigo">
+            <p class="toc-title">Neste artigo</p>
+            <ol>
+              {indice.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+            </ol>
+          </nav>
+        )}
+      </aside>
+      <article class="prose">
+        <Content />
+      </article>
     </div>
-  </article>
 
-  <aside class="cta-box container narrow">
-    {cta === 'guia' ? (
-      <>
-        <p class="eyebrow">Para começar hoje</p>
-        <h2>Planeje a sua mudança com o meu guia digital</h2>
-        <p>Tudo o que eu aprendi em 23 anos, organizado para você se planejar com os pés no chão.</p>
-        <div class="cta-actions">
-          <a href="/#guia" class="btn btn-primary">Conhecer o guia</a>
-          <a href="/#mentoria" class="btn btn-ghost">Ver a mentoria</a>
-        </div>
-      </>
-    ) : (
-      <>
-        <p class="eyebrow">Mentoria individual</p>
-        <h2>Quer desenhar a sua travessia com segurança?</h2>
-        <p>Eu acompanho a sua família do planejamento no Brasil até a chave na mão na Itália.</p>
-        <div class="cta-actions">
-          <a href="/#contato" class="btn btn-primary">Falar com o Alexandre</a>
-          <a href="/#mentoria" class="btn btn-ghost">Como funciona</a>
-        </div>
-      </>
-    )}
-  </aside>
+    <div class="container">
+      <aside class="cta-box on-dark">
+        {cta === 'guia' ? (
+          <>
+            <p class="std-tag"><span class="std-dot"></span> Para começar hoje</p>
+            <h2>Planeje a sua mudança com o meu <span class="serif-italic">guia digital</span></h2>
+            <p>Tudo o que eu aprendi em 23 anos, organizado para você se planejar com os pés no chão.</p>
+            <div class="cta-actions">
+              <a href={SITE.guiaUrl} class="btn btn-accent" target="_blank" rel="noopener"><Icon name="book" /> Quero o guia</a>
+              <a href="/#mentoria" class="btn btn-ghost">Ver a mentoria <Icon name="arrow" size={16} /></a>
+            </div>
+          </>
+        ) : (
+          <>
+            <p class="std-tag"><span class="std-dot"></span> Mentoria individual</p>
+            <h2>Quer desenhar a sua travessia <span class="serif-italic">com segurança?</span></h2>
+            <p>Eu acompanho a sua família do planejamento no Brasil até a chave na mão na Itália.</p>
+            <div class="cta-actions">
+              <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" /> Falar com o Alexandre</a>
+              <a href="/#mentoria" class="btn btn-ghost">Como funciona <Icon name="arrow" size={16} /></a>
+            </div>
+          </>
+        )}
+      </aside>
 
-  {outros.length > 0 && (
-    <section class="section outros">
-      <div class="container narrow">
-        <h2>Continue lendo</h2>
-        <ul>
-          {outros.map((p) => (
-            <li><a href={`/blog/${p.id}`}><span>{p.data.category}</span>{p.data.title}</a></li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
+      {outros.length > 0 && (
+        <section class="outros">
+          <h2>Continue lendo</h2>
+          <div class="outros-grid">
+            {outros.map((p) => (
+              <a href={`/blog/${p.id}`}>
+                <span>{p.data.category}</span>
+                {p.data.title}
+                <Icon name="arrow" size={16} />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </main>
 </Base>
 
 <style>
-  .narrow {
-    max-width: 760px;
+  .post {
+    padding: 140px 0 110px;
   }
-  .post-hero {
-    background: var(--olive);
-    color: #fff;
-    padding: 48px 0 64px;
-  }
-  .post-hero h1 {
-    font-size: clamp(2rem, 4.6vw, 3.2rem);
+  .post-head {
+    max-width: 920px;
+    text-align: center;
+    margin-bottom: 64px;
   }
   .back {
-    display: table;
-    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     text-decoration: none;
-    opacity: 0.8;
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-family: var(--font-display);
+    font-weight: 500;
   }
-  .meta {
-    color: rgba(255, 255, 255, 0.75);
+  .back :global(.flip) {
+    transform: rotate(180deg);
+  }
+  .post-head .std-tag {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto 22px;
+  }
+  .post-head h1 {
+    font-size: clamp(2.2rem, 5vw, 3.9rem);
+  }
+  .author {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    margin-top: 10px;
+  }
+  .author img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+  .author strong {
+    display: block;
+    font-family: var(--font-display);
+  }
+  .author span {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 720px);
+    gap: 64px;
+    justify-content: center;
+  }
+  .toc nav {
+    position: sticky;
+    top: 110px;
+  }
+  .toc-title {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .toc ol {
+    list-style: none;
+    padding: 0;
     margin: 0;
+    display: grid;
+    gap: 2px;
+    border-left: 1px solid var(--line-strong);
+  }
+  .toc a {
+    display: block;
+    padding: 6px 0 6px 14px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--ink-2);
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .toc a:hover {
+    color: var(--ink);
+    border-color: var(--accent);
   }
   .prose {
-    padding-top: 56px;
-    padding-bottom: 24px;
-    font-size: 1.1rem;
-    line-height: 1.75;
+    font-size: 1.12rem;
+    line-height: 1.78;
   }
   .prose :global(h2) {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
     margin-top: 2em;
+    scroll-margin-top: 110px;
   }
   .prose :global(h3) {
+    font-size: 1.35rem;
     margin-top: 1.6em;
   }
   .prose :global(a) {
-    color: var(--ink);
-    text-decoration-color: var(--yellow);
+    text-decoration-color: var(--accent);
     text-decoration-thickness: 3px;
     text-underline-offset: 3px;
     font-weight: 600;
   }
   .prose :global(blockquote) {
     margin: 2em 0;
-    padding: 20px 24px;
-    background: var(--cream);
-    border-left: 4px solid var(--yellow);
-    border-radius: 0 12px 12px 0;
+    padding: 22px 26px;
+    border-radius: var(--r-md);
+    background: var(--sand);
     font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.5;
   }
   .prose :global(blockquote p:last-child) {
     margin: 0;
   }
   .prose :global(table) {
     width: 100%;
-    border-collapse: collapse;
-    margin: 1.5em 0 2em;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.6em 0 2em;
     font-size: 0.98rem;
-  }
-  @media (max-width: 640px) {
-    .prose :global(table) {
-      display: block;
-      overflow-x: auto;
-    }
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    overflow: hidden;
   }
   .prose :global(th),
   .prose :global(td) {
     text-align: left;
-    padding: 12px 14px;
+    padding: 13px 16px;
     border-bottom: 1px solid var(--line);
   }
   .prose :global(th) {
-    background: var(--ink);
+    background: var(--dark);
     color: #fff;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .prose :global(tr:last-child td) {
+    border-bottom: 0;
   }
   .prose :global(tr:nth-child(even) td) {
-    background: rgba(244, 236, 221, 0.6);
+    background: var(--surface);
   }
   .prose :global(ul.contains-task-list) {
     list-style: none;
-    padding: 20px 24px;
-    background: #fff;
+    padding: 22px 26px;
+    border-radius: var(--r-md);
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
   }
   .prose :global(.task-list-item) {
     margin: 8px 0;
   }
   .prose :global(.task-list-item input) {
-    accent-color: var(--yellow);
+    accent-color: var(--accent);
     margin-right: 10px;
     transform: scale(1.2);
   }
   .prose :global(hr) {
     border: 0;
-    height: 2px;
-    background: var(--line);
+    height: 1px;
+    background: var(--line-strong);
     margin: 3em 0;
   }
   .cta-box {
-    margin: 32px auto 0;
-    background: var(--ink);
-    color: #fff;
-    border-radius: 20px;
-    padding: clamp(28px, 5vw, 44px);
+    max-width: 1060px;
+    margin: 72px auto 0;
+    padding: clamp(32px, 5vw, 56px);
+    border-radius: var(--r-xl);
+    background:
+      radial-gradient(circle at 90% 10%, rgba(245, 196, 0, 0.25), transparent 50%),
+      var(--dark);
+    text-align: center;
   }
-  .cta-box .eyebrow {
-    color: var(--yellow);
+  .cta-box h2 {
+    font-size: clamp(1.9rem, 4vw, 3rem);
   }
-  .cta-box p {
-    color: rgba(255, 255, 255, 0.82);
+  .cta-box h2 .serif-italic {
+    color: var(--accent);
+  }
+  .cta-box p:not(.std-tag) {
+    color: rgba(255, 255, 255, 0.72);
   }
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 24px;
   }
-  .cta-box .btn-ghost {
-    color: #fff;
+  .outros {
+    max-width: 1060px;
+    margin: 80px auto 0;
   }
-  .outros ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .outros h2 {
+    font-size: 1.8rem;
   }
-  .outros li a {
-    display: block;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line);
+  .outros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .outros-grid a {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    border-radius: var(--r-md);
+    background: var(--surface);
+    border: 1px solid var(--line);
     text-decoration: none;
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s;
   }
-  .outros li a span {
-    display: block;
-    font-family: var(--font-impact);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
+  .outros-grid a:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .outros-grid span {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--terra);
   }
-  .outros li a:hover {
-    color: var(--terracotta);
+  @media (max-width: 1000px) {
+    .post-grid {
+      grid-template-columns: minmax(0, 720px);
+    }
+    .toc {
+      display: none;
+    }
+  }
+  @media (max-width: 700px) {
+    .prose :global(table) {
+      display: block;
+      overflow-x: auto;
+    }
+    .outros-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
