@@ -39,6 +39,8 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1240px;
+  /* distância da borda da tela até o início do conteúdo */
+  --edge: calc((100vw - min(100vw, var(--max))) / 2 + var(--gutter));
 }
 
 *,
@@ -340,7 +342,7 @@ p {
 /* ---------- Polaroids decorativas nas laterais ---------- */
 .deco {
   position: absolute;
-  z-index: 1;
+  z-index: 4;
   top: var(--top, 80px);
   width: var(--w, 220px);
   pointer-events: none;

@@ -1,32 +1,21 @@
 ---
-// Grupo de polaroids decorativas nas laterais da seção.
-// No desktop fica solto na margem (com parallax); no celular vira uma fileira.
-interface Foto {
+// Polaroid decorativa (desktop). A posição horizontal é um valor CSS livre,
+// medido a partir da borda escolhida, para encaixar nos espaços vazios da seção.
+interface Props {
   src: string;
   cap: string;
-  rot?: number;
-}
-interface Props {
-  fotos: Foto[];
   side?: 'left' | 'right';
   top?: string;
-  offset?: string;
+  x?: string;
   width?: number;
+  rot?: number;
   speed?: number;
-  pair?: boolean;
 }
-const { fotos, side = 'right', top = '80px', offset = '-48px', width = 175, speed = 0.08, pair = false } = Astro.props;
+const { src, cap, side = 'right', top = '80px', x = '24px', width = 200, rot = -4, speed = 0.08 } = Astro.props;
 ---
-<div
-  class:list={['deco', `deco-${side}`, pair && 'has-pair']}
-  style={`--top:${top};--side:${offset};--w:${width}px`}
-  data-speed={speed}
-  aria-hidden="true"
->
-  {fotos.map((f) => (
-    <figure class="pola" style={`--rot:${f.rot ?? -4}deg`}>
-      <img src={`/fotos/${f.src}.jpg`} alt="" loading="lazy" width="800" height="800" />
-      <figcaption>{f.cap}</figcaption>
-    </figure>
-  ))}
+<div class:list={['deco', `deco-${side}`]} style={`--top:${top};--side:${x};--w:${width}px`} data-speed={speed} aria-hidden="true">
+  <figure class="pola" style={`--rot:${rot}deg`}>
+    <img src={`/fotos/${src}.jpg`} alt="" loading="lazy" width="700" height="700" />
+    <figcaption>{cap}</figcaption>
+  </figure>
 </div>

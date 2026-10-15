@@ -129,8 +129,8 @@ const faqs = [
 
     <!-- VITRINE -->
     <section class="vitrine">
-      <Polaroid side="left" pair top="40px" fotos={[{ src: 'pola-brasil', cap: 'O Brasil no coração', rot: -7 }]} />
-      <Polaroid top="120px" speed={0.12} fotos={[{ src: 'pola-italia', cap: 'A Itália real', rot: 6 }]} />
+      <Polaroid side="left" x="calc(50% - 380px - 250px)" top="70px" rot={-7} speed={0.12} src="pola-brasil" cap="O Brasil no coração" />
+      <Polaroid x="calc(50% - 380px - 250px)" top="110px" rot={6} src="pola-italia" cap="A Itália real" />
       <div class="container sec-head center reveal">
         <p class="std-tag"><span class="std-dot"></span> O que a mentoria cobre</p>
         <h2 class="sec-title">Tudo o que derruba uma família na chegada, <span class="grifo">resolvido antes</span>.</h2>
@@ -164,8 +164,7 @@ const faqs = [
     <!-- QUEM CHEGA AQUI -->
     <section class="sec quem">
       <div class="container">
-        <Polaroid side="left" pair top="45%" fotos={[{ src: 'pola-se', cap: 'São Paulo, com os meus', rot: -6 }]} />
-        <Polaroid top="90px" speed={0.12} fotos={[{ src: 'pola-familia', cap: 'Família reunida', rot: 6 }]} />
+        <Polaroid x="calc(var(--edge) + 40px)" top="50px" rot={5} width={190} src="pola-familia" cap="Família reunida" />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Quem chega até mim</p>
           <h2 class="sec-title">Talvez você se reconheça em <span class="grifo">alguma dessas situações</span>.</h2>
@@ -188,8 +187,8 @@ const faqs = [
 
     <!-- SOBRE -->
     <section class="sec sobre" id="historia">
-      <Polaroid side="left" pair top="18%" speed={0.12} fotos={[{ src: 'pola-rio', cap: 'Rio de Janeiro', rot: -5 }]} />
-      <Polaroid top="62%" fotos={[{ src: 'pola-masp', cap: 'Visita ao MASP', rot: 6 }]} />
+      <Polaroid side="left" x="calc(var(--edge) - var(--w) + 56px)" top="8%" rot={-6} speed={0.12} src="pola-rio" cap="Rio de Janeiro" />
+      <Polaroid x="calc(var(--edge) - var(--w) + 56px)" top="52%" rot={6} src="pola-se" cap="São Paulo, com os meus" />
       <div class="container sobre-grid">
         <div class="sobre-card reveal">
           <span class="sobre-dots" aria-hidden="true"></span>
@@ -243,8 +242,8 @@ const faqs = [
     <!-- JORNADA -->
     <section class="sec jornada" id="mentoria">
       <div class="container">
-        <Polaroid top="120px" speed={0.1} fotos={[{ src: 'pola-estrada', cap: 'Sempre pronto pra estrada', rot: 6 }]} />
-        <Polaroid side="left" pair top="55%" speed={0.14} fotos={[{ src: 'pola-mar', cap: 'Olhando o mar', rot: -7 }]} />
+        <Polaroid x="calc(var(--edge) + 40px)" top="90px" rot={-5} width={190} speed={0.1} src="pola-estrada" cap="Sempre pronto pra estrada" />
+        <Polaroid side="left" x="calc(var(--edge) - var(--w) + 56px)" top="68%" rot={-7} width={180} src="pola-cappuccino" cap="Cappuccino com os amigos" />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Como a mentoria funciona</p>
           <h2 class="sec-title">Seis passos. <span class="grifo">Nenhum no escuro.</span></h2>
@@ -282,6 +281,7 @@ const faqs = [
     <!-- DIFERENCIAIS -->
     <section class="sec dif">
       <div class="container">
+        <Polaroid x="calc(var(--edge) + 40px)" top="10px" rot={6} width={180} src="pola-espresso" cap="Espresso no balcão" />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> O que distingue</p>
           <h2 class="sec-title">O que só quem vive aqui <span class="grifo">consegue fazer</span>.</h2>
@@ -313,6 +313,8 @@ const faqs = [
 
     <!-- CONVERSAS (OBJEÇÕES) -->
     <section class="obj on-dark">
+      <Polaroid side="left" x="calc(50% - 380px - 250px)" top="34%" rot={-8} speed={0.14} src="pola-masp" cap="Visita ao MASP" />
+      <Polaroid x="calc(50% - 380px - 250px)" top="58%" rot={7} src="pola-mar" cap="Olhando o mar" />
       <div class="obj-fx" aria-hidden="true">
         <span class="obj-grid"></span>
         <span class="obj-glow obj-glow-1"></span>
@@ -424,6 +426,7 @@ const faqs = [
     <!-- FAQ -->
     <section class="sec faq" id="faq">
       <div class="container">
+        <Polaroid x="calc(var(--edge) + 40px)" top="-80px" rot={-5} width={180} src="pola-pizza" cap="Pizza de domingo" />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Dúvidas frequentes</p>
           <h2 class="sec-title">Perguntas <span class="grifo">mais comuns</span>.</h2>
@@ -460,6 +463,7 @@ const faqs = [
 
     <!-- GALERIA -->
     <section class="galeria">
+      <Polaroid side="left" x="calc(50% - 380px - 250px)" top="-20px" rot={-6} width={190} src="pola-trevi" cap="Fontana di Trevi" />
       <div class="container sec-head center reveal">
         <p class="std-tag"><span class="std-dot"></span> O chão real</p>
         <h2 class="sec-title">A Itália que <span class="grifo">espera por você</span>.</h2>
