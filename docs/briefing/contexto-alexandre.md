@@ -44,6 +44,8 @@ Base de conhecimento para o site e o blog. Tudo aqui foi extraído das falas do 
 - Acompanha presencialmente na burocracia (Questura, *codice fiscale*, *dichiarazione di ospitalità*, residência).
 - Apresenta a família à rede local (imobiliária, proprietária, vizinhos) — "as relações se criam assim".
 - Só coloca o nome na mesa por perfis preparados ("é o perfil que dá orgulho de defender").
+- **Duas modalidades**: plano **do zero** ou **ajuste fino** de um projeto que a família já tem.
+- Motivação: "Em gratidão a quem me ajudou no início" (o tio).
 
 ## 4. Produtos
 
@@ -92,6 +94,7 @@ Base de conhecimento para o site e o blog. Tudo aqui foi extraído das falas do 
 | Passe integrado Monza–Milão | 60–70 €/mês |
 | Carro por assinatura (SUV médio, tudo incluso) | 585 €/mês |
 | Pellet (época da Ligúria) | ~4 € o saco de 15 kg |
+| **Reserva mínima recomendada** | sozinho 10 mil € · casal 15 mil € · com filhos 20 mil € |
 
 ## 7. Voz e linguagem
 
@@ -165,6 +168,43 @@ Base de conhecimento para o site e o blog. Tudo aqui foi extraído das falas do 
 - Palavra de CTA: **"investimento"**.
 
 > Os reels revelam **três frentes**: mentoria de imigração (principal), orientação para concurso público e investimento imobiliário com gestão. **[CONFIRMAR com o Alexandre quais entram no site]**
+
+## 9b. Reels (lote 2)
+
+### O segredo de Monza
+- **2014–2018: Alexandre morou sozinho no Brasil (Rio de Janeiro)**, enviado por uma empresa italiana de comércio exterior para abrir uma filial, com excelente salário. A família ficou em Monza.
+- "Metade do meu salário me sustentava sozinho no Rio e a outra metade sustentava quatro pessoas em Monza com total dignidade." Plano de saúde, insegurança e custo de vida engoliam o dinheiro no Brasil.
+- Monza: **Ospedale San Gerardo** (um dos melhores da Lombardia), escolas de altíssimo nível, trem para o centro de Milão em ~10 min, **entre três aeroportos internacionais** (Malpensa, Linate e Bergamo), **o maior parque murado da Europa** (Parco di Monza). Montanhas de um lado, lagos do outro, o mar da Ligúria perto.
+- "Moramos quatro anos em Monza sem precisar de carro para absolutamente nada."
+- Depois disso: "a busca desenfreada por grandes salários não fazia mais sentido. Eu queria paz." → vira funcionário público. "A verdadeira dolce vita."
+- "Clima de interior, mas com o quintal em Milão." — CTA: **"Monza"**.
+
+### Reserva financeira
+- "A maior mentira que te contam é que você precisa somente de coragem. A coragem não paga o seu primeiro aluguel."
+- **Metas mínimas de reserva: sozinho 10 mil €; casal 15 mil €; família com filhos 20 mil €.**
+- Sacrifício antes da passagem: cortar o jantar fora, os "luxos invisíveis".
+- "A reserva não é um luxo. É o seu escudo." Dá paz para documentação, idioma e recomeço.
+- O clássico pai de família que vende carro e móveis e vem pela emoção. — CTA: **"reserva"**.
+
+### Série Mentoria — episódio 1
+- "Em gratidão a quem me ajudou no início, decidi ser o apoio de famílias brasileiras."
+- "Qualquer pessoa pode recomeçar aqui, desde que tenha planejamento."
+- **Dois caminhos legais**: **cidadania** (CTA "genealogia") ou **visto** (CTA "visto").
+- Série cobre: reserva financeira, trabalho, aluguel, escolas e burocracia real.
+
+### Viver de aparências
+- Mentoria com casal de **Brasília** (ele advogado, ela arquiteta, dois filhos), mudança prevista para o ano seguinte: "Eu não aguento mais viver no Brasil somente de aparência" — fortuna com escola, plano de saúde, carro blindado.
+- "Na Itália, todos nós somos iguais. O dono da grande empresa e o operário levam os filhos na mesma escola, usam o mesmo hospital público de ponta e tomam café no mesmo bar."
+- "Liberdade e igualdade valem mais do que qualquer status social." — CTA: **"recomeço"**.
+
+### A hora certa
+- "Decidir a hora de partir talvez seja a decisão mais difícil que um ser humano pode tomar."
+- Medos das famílias: emprego, adaptação dos filhos na escola, burocracia e aluguel sem falar o idioma.
+- "Imigrar não é abandonar a sua pátria." / "Encare a ida para a Itália como uma **pós-graduação de vida**." / "Crescer para somar" — quem sabe contribuir de volta com o Brasil.
+- "O maior gargalo de todos quase sempre é o teto." Aluguel sem histórico no país é "um verdadeiro labirinto".
+- **Duas formas de mentoria**: construir o plano **do zero** ou fazer o **ajuste fino** e validar um projeto que a família já tem.
+
+> Divergência: o briefing dizia que ele mora em Monza desde 2013, mas entre 2014 e 2018 ele esteve no Brasil enquanto a família ficou em Monza. **[CONFIRMAR]** quando ele voltou e quando virou funcionário público.
 
 ## 10. Regras do blog
 

@@ -98,6 +98,8 @@ Faça as contas com calma: entre chegar, conseguir a casa, protocolar documentos
 
 É por isso que eu sempre digo: ninguém que respeita a sua família de verdade vai te mandar vir para a Itália com 5 mil euros no bolso. **Planejamento não é ter medo. É ter a dignidade de passar os primeiros meses com paz.**
 
+Veja quanto juntar antes de embarcar no artigo [Reserva financeira para morar na Itália](/blog/reserva-financeira-para-morar-na-italia).
+
 ## Perguntas frequentes
 
 **Quanto tempo leva para tirar a residência na Itália?**

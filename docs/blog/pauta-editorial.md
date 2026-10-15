@@ -19,7 +19,7 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 
 | # | Título | Palavra-chave principal | CTA | Fonte | Status |
 |---|---|---|---|---|---|
-| 4b | O erro dos 5.000 euros: quanto dinheiro levar para morar na Itália | quanto dinheiro levar para morar na Itália | Mentoria | Reel Erro dos 5.000, Custo de vida | 📝 |
+| 4b | Reserva financeira para morar na Itália: quanto juntar antes de embarcar | quanto dinheiro levar para morar na Itália | Mentoria | Reels Erro dos 5.000 e Reserva, Custo de vida | ✅ |
 | 4c | Os primeiros 90 dias na Itália: por que você ainda não vai trabalhar | primeiros meses na Itália | Mentoria | Reel Erro dos 5.000, Reel Documentos | 📝 |
 
 ## Pilar 2 — Custo de vida
@@ -36,7 +36,8 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 
 | # | Título | Palavra-chave principal | CTA | Fonte | Status |
 |---|---|---|---|---|---|
-| 10 | Morar em Monza: a cidade a 12 minutos de Milão | morar em Monza | Mentoria | Todos | 📝 |
+| 10 | Morar em Monza: a cidade com clima de interior e o quintal em Milão | morar em Monza | Mentoria | Reel Segredo de Monza, Custo de vida, Entrevista | ✅ |
+| 10b | Brasil x Itália: o que eu aprendi vivendo 4 anos de volta no Rio | custo de vida Brasil x Itália | Mentoria | Reel Segredo de Monza | 📝 |
 | 11 | Como escolher a cidade certa para morar na Itália | melhor cidade para morar na Itália | Mentoria | Entrevista, Itália real | 📝 |
 | 12 | Lombardia: por que o motor da Itália atrai quem quer trabalhar | morar na Lombardia | Mentoria | Custo de vida | 📝 |
 
@@ -48,6 +49,7 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 | 14 | Cônjuge sem cidadania italiana: como fica o permesso di soggiorno | permesso di soggiorno por família | Mentoria | Entrevista, Minha História PT3 | 📝 |
 | 15 | Questura: como se preparar (e por que não ir sozinho) | questura Itália | Mentoria | Entrevista | 📝 |
 | 16 | Engenharia documental: por que a mala nunca é o primeiro passo | imigrar para a Itália com segurança | Mentoria | Custo de vida, Itália real | 📝 |
+| 16a | Cidadania ou visto: os dois caminhos legais para morar na Itália | como morar legalmente na Itália | Mentoria | Série Mentoria ep. 1 | 📝 |
 | 16b | Codice fiscale: por que tirar ainda no Brasil | codice fiscale no Brasil | Guia | Reel Documentos, Entrevista | 📝 |
 | 16c | Saúde pública na Itália: como escolher o médico de família na ASST | médico de família Itália | Guia | Reel Documentos | 📝 |
 | 16d | Como converter a CNH brasileira na Itália | converter CNH na Itália | Guia | Reel Documentos | 📝 |
@@ -75,6 +77,8 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 | 20 | Os italianos são fechados com estrangeiros? O que eu vivi em 23 anos | italianos e brasileiros | Mentoria | Entrevista | 📝 |
 | 21 | Cheguei na Itália com 2 euros: o que eu faria diferente hoje | imigrar para a Itália | Mentoria | Minha História | ⏳ (falta PT4) |
 | 21b | Por que tantas famílias brasileiras estão escolhendo a Itália | morar na Itália vale a pena | Mentoria | Reel Coração da imigração, Itália real | 📝 |
+| 21c | Viver de aparências: por que famílias de classe média estão deixando o Brasil | sair do Brasil classe média | Mentoria | Reel Viver de aparências | 📝 |
+| 21d | Imigrar não é abandonar o Brasil: a hora certa de partir | quando mudar para a Itália | Mentoria | Reel Hora certa | 📝 |
 | 22 | Rafael e Luciana: do Brasil a Monza em 3 meses | mentoria imigração Itália | Mentoria | Entrevista | 📝 |
 
 ## Padrão de cada artigo
