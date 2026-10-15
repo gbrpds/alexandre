@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="ft-grid">
       <div class="ft-brand">
-        <a href="/" class="ft-logo"><span class="logo-mark">VI</span> Vida Italiana <span class="serif-italic">na Prática</span></a>
+        <a href="/" class="ft-logo"><img class="logo-mark" src="/fotos/logo-alexandre.png" alt="" width="40" height="40" /> Vida Italiana <span class="serif-italic">na Prática</span></a>
         <p>Mentoria individual para famílias brasileiras que querem imigrar para a Itália com segurança. Direto de Monza, há 23 anos vivendo o chão real.</p>
         <div class="ft-social">
           {SITE.instagram && <a href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={18} /></a>}
@@ -83,15 +83,9 @@ const year = new Date().getFullYear();
     color: var(--accent);
   }
   .logo-mark {
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: var(--accent);
-    color: var(--ink);
-    font-family: var(--font-serif);
-    font-style: italic;
   }
   .ft-brand p {
     max-width: 40ch;

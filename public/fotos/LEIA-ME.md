@@ -7,7 +7,7 @@ Os originais ficam em `fotos-originais/`. Aqui estão as versões recortadas e o
 | Arquivo | Origem | Onde aparece |
 |---|---|---|
 | `hero-bg.jpg` | IMG_3812.JPG | Topo da página |
-| `alexandre-avatar.jpg` | 0922.png (rosto) | Story, conversa, FAQ e autor do blog |
+| `alexandre-avatar.jpg` | 607329047_..._n.jpg (perfil com o Duomo) | Story, conversa, FAQ e autor do blog |
 | `story-1.jpg` | 3.png | Story: "Do Brasil para a Itália" |
 | `story-2.jpg` | IMG_0112.JPG | Story: "Nós cinco" |
 | `story-3.jpg` | IMG_9311.JPG | Story: "A Itália que me acolheu" |
@@ -31,3 +31,4 @@ Os originais ficam em `fotos-originais/`. Aqui estão as versões recortadas e o
 | `aluguel.jpg` | Seção "O que só quem vive aqui consegue fazer" | Vertical 4:5 |
 | `galeria-01..04.jpg` | Galeria, fileira de cima | Vertical 4:5 |
 | `galeria-05..08.jpg` | Galeria, fileira de baixo | Horizontal 16:10 |
+| `logo-alexandre.png` | 607329047_..._n.jpg | Logo no topo e no rodapé (também `favicon-32.png`, `favicon-48.png`, `apple-touch-icon.png`) |
