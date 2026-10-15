@@ -1,0 +1,30 @@
+---
+// Borda de papel rasgado. Fica colada no topo ou na base de uma seção,
+// pintada com a cor da própria seção.
+interface Props {
+  color: string;
+  position?: 'top' | 'bottom';
+  seed?: number;
+}
+const { color, position = 'top', seed = 1 } = Astro.props;
+
+let s = seed * 9301 + 49297;
+const rand = () => {
+  s = (s * 9301 + 49297) % 233280;
+  return s / 233280;
+};
+
+const points: string[] = [];
+let x = 0;
+while (x < 1440) {
+  points.push(`${x.toFixed(1)},${(18 + rand() * 30).toFixed(1)}`);
+  x += 8 + rand() * 26;
+}
+points.push('1440,30');
+const d = `M0,60 L${points.join(' L')} L1440,60 Z`;
+---
+<div class={`torn torn--${position}`} aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d={d} fill={color} />
+  </svg>
+</div>

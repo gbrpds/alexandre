@@ -1,0 +1,1124 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Torn from '../components/Torn.astro';
+import { SITE } from '../config';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const dores = [
+  'Nenhum proprietário italiano quer alugar para quem ele não conhece.',
+  'Você não sabe quanto dinheiro precisa levar, e 5 mil euros não bastam.',
+  'Codice fiscale, permesso, residência: ninguém explica a ordem certa.',
+  'A cidade escolhida pelo Instagram nem sempre é a cidade certa para você.',
+  'A dúvida se os filhos vão se adaptar na escola e no idioma.',
+  'O medo de vender tudo e voltar com uma mão na frente e outra atrás.',
+];
+
+const historia = [
+  { ano: '2003', titulo: 'Eu tinha tudo, menos segurança', texto: 'Um sequestro relâmpago e um assalto à mão armada em São Paulo. Bom emprego, dois carros, escola particular, e o medo de ver meus três filhos crescerem assim.' },
+  { ano: '2003', titulo: 'Cheguei com 2 euros no bolso', texto: 'Deixei todo o dinheiro com a Clarissa e as crianças. A mala se perdeu e passei a primeira noite no saguão do aeroporto de Nice.' },
+  { ano: '2003', titulo: 'Mais de 100 portas fechadas', texto: 'Crise pós-euro. Andei a pé de Monza até Milão batendo em fábricas e restaurantes. Lavei prato, cortei grama, dormi com cinco cobertores num apartamento sem aquecimento.' },
+  { ano: '2004', titulo: 'A família reunida na montanha', texto: 'Depois de sete meses longe, alugamos uma casa de 300 euros numa vila de 90 habitantes. Uma moto velha, o eBay e a comunidade local nos ajudaram a atravessar o primeiro inverno.' },
+  { ano: 'Hoje', titulo: 'A raiz deu frutos', texto: 'Sou funcionário público em Monza. Meus filhos são trilíngues, trabalham e estão comprando suas próprias casas. Agora eu estendo a mão, como alguém um dia fez comigo.' },
+];
+
+const etapas = [
+  { titulo: 'Diagnóstico do seu perfil', texto: 'Um questionário e uma conversa sem pressa para entender a sua família, a sua renda, os seus documentos e o seu momento.' },
+  { titulo: 'A cidade certa para você', texto: 'Não a da moda: a que combina com o seu perfil, o seu trabalho e a sua rede de apoio. Às vezes eu digo que não é Monza.' },
+  { titulo: 'Reserva e documentos', texto: 'Quanto juntar, o que tirar ainda no Brasil e a ordem certa da burocracia. Engenharia documental antes da mala.' },
+  { titulo: 'O aluguel antes do embarque', texto: 'Eu faço a ponte com imobiliárias e proprietários que confiam no meu nome, para você embarcar com o contrato encaminhado.' },
+  { titulo: 'Chegada acompanhada', texto: 'Questura, residência, codice fiscale, médico de família. Eu estou do seu lado nos primeiros passos, falando a língua deles.' },
+  { titulo: 'Integração e rede', texto: 'Apresento você a quem importa: corretor, proprietário, vizinhos. Na Itália, as relações se criam assim.' },
+];
+
+const faqs = [
+  { q: 'A mentoria é em grupo ou individual?', a: 'Individual. Cada família tem as suas chamadas comigo, desde o planejamento no Brasil até os primeiros passos na Itália.' },
+  { q: 'Preciso ter cidadania italiana?', a: 'Não necessariamente. Existem dois caminhos legais: a cidadania ou um visto bem amarrado. O que não dá é vir sem chão jurídico, porque aluguel, escola e saúde exigem residência legal.' },
+  { q: 'Você garante o aluguel?', a: 'Eu não prometo milagre: eu coloco o meu nome e a minha credibilidade na mesa por famílias preparadas. Por isso a preparação, com reserva e documentos em ordem, é parte da mentoria.' },
+  { q: 'Só atende quem quer morar em Monza?', a: 'Não. Eu conheço muito bem o norte da Itália e indico a cidade pelo seu perfil. Se a sua estrutura de apoio estiver em outra região, eu vou te dizer para ir para lá.' },
+  { q: 'Quanto dinheiro preciso para me mudar?', a: 'Como meta mínima: 10 mil euros sozinho, 15 mil em casal e 20 mil com filhos. Na mentoria, a gente calcula a reserva exata da sua família.' },
+  { q: 'Já tenho um plano. A mentoria serve para mim?', a: 'Sim. Além de construir o plano do zero, eu faço o ajuste fino: valido cada etapa do projeto que você já tem para zerar as falhas antes do embarque.' },
+];
+
+const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<Base
+  title="Vida Italiana na Prática | Mentoria para imigrar para a Itália com segurança"
+  description="Mentoria individual com o Alexandre, há 23 anos na Itália, para famílias brasileiras que querem imigrar com segurança: cidade certa, reserva, documentos e aluguel."
+>
+  <!-- HERO -->
+  <section class="hero on-dark">
+    <Header />
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Mentoria individual · Direto de Monza</p>
+        <h1>Sua família na Itália, <em class="hl">do jeito certo</em>: com casa, documentos e segurança.</h1>
+        <p class="lead">Eu vivo há 23 anos o chão real da Itália. Cheguei com 2 euros no bolso e sem falar italiano. Hoje eu acompanho famílias brasileiras do planejamento no Brasil até a chave na mão.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-primary">Quero desenhar minha travessia</a>
+          <a href="#historia" class="btn btn-ghost">Conheça minha história</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="/fotos/alexandre-hero.jpg" alt="Alexandre, mentor do Vida Italiana na Prática" width="900" height="1200" fetchpriority="high" />
+        <div class="hero-badge">
+          <strong>23</strong>
+          <span>anos vivendo<br />na Itália</span>
+        </div>
+      </div>
+    </div>
+    <Torn color="var(--cream)" position="bottom" seed={3} />
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="stats cream">
+    <div class="container stats-grid">
+      <div><strong>23</strong><span>anos morando na Itália</span></div>
+      <div><strong>3</strong><span>filhos criados aqui, hoje adultos e trilíngues</span></div>
+      <div><strong>~50</strong><span>apartamentos pesquisados por contrato fechado</span></div>
+      <div><strong>1:1</strong><span>mentoria individual, do Brasil até a chegada</span></div>
+    </div>
+  </section>
+
+  <!-- DOR -->
+  <section class="section dor">
+    <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow">A Itália real</p>
+        <h2>Planejar a mudança parece simples. <span class="mark">Até você começar a pesquisar.</span></h2>
+        <p class="lead">Informação solta no Instagram, gente vendendo sonho e ninguém te dizendo a conta exata. O resultado é uma família ansiosa, com medo de errar no passo mais importante da vida.</p>
+      </div>
+      <ul class="dor-grid">
+        {dores.map((d) => (
+          <li class="reveal">
+            <span class="dor-icon" aria-hidden="true">✕</span>
+            {d}
+          </li>
+        ))}
+      </ul>
+      <blockquote class="big-quote reveal">
+        “A Itália não é um país para amadores. Ela é generosa com quem se prepara, mas <span class="mark">implacável com quem vem na ilusão.</span>”
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section id="historia" class="section dark on-dark historia">
+    <Torn color="var(--olive)" position="top" seed={7} />
+    <div class="container historia-grid">
+      <div class="historia-head reveal">
+        <p class="eyebrow">Minha história</p>
+        <h2>Eu já fiz essa travessia. <em class="hl">Sem ninguém para me guiar.</em></h2>
+        <p class="lead">Meu nome é Alexandre. Em 2003, eu deixei uma vida estável em São Paulo para construir o futuro dos meus filhos com segurança. A família inteira disse que era loucura.</p>
+        <div class="polaroids" aria-hidden="false">
+          <figure class="polaroid tape p1"><img src="/fotos/polaroid-2003.jpg" alt="Alexandre em 2003, recém-chegado à Itália" loading="lazy" width="800" height="800" /><figcaption>Monza, 2003</figcaption></figure>
+          <figure class="polaroid p2"><img src="/fotos/polaroid-montanha.jpg" alt="A primeira casa da família, na montanha da Ligúria" loading="lazy" width="800" height="800" /><figcaption>A casa na montanha</figcaption></figure>
+          <figure class="polaroid tape p3"><img src="/fotos/polaroid-familia.jpg" alt="Alexandre com a esposa Clarissa e os três filhos" loading="lazy" width="800" height="800" /><figcaption>Nós cinco</figcaption></figure>
+        </div>
+      </div>
+      <ol class="timeline">
+        {historia.map((h) => (
+          <li class="reveal">
+            <span class="t-ano">{h.ano}</span>
+            <h3>{h.titulo}</h3>
+            <p>{h.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <blockquote class="historia-quote container reveal">
+      “Migrar não é somente sobre você. <em class="hl">É sobre quem vem depois de você.</em>”
+    </blockquote>
+    <Torn color="var(--cream)" position="bottom" seed={11} />
+  </section>
+
+  <!-- ALUGUEL -->
+  <section class="section cream aluguel">
+    <div class="container aluguel-grid">
+      <div class="aluguel-photo reveal">
+        <figure class="polaroid tape">
+          <img src="/fotos/aluguel.jpg" alt="Prédio residencial em Monza" loading="lazy" width="1200" height="1500" />
+          <figcaption>A chave na mão</figcaption>
+        </figure>
+        <div class="stamp" aria-hidden="true">Contrato<br />antes do<br />embarque</div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">O meu diferencial</p>
+        <h2>O maior gargalo do brasileiro na Itália <span class="mark">é o teto.</span></h2>
+        <p>O proprietário italiano é conservador. Sem histórico no país, sem contrato de trabalho italiano e sem ninguém que responda por você, a porta simplesmente não abre. E sem casa não existe residência. Sem residência, o resto não anda.</p>
+        <p>É aqui que os meus 23 anos fazem diferença. Eu conheço imobiliárias e proprietários, falo a língua deles e <strong>coloco o meu nome e a minha credibilidade na mesa</strong> por famílias preparadas.</p>
+        <div class="big-number">
+          <strong>50</strong>
+          <span>apartamentos, em média, eu pesquiso para conseguir um contrato. Você não precisa fazer isso sozinho, do outro lado do oceano.</span>
+        </div>
+        <a href="#contato" class="btn btn-dark">Quero chegar com a chave na mão</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORIA -->
+  <section id="mentoria" class="section mentoria">
+    <Torn color="var(--paper)" position="top" seed={19} />
+    <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow">Como funciona a mentoria</p>
+        <h2>Do Brasil até a chave na mão, <span class="mark">passo a passo.</span></h2>
+        <p class="lead">Acompanhamento individual, em chamadas, com a sua família. Eu sou as suas pernas e os seus olhos no solo italiano.</p>
+      </div>
+      <ol class="etapas">
+        {etapas.map((e, i) => (
+          <li class="reveal">
+            <span class="etapa-n">{i + 1}</span>
+            <div>
+              <h3>{e.titulo}</h3>
+              <p>{e.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="modalidades">
+        <article class="modalidade reveal">
+          <p class="tag">Plano do zero</p>
+          <h3>Ainda estou no começo</h3>
+          <p>Para quem tem o sonho, mas não sabe por onde começar. Construímos juntos todo o projeto: caminho legal, cidade, reserva, documentos e chegada.</p>
+        </article>
+        <article class="modalidade reveal">
+          <p class="tag">Ajuste fino</p>
+          <h3>Já tenho um plano</h3>
+          <p>Para quem já estudou e se organizou. Eu valido cada etapa do seu projeto, aponto os riscos e ajusto o que for preciso para zerar as falhas.</p>
+        </article>
+      </div>
+      <div class="center">
+        <a href="#contato" class="btn btn-primary">Quero minha análise de perfil</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTO -->
+  <section id="depoimento" class="section dark on-dark depoimento">
+    <Torn color="var(--olive)" position="top" seed={23} />
+    <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow">Quem já fez o caminho</p>
+        <h2>Nove anos esperando a cidadania. <em class="hl">Três meses até a Itália.</em></h2>
+        <p class="lead">Rafael e Luciana me conheceram em janeiro. Em 1º de abril desembarcaram com um apartamento esperando por eles no centro histórico de Monza. Eu gravei com eles seis dias depois da chegada.</p>
+      </div>
+      <div class="video reveal">
+        {SITE.videoDepoimento ? (
+          <button class="video-facade" data-id={SITE.videoDepoimento} aria-label="Assistir à entrevista com Rafael e Luciana">
+            <img src="/fotos/rafael-luciana.jpg" alt="" loading="lazy" width="1280" height="720" />
+            <span class="play" aria-hidden="true"></span>
+          </button>
+        ) : (
+          <div class="video-facade is-pending">
+            <img src="/fotos/rafael-luciana.jpg" alt="Rafael e Luciana em Monza" loading="lazy" width="1280" height="720" />
+            <span class="play" aria-hidden="true"></span>
+          </div>
+        )}
+      </div>
+      <div class="quotes">
+        <figure class="note reveal">
+          <blockquote>“Quando você falou que o apartamento era nosso, em quatro horas eu comprei a passagem. Sem isso, a gente não embarcaria.”</blockquote>
+          <figcaption>Rafael</figcaption>
+        </figure>
+        <figure class="note reveal">
+          <blockquote>“O teu trabalho é humanizado, é sério, tem um lado emocional. Você tem a impressão de que está com uma mão te ajudando a caminhar.”</blockquote>
+          <figcaption>Luciana</figcaption>
+        </figure>
+        <figure class="note reveal">
+          <blockquote>“A nossa família olha para você e sente confiança. Parece um tio, um pai ou um irmão que está lá para te receber.”</blockquote>
+          <figcaption>Rafael</figcaption>
+        </figure>
+      </div>
+    </div>
+    <Torn color="var(--cream)" position="bottom" seed={29} />
+  </section>
+
+  <!-- GUIA -->
+  <section id="guia" class="section cream guia">
+    <div class="container">
+      <div class="guia-box reveal">
+        <div class="guia-copy">
+          <p class="eyebrow">Para começar hoje</p>
+          <h2>Guia digital <em>Vida Italiana na Prática</em></h2>
+          <p>Ainda não é a hora da mentoria? Comece pelo meu guia. Eu organizei o que aprendi em 23 anos para você se planejar com os pés no chão, no seu ritmo.</p>
+          <ul class="checks">
+            <li>Os primeiros passos para planejar a mudança</li>
+            <li>Custos reais de quem vive na Itália</li>
+            <li>A ordem dos documentos e da burocracia</li>
+            <li>Os erros que fazem famílias voltarem ao Brasil</li>
+          </ul>
+          <a href={SITE.guiaUrl} class="btn btn-primary" rel="noopener" target="_blank">Quero o guia digital</a>
+        </div>
+        <div class="guia-side">
+          <div class="guia-stat"><strong>23</strong><span>anos de chão real</span></div>
+          <div class="guia-stat"><strong>100%</strong><span>online, no seu ritmo</span></div>
+          <div class="guia-stat"><strong>PT</strong><span>em português, de brasileiro para brasileiro</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="section blog-teaser">
+    <Torn color="var(--paper)" position="top" seed={31} />
+    <div class="container">
+      <div class="blog-head reveal">
+        <div>
+          <p class="eyebrow">Do blog</p>
+          <h2>A Itália real, <span class="mark">em números e histórias.</span></h2>
+        </div>
+        <a href="/blog" class="btn btn-ghost">Ver todos os artigos</a>
+      </div>
+      <div class="posts">
+        {posts.map((p) => (
+          <a href={`/blog/${p.id}`} class="post-card reveal">
+            <span class="post-cat">{p.data.category}</span>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.description}</p>
+            <span class="post-more">Ler artigo →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq cream">
+    <Torn color="var(--cream)" position="top" seed={37} />
+    <div class="container faq-grid">
+      <div class="reveal">
+        <p class="eyebrow">Perguntas frequentes</p>
+        <h2>Antes de você me chamar.</h2>
+        <p class="lead">Se a sua dúvida não estiver aqui, me escreva. Eu respondo pessoalmente.</p>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="reveal">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section dark on-dark contato">
+    <Torn color="var(--olive)" position="top" seed={41} />
+    <div class="container contato-grid">
+      <div class="reveal">
+        <p class="eyebrow">Vamos conversar</p>
+        <h2>Me conta a sua história. <em class="hl">Eu te mostro o caminho seguro.</em></h2>
+        <p class="lead">Responda três perguntas rápidas. A sua mensagem chega direto no meu WhatsApp e eu te respondo pessoalmente.</p>
+        <p class="assinatura">Um abraço forte aqui de Monza,<br /><span>Alexandre</span></p>
+      </div>
+      <form class="lead-form reveal" id="lead-form" data-whatsapp={SITE.whatsapp}>
+        <label>
+          Seu nome
+          <input name="nome" required autocomplete="name" placeholder="Como posso te chamar?" />
+        </label>
+        <label>
+          Quem vem para a Itália?
+          <select name="quem" required>
+            <option value="">Selecione</option>
+            <option>Só eu</option>
+            <option>Eu e meu cônjuge</option>
+            <option>Família com filhos</option>
+          </select>
+        </label>
+        <label>
+          Como está a sua documentação?
+          <select name="doc" required>
+            <option value="">Selecione</option>
+            <option>Já tenho cidadania italiana</option>
+            <option>A cidadania está em processo</option>
+            <option>Não tenho, vou precisar de visto</option>
+            <option>Ainda não sei qual é o meu caminho</option>
+          </select>
+        </label>
+        <label>
+          Qual é o seu momento?
+          <select name="momento" required>
+            <option value="">Selecione</option>
+            <option>Estou começando a planejar</option>
+            <option>Já tenho um plano e quero validá-lo</option>
+            <option>Quero me mudar nos próximos meses</option>
+            <option>Já moro na Itália e quero orientação</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary">Enviar pelo WhatsApp</button>
+        <p class="form-note" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.video-facade[data-id]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1`;
+      iframe.title = 'Entrevista com Rafael e Luciana';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      btn.replaceWith(iframe);
+    });
+  });
+
+  const form = document.getElementById('lead-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const note = form.querySelector('.form-note') as HTMLElement;
+    const numero = form.dataset.whatsapp;
+    const texto =
+      `Olá, Alexandre! Sou ${data.get('nome')}.\n` +
+      `Quem vem: ${data.get('quem')}\n` +
+      `Documentação: ${data.get('doc')}\n` +
+      `Meu momento: ${data.get('momento')}\n` +
+      `Quero saber mais sobre a mentoria.`;
+    if (!numero) {
+      note.textContent = 'O WhatsApp ainda não foi configurado no site.';
+      return;
+    }
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+  });
+</script>
+
+<style>
+  .center {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px;
+  }
+  .center .lead {
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  .hero {
+    color: #fff;
+    background: var(--ink);
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 130px 0 110px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(20, 28, 18, 0.92) 0%, rgba(20, 28, 18, 0.7) 45%, rgba(20, 28, 18, 0.25) 100%),
+      url('/fotos/hero-bg.jpg') center / cover no-repeat;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero h1 {
+    margin-bottom: 0.45em;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .hero-photo {
+    position: relative;
+    justify-self: end;
+    width: min(100%, 440px);
+  }
+  .hero-photo img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 220px 220px 18px 18px;
+    border: 6px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+  }
+  .hero-badge {
+    position: absolute;
+    left: -36px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--yellow);
+    color: var(--ink);
+    padding: 14px 20px;
+    border-radius: 14px;
+    transform: rotate(-4deg);
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-impact);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+  .hero-badge strong {
+    font-size: 2.6rem;
+    line-height: 1;
+  }
+
+  /* STATS */
+  .stats {
+    padding: 72px 0 56px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .stats-grid div {
+    border-left: 3px solid var(--yellow);
+    padding-left: 18px;
+  }
+  .stats-grid strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stats-grid span {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  /* DOR */
+  .dor-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 72px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .dor-grid li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: 0 10px 30px -24px rgba(0, 0, 0, 0.4);
+  }
+  .dor-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .big-quote {
+    margin: 0 auto;
+    max-width: 880px;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.3;
+  }
+
+  /* HISTÓRIA */
+  .historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .historia-head {
+    position: sticky;
+    top: 40px;
+  }
+  .polaroids {
+    position: relative;
+    height: 360px;
+    margin-top: 40px;
+  }
+  .polaroids .polaroid {
+    position: absolute;
+    width: 52%;
+    margin: 0;
+  }
+  .p1 {
+    left: 0;
+    top: 10px;
+    transform: rotate(-6deg);
+  }
+  .p2 {
+    left: 26%;
+    top: 60px;
+    transform: rotate(4deg);
+    z-index: 2;
+  }
+  .p3 {
+    right: 0;
+    top: 0;
+    transform: rotate(-2deg);
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 32px;
+    border-left: 2px dashed rgba(245, 196, 0, 0.5);
+  }
+  .timeline li {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -41px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 0 5px rgba(245, 196, 0, 0.2);
+  }
+  .t-ano {
+    font-family: var(--font-impact);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+    font-size: 0.85rem;
+  }
+  .timeline h3 {
+    margin: 4px 0 8px;
+  }
+  .timeline p {
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+  }
+  .historia-quote {
+    margin-top: 40px;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+    line-height: 1.25;
+  }
+
+  /* ALUGUEL */
+  .aluguel-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .aluguel-photo {
+    position: relative;
+  }
+  .aluguel-photo .polaroid {
+    margin: 0;
+    transform: rotate(-3deg);
+  }
+  .aluguel-photo .polaroid img {
+    aspect-ratio: 4 / 5;
+  }
+  .stamp {
+    position: absolute;
+    right: -24px;
+    bottom: 60px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid var(--terracotta);
+    color: var(--terracotta);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--font-impact);
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    transform: rotate(12deg);
+    background: rgba(244, 236, 221, 0.9);
+  }
+  .big-number {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 28px 0 32px;
+    padding: 22px 24px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--radius);
+  }
+  .big-number strong {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--yellow);
+  }
+  .big-number span {
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* MENTORIA */
+  .mentoria {
+    background: var(--paper);
+  }
+  .etapas {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 40px;
+  }
+  .etapas li {
+    display: flex;
+    gap: 16px;
+  }
+  .etapa-n {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    line-height: 0.85;
+    font-weight: 600;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--yellow);
+  }
+  .etapas h3 {
+    margin-bottom: 6px;
+  }
+  .etapas p {
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+  .modalidades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .modalidade {
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 32px;
+    background: #fff;
+    box-shadow: 8px 8px 0 var(--yellow);
+  }
+  .modalidade .tag {
+    display: inline-block;
+    font-family: var(--font-impact);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--yellow);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  .modalidade p:last-child {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* DEPOIMENTO */
+  .video {
+    max-width: 900px;
+    margin: 0 auto 56px;
+  }
+  .video-facade,
+  .video :global(iframe) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    background: #000;
+    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+  }
+  button.video-facade {
+    cursor: pointer;
+  }
+  .video-facade img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+  }
+  .play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 0 12px rgba(245, 196, 0, 0.25);
+  }
+  .play::after {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: 26px;
+    border-left: 24px solid var(--ink);
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+  }
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .note {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 28px 24px 22px;
+    position: relative;
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  }
+  .note:nth-child(1) {
+    transform: rotate(-1.5deg);
+  }
+  .note:nth-child(2) {
+    transform: rotate(1deg);
+  }
+  .note:nth-child(3) {
+    transform: rotate(-0.5deg);
+  }
+  .note::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 80px;
+    height: 24px;
+    transform: translateX(-50%) rotate(2deg);
+    background: rgba(245, 196, 0, 0.6);
+  }
+  .note blockquote {
+    margin: 0 0 14px;
+    font-family: var(--font-serif);
+    font-size: 1.12rem;
+    line-height: 1.45;
+  }
+  .note figcaption {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--terracotta);
+  }
+
+  /* GUIA */
+  .guia-box {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    background: var(--paper);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.5);
+  }
+  .guia-copy {
+    padding: clamp(28px, 5vw, 56px);
+  }
+  .guia-copy h2 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .checks {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 32px;
+    display: grid;
+    gap: 12px;
+  }
+  .checks li {
+    position: relative;
+    padding-left: 34px;
+  }
+  .checks li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--yellow);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 0.8rem;
+  }
+  .guia-side {
+    background: var(--ink);
+    color: #fff;
+    display: grid;
+    align-content: center;
+    gap: 28px;
+    padding: 40px 32px;
+  }
+  .guia-stat strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .guia-stat span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  /* BLOG */
+  .blog-teaser {
+    background: var(--paper);
+  }
+  .blog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .blog-head h2 {
+    margin: 0;
+  }
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.5);
+  }
+  .post-cat {
+    font-family: var(--font-impact);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .post-card h3 {
+    font-size: 1.3rem;
+  }
+  .post-card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    flex: 1;
+  }
+  .post-more {
+    font-weight: 700;
+  }
+
+  /* FAQ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 64px;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  .faq-list summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-list summary::after {
+    content: '+';
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    transition: transform 0.2s ease;
+  }
+  .faq-list details[open] summary::after {
+    transform: rotate(45deg);
+  }
+  .faq-list p {
+    margin: 12px 0 0;
+    color: var(--ink-soft);
+  }
+
+  /* CONTATO */
+  .contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .assinatura {
+    margin-top: 32px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .assinatura span {
+    font-family: 'Caveat', cursive;
+    font-size: 2.2rem;
+    color: var(--yellow);
+  }
+  .lead-form {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 20px;
+    padding: clamp(24px, 4vw, 40px);
+    display: grid;
+    gap: 18px;
+    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.6);
+  }
+  .lead-form label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .lead-form input,
+  .lead-form select {
+    font: inherit;
+    font-weight: 400;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    width: 100%;
+  }
+  .lead-form input:focus,
+  .lead-form select:focus {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.5);
+  }
+  .lead-form .btn {
+    width: 100%;
+    margin-top: 6px;
+  }
+  .form-note {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--terracotta);
+    min-height: 1.2em;
+  }
+
+  /* RESPONSIVO */
+  @media (max-width: 960px) {
+    .hero-grid,
+    .historia-grid,
+    .aluguel-grid,
+    .faq-grid,
+    .contato-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-photo {
+      justify-self: center;
+      width: min(80%, 360px);
+    }
+    .historia-head {
+      position: static;
+    }
+    .stats-grid,
+    .dor-grid,
+    .etapas,
+    .quotes,
+    .posts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .guia-box {
+      grid-template-columns: 1fr;
+    }
+    .guia-side {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 28px;
+    }
+    .aluguel-photo {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: 110px;
+    }
+    .hero-badge {
+      left: -10px;
+    }
+    .stats-grid,
+    .dor-grid,
+    .etapas,
+    .quotes,
+    .posts,
+    .modalidades {
+      grid-template-columns: 1fr;
+    }
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .polaroids {
+      height: 260px;
+    }
+    .stamp {
+      right: -6px;
+      width: 104px;
+      height: 104px;
+      font-size: 0.62rem;
+    }
+    .big-number {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .guia-side {
+      grid-template-columns: 1fr;
+    }
+    .hero-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

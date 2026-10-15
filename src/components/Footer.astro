@@ -1,0 +1,68 @@
+---
+import { SITE } from '../config';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container inner">
+    <div>
+      <p class="name">Vida Italiana <em>na Prática</em></p>
+      <p class="tag">Mentoria para famílias brasileiras que querem imigrar para a Itália com segurança. Direto de Monza, há 23 anos vivendo o chão real.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <a href="/#historia">Minha história</a>
+      <a href="/#mentoria">Mentoria</a>
+      <a href="/#guia">Guia digital</a>
+      <a href="/blog">Blog</a>
+      <a href="/#contato">Contato</a>
+      {SITE.instagram && <a href={SITE.instagram} rel="noopener" target="_blank">Instagram</a>}
+      {SITE.youtube && <a href={SITE.youtube} rel="noopener" target="_blank">YouTube</a>}
+    </nav>
+  </div>
+  <div class="container legal">© {year} Vida Italiana na Prática · Alexandre</div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255, 255, 255, 0.78);
+    padding: 64px 0 28px;
+    font-size: 0.95rem;
+  }
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.4em;
+  }
+  .name em {
+    color: var(--yellow);
+  }
+  .tag {
+    max-width: 44ch;
+  }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px 40px;
+    align-content: start;
+  }
+  nav a {
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--yellow);
+  }
+  .legal {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+</style>

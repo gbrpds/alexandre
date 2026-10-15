@@ -1,0 +1,102 @@
+---
+const { solid = false } = Astro.props;
+---
+<header class:list={['site-header', { solid }]}>
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Vida Italiana na Prática — início">
+      <span class="brand-mark">VI</span>
+      <span class="brand-text">Vida Italiana<br /><em>na Prática</em></span>
+    </a>
+    <nav aria-label="Principal">
+      <a href="/#historia">Minha história</a>
+      <a href="/#mentoria">Mentoria</a>
+      <a href="/#depoimento">Depoimentos</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <a href="/#contato" class="btn btn-primary btn-sm">Quero minha análise</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    color: #fff;
+    padding: 18px 0;
+  }
+  .site-header.solid {
+    position: relative;
+    background: var(--olive);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--yellow);
+    color: var(--yellow);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .brand-text {
+    font-family: var(--font-impact);
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.15;
+  }
+  .brand-text em {
+    font-family: var(--font-serif);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--yellow);
+  }
+  nav {
+    display: flex;
+    gap: 28px;
+    font-size: 0.95rem;
+  }
+  nav a {
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  nav a:hover {
+    opacity: 1;
+    color: var(--yellow);
+  }
+  .btn-sm {
+    padding: 0.8em 1.3em;
+    font-size: 0.78rem;
+  }
+  @media (max-width: 900px) {
+    nav {
+      display: none;
+    }
+  }
+  @media (max-width: 480px) {
+    .btn-sm {
+      display: none;
+    }
+  }
+</style>
