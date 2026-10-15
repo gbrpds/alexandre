@@ -299,7 +299,17 @@ const faqs = [
             <a href={waLink()} class="btn btn-accent dif-btn">Quero chegar com a chave na mão <Icon name="arrow" size={16} /></a>
           </div>
           <div class="dif-figure reveal">
-            <img src="/fotos/aluguel.jpg" alt="Prédio residencial em Monza" loading="lazy" width="1200" height="1500" />
+            <div class="dif-slides" data-dif-slides>
+              {[
+                ['apto-1', 'Rua residencial com casas coloridas na Itália'],
+                ['apto-2', 'Prédios residenciais às margens de um canal em Veneza'],
+                ['apto-3', 'Sala de um apartamento italiano iluminado'],
+                ['apto-4', 'Telhados residenciais de Florença'],
+                ['apto-5', 'Ruela com prédios residenciais na Itália'],
+              ].map(([src, alt], i) => (
+                <img class:list={['dif-slide', i === 0 && 'is-on']} src={`/fotos/${src}.jpg`} alt={alt} loading="lazy" width="1200" height="1500" />
+              ))}
+            </div>
             <div class="dif-stat">
               <strong>~50</strong>
               <span>apartamentos pesquisados, em média, para cada contrato fechado</span>
@@ -549,6 +559,17 @@ const faqs = [
 
 <script>
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Fotos de apartamentos que se alternam no bloco "~50"
+  const difSlides = document.querySelectorAll<HTMLElement>('[data-dif-slides] .dif-slide');
+  if (difSlides.length > 1 && !reduced) {
+    let difCur = 0;
+    setInterval(() => {
+      difSlides[difCur].classList.remove('is-on');
+      difCur = (difCur + 1) % difSlides.length;
+      difSlides[difCur].classList.add('is-on');
+    }, 3800);
+  }
 
   // Palavra que troca no hero
   const word = document.querySelector<HTMLElement>('[data-rotate]');
@@ -1387,10 +1408,23 @@ const faqs = [
     overflow: hidden;
     aspect-ratio: 4 / 5;
   }
-  .dif-figure img {
+  .dif-slides {
+    position: absolute;
+    inset: 0;
+  }
+  .dif-slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1.1s ease, transform 5.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .dif-slide.is-on {
+    opacity: 1;
+    transform: scale(1);
   }
   .dif-stat {
     position: absolute;

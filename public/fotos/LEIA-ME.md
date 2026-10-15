@@ -35,7 +35,11 @@ Os originais ficam em `fotos-originais/`. Aqui estão as versões recortadas e o
 | `card-chegada.jpg` | Plataforma de estação de trem | 1532105956626-9569c03602f6 |
 | `card-custo.jpg` | Notas de euro | 1621981386829-9b458a2cddde |
 | `card-concurso.jpg` | Prancheta com checklist | 1586281380349-632531db7ed4 |
-| `aluguel.jpg` | Rua estreita com prédios residenciais | 1527631746610-bca00a040d60 |
+| `apto-1.jpg` | Rua com casas coloridas (bloco "~50", alterna) | 1515859005217-8a1f08870f59 |
+| `apto-2.jpg` | Prédios residenciais em canal de Veneza (bloco "~50") | 1498307833015-e7b400441eb8 |
+| `apto-3.jpg` | Sala de apartamento iluminado (bloco "~50") | 1522708323590-d24dbb6b0267 |
+| `apto-4.jpg` | Telhados de Florença (bloco "~50") | 1541370976299-4d24ebbc9077 |
+| `apto-5.jpg` | Ruela com prédios residenciais (bloco "~50") | 1527631746610-bca00a040d60 |
 | `galeria-01.jpg` | Manarola, Cinque Terre (Ligúria) | 1516483638261-f4dbaf036963 |
 | `galeria-02.jpg` | Florença | 1528114039593-4366cc08227d |
 | `galeria-03.jpg` | Canal em Veneza | 1534113414509-0eec2bfb493f |
