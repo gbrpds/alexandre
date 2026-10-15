@@ -8,7 +8,7 @@ export const SITE = {
   youtube: '',
   // ID do vídeo da entrevista com Rafael e Luciana (parte final da URL do YouTube).
   videoDepoimento: '',
-  guiaUrl: 'https://guerzoni9.hotmart.host/pagina-de-vendas-6c4bcb33-194f-427d-a1d0-5b4876a7278b',
+  guiaUrl: 'https://pay.hotmart.com/H103483390L?off=5svxi8vu',
 };
 
 const MSG_PADRAO = 'Olá, Alexandre! Vim pelo site do Vida Italiana na Prática e quero saber mais sobre a mentoria.';
