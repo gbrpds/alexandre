@@ -1,11 +1,11 @@
 // Dados de contato e links do projeto.
-// TODO: preencher com os dados reais do Alexandre.
 export const SITE = {
   name: 'Vida Italiana na Prática',
   // Número no formato internacional, só dígitos (ex.: 39XXXXXXXXXX).
-  whatsapp: '',
-  instagram: '',
-  youtube: '',
+  whatsapp: '393793447644',
+  instagram: 'https://www.instagram.com/vidaitaliananapratica.oficial/',
+  tiktok: 'https://www.tiktok.com/@vidaitaliananapratica',
+  youtube: 'https://www.youtube.com/@vidaitaliananapratica',
   // ID do vídeo da entrevista com Rafael e Luciana (parte final da URL do YouTube).
   videoDepoimento: '',
   guiaUrl: 'https://pay.hotmart.com/H103483390L?off=5svxi8vu',

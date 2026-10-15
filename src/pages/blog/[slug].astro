@@ -26,7 +26,7 @@ const jsonLd = {
   datePublished: date.toISOString(),
   inLanguage: 'pt-BR',
   author: { '@type': 'Person', name: 'Alexandre' },
-  publisher: { '@type': 'Organization', name: 'Vida Italiana na Prática' },
+  publisher: { '@type': 'Organization', name: 'Vida Italiana na Prática', sameAs: [SITE.instagram, SITE.tiktok, SITE.youtube].filter(Boolean) },
   mainEntityOfPage: new URL(`/blog/${post.id}`, Astro.site).toString(),
 };
 ---
