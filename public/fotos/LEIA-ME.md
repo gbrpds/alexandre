@@ -1,17 +1,33 @@
 # Fotos do site
 
-As imagens desta pasta são **provisórias** (gradientes com o nome do arquivo).
-Para trocar, basta substituir o arquivo mantendo o mesmo nome.
+Os originais ficam em `fotos-originais/`. Aqui estão as versões recortadas e otimizadas.
+
+## Fotos reais em uso
+
+| Arquivo | Origem | Onde aparece |
+|---|---|---|
+| `hero-bg.jpg` | IMG_3812.JPG | Topo da página |
+| `alexandre-avatar.jpg` | 0922.png (rosto) | Story, conversa, FAQ e autor do blog |
+| `story-1.jpg` | 3.png | Story: "Do Brasil para a Itália" |
+| `story-2.jpg` | IMG_0112.JPG | Story: "Nós cinco" |
+| `story-3.jpg` | IMG_9311.JPG | Story: "A Itália que me acolheu" |
+| `pola-brasil.jpg` | IMG_20260716_142641.jpg | Polaroid "O Brasil no coração" |
+| `pola-italia.jpg` | IMG_9319.JPG | Polaroid "A Itália real" |
+| `pola-se.jpg` | IMG_20260708_161638.jpg | Polaroid "São Paulo, com os meus" |
+| `pola-familia.jpg` | IMG_0275.JPG | Polaroid "Família reunida" |
+| `pola-rio.jpg` | IMG_20260716_141933.jpg | Polaroid "Rio de Janeiro" |
+| `pola-masp.jpg` | IMG_20260707_164956.jpg | Polaroid "Visita ao MASP" |
+| `pola-mar.jpg` | IMG_20260716_142636.jpg | Polaroid "Olhando o mar" |
+| `pola-estrada.jpg` | 0922.png | Polaroid "Sempre pronto pra estrada" |
+| `rafael-luciana.jpg` | Thumbnail.png | Capa do vídeo de depoimento |
+| `testi-bg.jpg` | Thumbnail.png (desfocada) | Fundo dos depoimentos |
+| `cta-bg.jpg` | IMG_9318.JPG | Fundo do formulário final |
+
+## Ainda provisórias (precisam de fotos da Itália)
 
 | Arquivo | Onde aparece | Formato ideal |
 |---|---|---|
-| `hero-bg.jpg` | Fundo do topo (Alexandre em Monza/Itália, com espaço à direita) | Horizontal, 1920×1200 |
-| `alexandre-avatar.jpg` | Avatar no story, no chat e no FAQ | Quadrada, 192×192 |
-| `polaroid-2003.jpg`, `polaroid-montanha.jpg`, `polaroid-familia.jpg`, `alexandre-sobre.jpg` | Story da seção "Prazer, Alexandre" | Quadrada/vertical, 800×800+ |
-| `card-*.jpg` (6) | Vitrine de artigos e capas do blog | Vertical 3:4, 900×1200 |
-| `aluguel.jpg` | Seção "O que só quem vive aqui consegue fazer" | Vertical 4:5, 1200×1500 |
-| `rafael-luciana.jpg` | Capa do vídeo do depoimento | Horizontal 16:9, 1280×720 |
-| `testi-bg.jpg` | Fundo da seção de depoimentos | Horizontal, 1920×1100 |
-| `galeria-01..08.jpg` | Galeria "A Itália que espera por você" | Vertical 3:4, 900×1200 |
-| `cta-bg.jpg` | Fundo do formulário final | Horizontal, 1920×1100 |
-| `pola-01..14.jpg` | Polaroids nas laterais das seções (cada uma tem uma legenda no código, em `src/pages/index.astro`) | Quadrada, 800×800 |
+| `card-*.jpg` (6) | Cards "O que a mentoria cobre" e capas do blog | Vertical 3:4 |
+| `aluguel.jpg` | Seção "O que só quem vive aqui consegue fazer" | Vertical 4:5 |
+| `galeria-01..04.jpg` | Galeria, fileira de cima | Vertical 4:5 |
+| `galeria-05..08.jpg` | Galeria, fileira de baixo | Horizontal 16:10 |

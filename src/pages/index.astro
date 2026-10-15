@@ -34,10 +34,9 @@ const historia = [
 ];
 
 const slides = [
-  { img: 'polaroid-2003', legenda: '2003 · Monza, sem falar italiano' },
-  { img: 'polaroid-montanha', legenda: '2004 · A casa na montanha' },
-  { img: 'polaroid-familia', legenda: 'Nós cinco, uma rocha' },
-  { img: 'alexandre-sobre', legenda: 'Hoje · Monza, Lombardia' },
+  { img: 'story-1', legenda: 'Do Brasil para a Itália' },
+  { img: 'story-2', legenda: 'Nós cinco, uma rocha' },
+  { img: 'story-3', legenda: 'Hoje · A Itália que me acolheu' },
 ];
 
 const etapas = [
@@ -110,21 +109,13 @@ const faqs = [
             <Icon name="badge" size={16} />
             <span><strong>Acompanhamento individual.</strong> Do Brasil até a chave na mão.</span>
           </p>
+          <ul class="hero-creds fx-up" style="--i:6" aria-label="Credenciais">
+            <li><strong>23</strong><span>anos vivendo<br />na Itália</span></li>
+            <li><strong>~50</strong><span>apartamentos pesquisados<br />por contrato</span></li>
+            <li><strong>3</strong><span>filhos criados<br />na Itália</span></li>
+          </ul>
         </div>
-        <aside class="hero-creds fx-up" style="--i:5" aria-label="Credenciais">
-          <div class="hc-card">
-            <span class="hc-num">23</span>
-            <span class="hc-label">anos vivendo na Itália</span>
-          </div>
-          <div class="hc-card">
-            <span class="hc-num">~50</span>
-            <span class="hc-label">apartamentos pesquisados por contrato</span>
-          </div>
-          <div class="hc-card">
-            <span class="hc-row"><Icon name="badge" size={16} /> Funcionário público em Monza</span>
-            <span class="hc-row"><Icon name="users" size={16} /> Pai de 3 filhos criados aqui</span>
-          </div>
-        </aside>
+
       </div>
     </section>
 
@@ -137,8 +128,8 @@ const faqs = [
 
     <!-- VITRINE -->
     <section class="vitrine">
-      <Polaroid side="left" pair top="40px" fotos={[{ src: 'pola-01', cap: 'Duomo de Milão', rot: -7 }]} />
-      <Polaroid side="right" top="110px" speed={0.12} fotos={[{ src: 'pola-02', cap: 'Parque de Monza', rot: 6 }]} />
+      <Polaroid side="left" pair top="40px" fotos={[{ src: 'pola-brasil', cap: 'O Brasil no coração', rot: -7 }]} />
+      <Polaroid top="120px" speed={0.12} fotos={[{ src: 'pola-italia', cap: 'A Itália real', rot: 6 }]} />
       <div class="container sec-head center reveal">
         <p class="std-tag"><span class="std-dot"></span> O que a mentoria cobre</p>
         <h2 class="sec-title">Tudo o que derruba uma família na chegada, <span class="grifo">resolvido antes</span>.</h2>
@@ -165,8 +156,8 @@ const faqs = [
     <!-- QUEM CHEGA AQUI -->
     <section class="sec quem">
       <div class="container">
-        <Polaroid side="left" pair top="45%" fotos={[{ src: 'pola-03', cap: 'Ligúria, 2004', rot: -6 }]} />
-        <Polaroid top="90px" speed={0.12} fotos={[{ src: 'pola-04', cap: 'O primeiro inverno', rot: 6 }]} />
+        <Polaroid side="left" pair top="45%" fotos={[{ src: 'pola-se', cap: 'São Paulo, com os meus', rot: -6 }]} />
+        <Polaroid top="90px" speed={0.12} fotos={[{ src: 'pola-familia', cap: 'Família reunida', rot: 6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Quem chega até mim</p>
           <h2 class="sec-title">Talvez você se reconheça em <span class="grifo">alguma dessas situações</span>.</h2>
@@ -189,8 +180,8 @@ const faqs = [
 
     <!-- SOBRE -->
     <section class="sec sobre" id="historia">
-      <Polaroid side="left" pair top="18%" speed={0.12} fotos={[{ src: 'pola-13', cap: 'São Paulo, 2003', rot: -5 }]} />
-      <Polaroid top="62%" fotos={[{ src: 'pola-14', cap: 'Os três, pequenos', rot: 6 }]} />
+      <Polaroid side="left" pair top="18%" speed={0.12} fotos={[{ src: 'pola-rio', cap: 'Rio de Janeiro', rot: -5 }]} />
+      <Polaroid top="62%" fotos={[{ src: 'pola-masp', cap: 'Visita ao MASP', rot: 6 }]} />
       <div class="container sobre-grid">
         <div class="sobre-card reveal">
           <span class="sobre-dots" aria-hidden="true"></span>
@@ -237,8 +228,8 @@ const faqs = [
     <!-- JORNADA -->
     <section class="sec jornada" id="mentoria">
       <div class="container">
-        <Polaroid top="120px" speed={0.1} fotos={[{ src: 'pola-05', cap: 'Trem Monza–Milão', rot: 6 }]} />
-        <Polaroid side="left" pair top="55%" speed={0.14} fotos={[{ src: 'pola-06', cap: 'Café no balcão', rot: -7 }]} />
+        <Polaroid top="120px" speed={0.1} fotos={[{ src: 'pola-estrada', cap: 'Sempre pronto pra estrada', rot: 6 }]} />
+        <Polaroid side="left" pair top="55%" speed={0.14} fotos={[{ src: 'pola-mar', cap: 'Olhando o mar', rot: -7 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Como a mentoria funciona</p>
           <h2 class="sec-title">Seis passos. <span class="grifo">Nenhum no escuro.</span></h2>
@@ -276,7 +267,6 @@ const faqs = [
     <!-- DIFERENCIAIS -->
     <section class="sec dif">
       <div class="container">
-        <Polaroid top="40px" fotos={[{ src: 'pola-07', cap: 'A chave na mão', rot: 6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> O que distingue</p>
           <h2 class="sec-title">O que só quem vive aqui <span class="grifo">consegue fazer</span>.</h2>
@@ -318,8 +308,6 @@ const faqs = [
           <path d="M-100 740 C 420 600, 800 920, 1200 720 S 1680 660, 1700 860" />
         </svg>
       </div>
-      <Polaroid side="left" pair top="38%" speed={0.14} fotos={[{ src: 'pola-08', cap: 'Nossa primeira casa', rot: -8 }]} />
-      <Polaroid top="58%" speed={0.1} fotos={[{ src: 'pola-09', cap: 'Família reunida', rot: 7 }]} />
       <div class="container obj-inner">
         <div class="sec-head center reveal">
           <p class="std-tag"><span class="std-dot"></span> Antes da sua decisão</p>
@@ -421,7 +409,6 @@ const faqs = [
     <!-- FAQ -->
     <section class="sec faq" id="faq">
       <div class="container">
-        <Polaroid side="left" top="30%" fotos={[{ src: 'pola-10', cap: 'Aperitivo em Monza', rot: -6 }]} />
         <div class="sec-head reveal">
           <p class="std-tag"><span class="std-dot"></span> Dúvidas frequentes</p>
           <h2 class="sec-title">Perguntas <span class="grifo">mais comuns</span>.</h2>
@@ -458,8 +445,6 @@ const faqs = [
 
     <!-- GALERIA -->
     <section class="galeria">
-      <Polaroid side="left" pair top="10px" fotos={[{ src: 'pola-11', cap: 'Lago de Como', rot: -6 }]} />
-      <Polaroid top="40px" speed={0.12} fotos={[{ src: 'pola-12', cap: 'Centro de Monza', rot: 5 }]} />
       <div class="container sec-head center reveal">
         <p class="std-tag"><span class="std-dot"></span> O chão real</p>
         <h2 class="sec-title">A Itália que <span class="grifo">espera por você</span>.</h2>
@@ -658,6 +643,7 @@ const faqs = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 70% 30%;
     transform: scale(1.08);
     animation: heroZoom 2.4s var(--ease) forwards;
   }
@@ -676,10 +662,6 @@ const faqs = [
   }
   .hero-inner {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 48px;
-    align-items: end;
   }
   .hero-content {
     max-width: 880px;
@@ -781,40 +763,36 @@ const faqs = [
     color: var(--accent);
   }
   .hero-creds {
-    display: grid;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 32px 0 0;
+  }
+  .hero-creds li {
+    display: flex;
+    align-items: center;
     gap: 12px;
-    width: 280px;
-  }
-  .hc-card {
-    padding: 18px 20px;
+    padding: 12px 16px;
     border-radius: var(--r-md);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(30, 26, 21, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    display: grid;
-    gap: 6px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .hc-num {
+  .hero-creds strong {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 2.4rem;
+    font-size: 1.9rem;
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--accent);
   }
-  .hc-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.78);
-  }
-  .hc-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.92rem;
-  }
-  .hc-row :global(svg) {
-    color: var(--accent);
+  .hero-creds span {
+    font-size: 0.82rem;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   /* ================= FAIXA DE TEMAS ================= */
@@ -2086,13 +2064,6 @@ const faqs = [
 
   /* ================= RESPONSIVO ================= */
   @media (max-width: 1020px) {
-    .hero-inner {
-      grid-template-columns: 1fr;
-    }
-    .hero-creds {
-      width: 100%;
-      grid-template-columns: repeat(3, 1fr);
-    }
     .quem-grid,
     .jor-grid {
       grid-template-columns: 1fr 1fr;
@@ -2120,13 +2091,21 @@ const faqs = [
       padding-top: 120px;
     }
     .hero-creds {
-      grid-template-columns: 1fr 1fr;
+      flex-wrap: nowrap;
+      gap: 8px;
     }
-    .hero-creds .hc-card:last-child {
-      grid-column: 1 / -1;
+    .hero-creds li {
+      flex: 1 1 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 10px 12px;
     }
-    .hc-num {
-      font-size: 2rem;
+    .hero-creds strong {
+      font-size: 1.5rem;
+    }
+    .hero-creds span {
+      font-size: 0.74rem;
     }
     .hero-cta .btn {
       width: 100%;
