@@ -15,6 +15,13 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 | 3 | Airbnb ao chegar na Itália: por que pode virar uma armadilha | chegar na Itália sem casa | Mentoria | Entrevista | 📝 |
 | 4 | Dossiê financeiro: o que os proprietários italianos querem ver | documentos para alugar na Itália | Guia | Itália real | 📝 |
 
+## Pilar 1b — Planejamento financeiro da mudança
+
+| # | Título | Palavra-chave principal | CTA | Fonte | Status |
+|---|---|---|---|---|---|
+| 4b | O erro dos 5.000 euros: quanto dinheiro levar para morar na Itália | quanto dinheiro levar para morar na Itália | Mentoria | Reel Erro dos 5.000, Custo de vida | 📝 |
+| 4c | Os primeiros 90 dias na Itália: por que você ainda não vai trabalhar | primeiros meses na Itália | Mentoria | Reel Erro dos 5.000, Reel Documentos | 📝 |
+
 ## Pilar 2 — Custo de vida
 
 | # | Título | Palavra-chave principal | CTA | Fonte | Status |
@@ -37,10 +44,26 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 
 | # | Título | Palavra-chave principal | CTA | Fonte | Status |
 |---|---|---|---|---|---|
-| 13 | Primeiros documentos ao chegar na Itália: residência, codice fiscale e permesso | documentos ao chegar na Itália | Guia | Entrevista, Minha História | 📝 |
+| 13 | Residência na Itália: o mapa dos primeiros documentos, passo a passo | residência na Itália | Guia | Reel Documentos, Entrevista, Minha História | ✅ |
 | 14 | Cônjuge sem cidadania italiana: como fica o permesso di soggiorno | permesso di soggiorno por família | Mentoria | Entrevista, Minha História PT3 | 📝 |
 | 15 | Questura: como se preparar (e por que não ir sozinho) | questura Itália | Mentoria | Entrevista | 📝 |
 | 16 | Engenharia documental: por que a mala nunca é o primeiro passo | imigrar para a Itália com segurança | Mentoria | Custo de vida, Itália real | 📝 |
+| 16b | Codice fiscale: por que tirar ainda no Brasil | codice fiscale no Brasil | Guia | Reel Documentos, Entrevista | 📝 |
+| 16c | Saúde pública na Itália: como escolher o médico de família na ASST | médico de família Itália | Guia | Reel Documentos | 📝 |
+| 16d | Como converter a CNH brasileira na Itália | converter CNH na Itália | Guia | Reel Documentos | 📝 |
+
+## Pilar 4b — Trabalho
+
+| # | Título | Palavra-chave principal | CTA | Fonte | Status |
+|---|---|---|---|---|---|
+| 23 | Concurso público na Itália: o caminho que pouca gente conhece | concurso público na Itália | Mentoria (concurso) | Reel Concurso | ✅ |
+| 24 | Graduatoria: como funciona a lista de aprovados nos concursos italianos | graduatoria concurso Itália | Mentoria (concurso) | Reel Concurso | 📝 |
+
+## Pilar 4c — Investimento ⏳ (aguardando o Alexandre confirmar se entra no site)
+
+| # | Título | Palavra-chave principal | CTA | Fonte | Status |
+|---|---|---|---|---|---|
+| 25 | Investir em imóvel na Itália: renda em euro sem cair na "casa de 1 euro" | investir em imóvel na Itália | Investimento | Reel Investimento | ⏳ |
 
 ## Pilar 5 — Vida real e emocional
 
@@ -51,6 +74,7 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 | 19 | Filhos na escola italiana: como prepará-los para o idioma | escola na Itália para brasileiros | Guia | Minha História PT3 | 📝 |
 | 20 | Os italianos são fechados com estrangeiros? O que eu vivi em 23 anos | italianos e brasileiros | Mentoria | Entrevista | 📝 |
 | 21 | Cheguei na Itália com 2 euros: o que eu faria diferente hoje | imigrar para a Itália | Mentoria | Minha História | ⏳ (falta PT4) |
+| 21b | Por que tantas famílias brasileiras estão escolhendo a Itália | morar na Itália vale a pena | Mentoria | Reel Coração da imigração, Itália real | 📝 |
 | 22 | Rafael e Luciana: do Brasil a Monza em 3 meses | mentoria imigração Itália | Mentoria | Entrevista | 📝 |
 
 ## Padrão de cada artigo
@@ -63,3 +87,4 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 - CTA final: mentoria (lead) ou guia (Hotmart).
 - Frontmatter: `title`, `description` (até 155 caracteres), `slug`, `date`, `category`, `keywords`, `cta`.
 - Links internos entre artigos do mesmo pilar.
+- **Nenhum link externo.** O blog é interno; CTAs apontam para páginas do próprio site (`/mentoria`, `/guia`).

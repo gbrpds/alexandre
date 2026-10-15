@@ -12,7 +12,7 @@ Se você perguntar a qualquer brasileiro que já mora aqui qual foi a parte mais
 
 Não é a língua. Não é a burocracia. É convencer um italiano a te entregar a chave do imóvel dele.
 
-Eu moro na Itália há 23 anos e vejo isso toda semana na minha mesa. Neste artigo eu te explico por que é tão difícil, o que o proprietário italiano quer ver e como você pode chegar aqui com o contrato encaminhado, em vez de ficar queimando a sua reserva num Airbnb.
+Eu moro na Itália há 23 anos e vejo isso toda semana na minha mesa. Para você ter uma ideia, eu pesquiso em média **50 apartamentos para conseguir um contrato** para uma família. Neste artigo eu te explico por que é tão difícil, o que o proprietário italiano quer ver e como você pode chegar aqui com o contrato encaminhado, em vez de ficar queimando a sua reserva num Airbnb.
 
 ## Por que é tão difícil alugar casa na Itália
 
@@ -104,4 +104,4 @@ Não é contra o estrangeiro: é desconfiança de quem eles não conhecem. Despe
 
 ---
 
-**Quer chegar na Itália com a chave na mão?** Na mentoria individual, eu analiso o perfil da sua família, ajudo a escolher a cidade certa, organizo com você o dossiê e faço a ponte com imobiliárias e proprietários que confiam no meu nome. **Fale comigo e vamos desenhar a sua chegada.**
+**Quer chegar na Itália com a chave na mão?** Na mentoria individual, eu analiso o perfil da sua família, ajudo a escolher a cidade certa, organizo com você o dossiê e faço a ponte com imobiliárias e proprietários que confiam no meu nome. **[Fale comigo](/mentoria) e vamos desenhar a sua chegada.**

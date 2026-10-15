@@ -122,9 +122,58 @@ Base de conhecimento para o site e o blog. Tudo aqui foi extraído das falas do 
 4. A Itália é generosa com quem se prepara.
 5. Escolha da cidade pelo seu perfil, não pela moda.
 
-## 9. Pendências
+## 9. Reels (lote 1)
 
-- [ ] Capítulo "A grande virada" (Minha História PT4)
+### O coração da imigração
+- "Quando comecei o projeto, não fazia ideia que eram tantas famílias decididas a mudar de vida."
+- Filhos **trilíngues**, estudando em universidades europeias, com repertório global.
+- "Nossa vida aqui parece um sonho. Mas não é porque somos ricos. É porque aqui o básico — segurança, educação e saúde — é o normal para todos."
+- "A Itália está longe de ser perfeita, cheia de problemas burocráticos. Mas são problemas que não atacam o seu direito de ir e vir."
+- **Ama o Brasil**; sonha voltar um dia para realizar um **projeto social**. Nunca falar mal do Brasil de forma agressiva — o tom é de carinho.
+
+### O erro dos 5.000 euros
+- "Ninguém que respeita sua família de verdade vai te mandar vir para a Itália com 5 mil euros no bolso."
+- Roteiro do sofrimento: vende tudo → desembarca em 2 semanas → gasta 3 mil+ só de caução e aluguel → **primeiros 90 dias de burocracia** (residência, documentos, autorizações) sem acesso ao mercado formal → o dinheiro escorre.
+- "Planejamento não é ter medo, é ter a dignidade de passar os primeiros meses com paz."
+- Palavra de CTA: **"travessia"**.
+
+### Documentos e burocracia (o mapa da residência)
+1. **Contrato de aluguel** — "é o seu chão". Tudo nasce dele.
+2. **Codice fiscale ainda no Brasil** (consulado) — "as regras mudaram e a burocracia está mais apertada" (confirma o caso do Rafael, que não conseguiu tirar na Itália).
+3. **Casal misto** (um com cidadania, outro sem): *kit* dos Correios (Poste) para o *permesso di soggiorno*. **Guardar a *ricevuta* "como se fosse ouro"** — com ela a pessoa já está regular e pode aceitar proposta de emprego enquanto aguarda a convocação da Questura. **[CONFIRMAR: para familiar de cidadão UE o procedimento varia por Questura]**
+4. **Residência**: com contrato, passaporte e recibos; hoje quase tudo online/e-mail. Em até **45 dias** a polícia local pode visitar para confirmar.
+5. **TARI** — pagar em dia, senão vem com juros.
+6. **ASST** — com o recibo da residência, escolher o **médico de família** (saúde pública).
+7. **Carta d'identità** — abre a porta para **converter a CNH**, abrir **conta em banco** etc.
+- "Sem residência você é um turista. Com ela, você é um cidadão com direitos."
+- "É aqui que o governo passa a te enxergar — para a saúde, a educação e até para as multas."
+
+### Concurso público
+- O serviço público italiano abre concursos com frequência.
+- Benefícios citados: jornada de **6 horas por dia**, estabilidade, **36 a 40 dias de férias** pagas, 13º e **14º** salário, facilidades para financiar a casa própria. **[CONFIRMAR: 14º e número de dias de férias no setor público]**
+- "Muitas vagas ficam vazias ou com reprovações simples por falta de preparação para a prova escrita."
+- Quem passa para a prova oral entra na **graduatoria**, lista válida por até **2 anos** — pode ser chamado por aquele ou por outros municípios da região.
+- Para quem já mora aqui: saída da "rotina pesada da fábrica". Para quem está no Brasil: entender o processo e chegar preparado.
+- "Eu conquistei essa vida no chão real." — Palavra de CTA: **"concurso"**.
+
+### Investimento em euro
+- "Eu preciso pesquisar em média **50 apartamentos** para conseguir um contrato." (dimensiona a dificuldade do aluguel)
+- Oferta para investidores no Brasil: imóvel na Lombardia já alugado (ex.: **49 mil euros** com pequena adequação), com **gestão completa** por ele e inquilinos vindos das famílias brasileiras que ele acompanha.
+- Rentabilidade líquida citada: **0,7% a 0,8% ao mês**, após impostos e taxa de administração.
+- "Esqueça essa coisa de casa de um euro." / "Imóvel sem estudo de localização vira um mico."
+- "Gerar renda em euro e ainda ajudar uma família do bem a se estabelecer."
+- Palavra de CTA: **"investimento"**.
+
+> Os reels revelam **três frentes**: mentoria de imigração (principal), orientação para concurso público e investimento imobiliário com gestão. **[CONFIRMAR com o Alexandre quais entram no site]**
+
+## 10. Regras do blog
+
+- Blog **interno** no próprio site.
+- **Sem links externos** nos artigos: só links internos (outros artigos, página da mentoria, página do guia).
+
+## 11. Pendências
+
+- [ ] Capítulo "A grande virada" (Minha História PT4) — ainda não gravado
 - [ ] Reels
 - [ ] Referências visuais
 - [ ] Detalhes do guia da Hotmart
