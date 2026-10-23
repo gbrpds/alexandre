@@ -1,6 +1,10 @@
 ---
 import Icon from './Icon.astro';
 import { SITE, waLink } from '../config';
+interface Props {
+  semWhatsapp?: boolean;
+}
+const { semWhatsapp = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer class="ft on-dark">
@@ -36,7 +40,7 @@ const year = new Date().getFullYear();
       <div>
         <h3 class="ft-head">Contato</h3>
         <ul>
-          <li><a href={waLink()}><Icon name="whatsapp" size={14} /> WhatsApp</a></li>
+          {!semWhatsapp && <li><a href={waLink()}><Icon name="whatsapp" size={14} /> WhatsApp</a></li>}
           <li><span><Icon name="pin" size={14} /> Monza, Lombardia, Itália</span></li>
         </ul>
       </div>

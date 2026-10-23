@@ -85,4 +85,4 @@ Um apartamento de dois quartos fica entre 900 e 1.100 euros por mês.
 
 ---
 
-**Quer começar a sua história em Monza?** Na [mentoria individual](/mentoria), eu te mostro como funciona o chão real dessa cidade e ajudo a sua família a chegar com o aluguel encaminhado.
+**Quer começar a sua história em Monza?** Na [mentoria individual](/#mentoria), eu te mostro como funciona o chão real dessa cidade e ajudo a sua família a chegar com o aluguel encaminhado.

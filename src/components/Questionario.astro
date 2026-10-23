@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Icon from './Icon.astro';
+
+// Página de pré-qualificação: o Google Form embutido vem antes de qualquer contato.
+// O site não guarda nenhum dado; as respostas ficam no Google Forms do cliente.
+interface Props {
+  servico: string;
+  titulo: string;
+  tituloDestaque: string;
+  pageTitle: string;
+  description: string;
+  form: { url: string; embed: string };
+  image?: string;
+}
+const { servico, titulo, tituloDestaque, pageTitle, description, form, image } = Astro.props;
+---
+<Base title={pageTitle} description={description} image={image} semWhatsapp>
+  <Header variant="solid" minimal />
+  <main id="main" class="qst">
+    <div class="container qst-inner">
+      <header class="qst-head">
+        <p class="std-tag"><span class="std-dot"></span> Questionário · {servico}</p>
+        <h1>{titulo} <span class="serif-italic">{tituloDestaque}</span></h1>
+        <p class="qst-lede">
+          Para te atender de forma personalizada, preencha o questionário abaixo (5 a 10 minutos). Ao final, você poderá falar
+          diretamente comigo no WhatsApp.
+        </p>
+      </header>
+
+      <p class="qst-lgpd">
+        <Icon name="shield" size={18} />
+        <span>Seus dados serão usados apenas para o seu atendimento pela Vida Italiana e não serão compartilhados.</span>
+      </p>
+
+      <div class="qst-frame" data-qst-frame>
+        <div class="qst-loading" aria-hidden="true">
+          <span class="qst-spinner"></span>
+          Carregando questionário…
+        </div>
+        <iframe src={form.embed} title={`Questionário da ${servico}`} loading="lazy">Carregando questionário…</iframe>
+      </div>
+
+      <p class="qst-fallback">
+        Problemas para visualizar?
+        <a href={form.url} target="_blank" rel="noopener">Abra o questionário em uma nova aba <Icon name="arrow" size={14} /></a>
+      </p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .qst {
+    padding: 96px 0 88px;
+  }
+  .qst-inner {
+    max-width: 820px;
+  }
+  .qst-head h1 {
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    margin: 12px 0 10px;
+  }
+  .qst-head h1 .serif-italic {
+    font-size: 1.06em;
+  }
+  .qst-lede {
+    font-size: 1rem;
+    color: var(--ink-2);
+    max-width: 60ch;
+    margin: 0;
+  }
+  .qst-lgpd {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0 12px;
+    padding: 10px 14px;
+    border-radius: var(--r-md);
+    background: var(--sand);
+    font-size: 0.86rem;
+    color: var(--ink-2);
+  }
+  .qst-lgpd :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--terra);
+  }
+  .qst-frame {
+    position: relative;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .qst-frame iframe {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 1800px;
+    border: 0;
+  }
+  .qst-loading {
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 64px 16px;
+    font-family: var(--font-display);
+    color: var(--ink-2);
+  }
+  .qst-frame.is-loaded .qst-loading {
+    display: none;
+  }
+  .qst-spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--line-strong);
+    border-top-color: var(--accent);
+    animation: qst-spin 0.8s linear infinite;
+  }
+  @keyframes qst-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .qst-fallback {
+    margin: 16px 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    text-align: center;
+  }
+  .qst-fallback a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  @media (min-width: 760px) {
+    .qst {
+      padding-top: 140px;
+    }
+    .qst-lede {
+      font-size: 1.08rem;
+    }
+    .qst-lgpd {
+      margin-top: 24px;
+      font-size: 0.92rem;
+    }
+    .qst-frame iframe {
+      height: 1400px;
+    }
+  }
+</style>
+
+<script>
+  // Só esconde o "Carregando…". O envio do formulário não é detectável (iframe de outro domínio).
+  document.querySelectorAll<HTMLElement>('[data-qst-frame]').forEach((box) => {
+    box.querySelector('iframe')?.addEventListener('load', () => box.classList.add('is-loaded'), { once: true });
+  });
+</script>

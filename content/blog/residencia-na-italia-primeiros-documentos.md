@@ -116,4 +116,4 @@ Não. O endereço é a base de tudo. Por isso a casa é o primeiro passo.
 
 ---
 
-**Ficou com dúvida em alguma etapa?** No meu [guia digital](/guia) eu organizei esse caminho com mais detalhes, para você chegar com o mapa na mão. E se quiser que eu acompanhe a sua família em cada etapa, do contrato de aluguel até a identidade, conheça a [mentoria individual](/mentoria).
+**Ficou com dúvida em alguma etapa?** No meu [guia digital](/guia) eu organizei esse caminho com mais detalhes, para você chegar com o mapa na mão. E se quiser que eu acompanhe a sua família em cada etapa, do contrato de aluguel até a identidade, conheça a [mentoria individual](/#mentoria).

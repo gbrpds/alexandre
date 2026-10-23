@@ -82,4 +82,4 @@ As provas são em italiano, inclusive a escrita e a oral. A preparação no idio
 
 ---
 
-**Quer entender como funciona o acesso aos concursos e como se preparar da maneira certa?** Eu conquistei essa vida no chão real e sei como esse motor funciona. [Fale comigo](/mentoria) e vamos conversar sobre o seu caso.
+**Quer entender como funciona o acesso aos concursos e como se preparar da maneira certa?** Eu conquistei essa vida no chão real e sei como esse motor funciona. [Fale comigo](/#mentoria) e vamos conversar sobre o seu caso.

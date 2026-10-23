@@ -9,8 +9,12 @@ interface Props {
   description: string;
   image?: string;
   type?: 'website' | 'article';
+  // Páginas de obrigado não entram no Google.
+  noindex?: boolean;
+  // Páginas de questionário: o contato só acontece depois do formulário.
+  semWhatsapp?: boolean;
 }
-const { title, description, image = '/fotos/hero-bg.jpg', type = 'website' } = Astro.props;
+const { title, description, image = '/fotos/hero-bg.jpg', type = 'website', noindex = false, semWhatsapp = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 ---
@@ -21,7 +25,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -40,10 +44,12 @@ const ogImage = new URL(image, Astro.site);
   <body>
     <a href="#main" class="skip-link">Pular para o conteúdo</a>
     <slot />
-    <Footer />
-    <a href={waLink()} class="wa-float" aria-label="Falar com o Alexandre pelo WhatsApp">
-      <Icon name="whatsapp" size={28} />
-    </a>
+    <Footer semWhatsapp={semWhatsapp} />
+    {!semWhatsapp && (
+      <a href={waLink()} class="wa-float" aria-label="Falar com o Alexandre pelo WhatsApp">
+        <Icon name="whatsapp" size={28} />
+      </a>
+    )}
     <script>
       import '../scripts/site';
     </script>

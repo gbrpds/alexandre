@@ -100,4 +100,4 @@ Pelo menos os primeiros três meses, que é o tempo médio da burocracia inicial
 
 ---
 
-**Quer saber qual é a reserva exata para a sua realidade?** Na [mentoria individual](/mentoria), eu desenho com você o mapa financeiro da sua travessia, sob medida para a sua família, para você chegar sem expor quem você mais ama a riscos desnecessários.
+**Quer saber qual é a reserva exata para a sua realidade?** Na [mentoria individual](/#mentoria), eu desenho com você o mapa financeiro da sua travessia, sob medida para a sua família, para você chegar sem expor quem você mais ama a riscos desnecessários.

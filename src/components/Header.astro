@@ -5,8 +5,10 @@ import { waLink } from '../config';
 interface Props {
   // "light": começa sobre fundo escuro (hero); "solid": já começa com fundo.
   variant?: 'light' | 'solid';
+  // Só a marca, sem menu e sem botão de WhatsApp (páginas de questionário).
+  minimal?: boolean;
 }
-const { variant = 'light' } = Astro.props;
+const { variant = 'light', minimal = false } = Astro.props;
 const links = [
   { href: '/#historia', label: 'Minha história' },
   { href: '/#mentoria', label: 'Mentoria' },
@@ -21,6 +23,8 @@ const links = [
       <img class="logo-mark" src="/fotos/logo-alexandre.png" alt="" width="40" height="40" />
       <span class="logo-text">Vida Italiana <span class="serif-italic">na Prática</span></span>
     </a>
+    {!minimal && (
+      <Fragment>
     <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
       <ul>
         {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
@@ -35,6 +39,8 @@ const links = [
     <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-nav">
       <span></span><span></span>
     </button>
+      </Fragment>
+    )}
   </div>
 </header>
 

@@ -91,4 +91,4 @@ Cada artigo é escrito na voz do Alexandre (primeira pessoa), com números reais
 - CTA final: mentoria (lead) ou guia (Hotmart).
 - Frontmatter: `title`, `description` (até 155 caracteres), `slug`, `date`, `category`, `keywords`, `cta`.
 - Links internos entre artigos do mesmo pilar.
-- **Nenhum link externo.** O blog é interno; CTAs apontam para páginas do próprio site (`/mentoria`, `/guia`).
+- **Nenhum link externo.** O blog é interno; CTAs apontam para páginas do próprio site (`/#mentoria`, `/guia`). `/mentoria` e `/assessoria` são os questionários de pré-qualificação (links da bio).

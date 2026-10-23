@@ -104,4 +104,4 @@ Não é contra o estrangeiro: é desconfiança de quem eles não conhecem. Despe
 
 ---
 
-**Quer chegar na Itália com a chave na mão?** Na mentoria individual, eu analiso o perfil da sua família, ajudo a escolher a cidade certa, organizo com você o dossiê e faço a ponte com imobiliárias e proprietários que confiam no meu nome. **[Fale comigo](/mentoria) e vamos desenhar a sua chegada.**
+**Quer chegar na Itália com a chave na mão?** Na mentoria individual, eu analiso o perfil da sua família, ajudo a escolher a cidade certa, organizo com você o dossiê e faço a ponte com imobiliárias e proprietários que confiam no meu nome. **[Fale comigo](/#mentoria) e vamos desenhar a sua chegada.**
