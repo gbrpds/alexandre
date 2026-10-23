@@ -11,6 +11,9 @@ export const SITE = {
   guiaUrl: 'https://pay.hotmart.com/H103483390L?off=5svxi8vu',
 };
 
+// Os botões da mentoria levam primeiro ao questionário; o WhatsApp vem depois dele.
+export const MENTORIA_URL = '/mentoria';
+
 // Questionários de pré-qualificação (Google Forms). As respostas ficam na conta Google do cliente.
 // Para trocar de formulário, mude só aqui.
 const gform = (id: string) => ({

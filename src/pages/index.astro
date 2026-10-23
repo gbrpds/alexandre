@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Icon from '../components/Icon.astro';
 import Polaroid from '../components/Polaroid.astro';
 import PolaStrip from '../components/PolaStrip.astro';
-import { SITE, waLink } from '../config';
+import { SITE, MENTORIA_URL } from '../config';
 
 const temas = [
   'Aluguel na Itália', 'Codice fiscale', 'Permesso di soggiorno', 'Residência', 'Reserva financeira',
@@ -103,7 +103,7 @@ const faqs = [
             <p>Mentoria individual para quem quer recomeçar na Itália <strong>com segurança</strong>, guiado por quem vive lá há 23 anos.</p>
           </div>
           <div class="hero-cta fx-up" style="--i:4">
-            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" /> Quero desenhar minha travessia</a>
+            <a href={MENTORIA_URL} class="btn btn-accent">Quero desenhar minha travessia <Icon name="arrow" size={16} /></a>
             <a href="#historia" class="btn btn-ghost">Conheça o Alexandre <Icon name="arrow" size={16} /></a>
           </div>
           <p class="hero-filtro fx-up" style="--i:5">
@@ -139,7 +139,7 @@ const faqs = [
       <div class="mq vitrine-mq">
         <div class="mq-track vitrine-track" style="--dur:70s">
           {[...vitrine, ...vitrine].map((c, i) => (
-            <a class="v-card" href={waLink()} aria-hidden={i >= vitrine.length ? 'true' : undefined} tabindex={i >= vitrine.length ? -1 : undefined}>
+            <a class="v-card" href={MENTORIA_URL} aria-hidden={i >= vitrine.length ? 'true' : undefined} tabindex={i >= vitrine.length ? -1 : undefined}>
               <img src={`/fotos/${c.img}.jpg`} alt="" loading="lazy" width="900" height="1200" />
               <span class="v-veil"></span>
               <div class="v-text">
@@ -178,7 +178,7 @@ const faqs = [
               </div>
               <h3>{s.titulo}</h3>
               <p>{s.texto}</p>
-              <a href={waLink()} class="quem-cta"><Icon name="whatsapp" size={16} /> Quero conversar</a>
+              <a href={MENTORIA_URL} class="quem-cta">Quero conversar <Icon name="arrow" size={16} /></a>
             </article>
           ))}
         </div>
@@ -198,7 +198,7 @@ const faqs = [
           <p>Em 2003, eu tinha a vida que a classe média brasileira considera ideal: ótimo emprego, apartamento, dois carros e escola particular. Até que um sequestro relâmpago e um assalto à mão armada me mostraram que eu tinha tudo, menos segurança.</p>
           <p>Vim sozinho, sem falar italiano, com 2 euros no bolso. Bati em mais de cem portas, passei frio e solidão, e reuni a minha família numa casa de 300 euros na montanha. Hoje, meus três filhos são adultos realizados na Itália. <strong>Eu estendo a mão para você, como alguém um dia fez comigo.</strong></p>
           <div class="sobre-cta">
-            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" size={16} /> Falar com o Alexandre</a>
+            <a href={MENTORIA_URL} class="btn btn-accent">Falar com o Alexandre <Icon name="arrow" size={16} /></a>
             <a href="#mentoria" class="btn btn-ghost">Como funciona a mentoria <Icon name="arrow" size={16} /></a>
           </div>
         </div>
@@ -265,13 +265,13 @@ const faqs = [
             <span class="modo-tag">Plano do zero</span>
             <h3>Ainda estou no começo</h3>
             <p>Para quem tem o sonho, mas não sabe por onde começar. Construímos juntos o caminho legal, a cidade, a reserva, os documentos e a chegada.</p>
-            <a href={waLink()} class="btn btn-accent btn-sm">Começar do zero <Icon name="arrow" size={15} /></a>
+            <a href={MENTORIA_URL} class="btn btn-accent btn-sm">Começar do zero <Icon name="arrow" size={15} /></a>
           </article>
           <article class="modo reveal" style="--d:.1s">
             <span class="modo-tag">Ajuste fino</span>
             <h3>Já tenho um plano</h3>
             <p>Para quem já estudou e se organizou. Eu valido cada etapa do seu projeto, aponto os riscos e ajusto o que for preciso para zerar as falhas.</p>
-            <a href={waLink()} class="btn btn-sm">Validar meu plano <Icon name="arrow" size={15} /></a>
+            <a href={MENTORIA_URL} class="btn btn-sm">Validar meu plano <Icon name="arrow" size={15} /></a>
           </article>
         </div>
       </div>
@@ -296,7 +296,7 @@ const faqs = [
                 <div class="dif-a"><div><p>{d.texto}</p></div></div>
               </article>
             ))}
-            <a href={waLink()} class="btn btn-accent dif-btn">Quero chegar com a chave na mão <Icon name="arrow" size={16} /></a>
+            <a href={MENTORIA_URL} class="btn btn-accent dif-btn">Quero chegar com a chave na mão <Icon name="arrow" size={16} /></a>
           </div>
           <div class="dif-figure reveal">
             <div class="dif-slides" data-dif-slides>
@@ -353,7 +353,7 @@ const faqs = [
             </>
           ))}
           <div class="msg msg-cta" data-msg>
-            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" /> Conversar no WhatsApp</a>
+            <a href={MENTORIA_URL} class="btn btn-accent">Quero conversar com o Alexandre <Icon name="arrow" size={16} /></a>
           </div>
         </div>
       </div>
@@ -451,7 +451,7 @@ const faqs = [
                 </div>
               </div>
             </div>
-            <a href={waLink()} class="btn btn-accent"><Icon name="whatsapp" size={16} /> Falar no WhatsApp</a>
+            <a href={MENTORIA_URL} class="btn btn-accent">Quero a mentoria <Icon name="arrow" size={16} /></a>
           </aside>
           <div class="faq-list">
             {faqs.map((f) => (
@@ -507,46 +507,18 @@ const faqs = [
         <div class="cta-left reveal">
           <p class="std-tag"><span class="std-dot"></span> O primeiro passo</p>
           <h2 class="cta-title">Não começa com uma mala. <span class="serif-italic">Começa com uma conversa.</span></h2>
-          <p class="sec-lede">Responda três perguntas rápidas. A sua mensagem chega direto no meu WhatsApp e eu te respondo pessoalmente.</p>
+          <p class="sec-lede">Responda o questionário da mentoria para eu conhecer a sua família. Depois, a gente conversa direto no WhatsApp e eu te respondo pessoalmente.</p>
           <p class="assinatura">Um abraço forte aqui de Monza,<br /><span class="serif-italic">Alexandre</span></p>
         </div>
-        <form class="lead-form reveal" style="--d:.15s" id="lead-form" data-whatsapp={SITE.whatsapp}>
-          <label>
-            Seu nome
-            <input name="nome" required autocomplete="name" placeholder="Como posso te chamar?" />
-          </label>
-          <label>
-            Quem vem para a Itália?
-            <select name="quem" required>
-              <option value="">Selecione</option>
-              <option>Só eu</option>
-              <option>Eu e meu cônjuge</option>
-              <option>Família com filhos</option>
-            </select>
-          </label>
-          <label>
-            Como está a sua documentação?
-            <select name="doc" required>
-              <option value="">Selecione</option>
-              <option>Já tenho cidadania italiana</option>
-              <option>A cidadania está em processo</option>
-              <option>Não tenho, vou precisar de visto</option>
-              <option>Ainda não sei qual é o meu caminho</option>
-            </select>
-          </label>
-          <label>
-            Qual é o seu momento?
-            <select name="momento" required>
-              <option value="">Selecione</option>
-              <option>Estou começando a planejar</option>
-              <option>Já tenho um plano e quero validá-lo</option>
-              <option>Quero me mudar nos próximos meses</option>
-              <option>Já moro na Itália e quero orientação</option>
-            </select>
-          </label>
-          <button type="submit" class="btn btn-accent"><Icon name="whatsapp" /> Enviar pelo WhatsApp</button>
-          <p class="form-note" role="status" aria-live="polite"></p>
-        </form>
+        <div class="cta-card reveal" style="--d:.15s">
+          <p class="cta-card-head">Como funciona</p>
+          <ol class="cta-steps">
+            <li><span>1</span> Você responde o questionário da mentoria (5 a 10 minutos).</li>
+            <li><span>2</span> Me conta quem vem, o seu momento e os seus planos.</li>
+            <li><span>3</span> No final, você fala direto comigo no WhatsApp.</li>
+          </ol>
+          <a href={MENTORIA_URL} class="btn btn-accent">Responder o questionário <Icon name="arrow" size={16} /></a>
+        </div>
       </div>
       <div class="cta-mq mq">
         <div class="mq-track cta-track" style="--dur:60s" aria-hidden="true">
@@ -640,26 +612,6 @@ const faqs = [
       iframe.allowFullscreen = true;
       btn.replaceWith(iframe);
     });
-  });
-
-  // Formulário abre o WhatsApp com a mensagem pronta
-  const form = document.getElementById('lead-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const note = form.querySelector('.form-note') as HTMLElement;
-    const numero = form.dataset.whatsapp;
-    const texto =
-      `Olá, Alexandre! Sou ${data.get('nome')}.\n` +
-      `Quem vem: ${data.get('quem')}\n` +
-      `Documentação: ${data.get('doc')}\n` +
-      `Meu momento: ${data.get('momento')}\n` +
-      `Quero saber mais sobre a mentoria.`;
-    if (!numero) {
-      note.textContent = 'O WhatsApp ainda não foi configurado no site.';
-      return;
-    }
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
   });
 </script>
 
@@ -2047,9 +1999,9 @@ const faqs = [
     font-size: 2.2rem;
     color: var(--accent);
   }
-  .lead-form {
+  .cta-card {
     display: grid;
-    gap: 16px;
+    gap: 20px;
     padding: clamp(24px, 4vw, 36px);
     border-radius: var(--r-lg);
     background: rgba(255, 255, 255, 0.08);
@@ -2057,38 +2009,44 @@ const faqs = [
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
-  .lead-form label {
-    display: grid;
-    gap: 6px;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 0.92rem;
-  }
-  .lead-form input,
-  .lead-form select {
-    font: inherit;
-    font-family: var(--font-body);
-    padding: 14px 16px;
-    border-radius: var(--r-sm);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--ink);
-    width: 100%;
-  }
-  .lead-form input:focus,
-  .lead-form select:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.6);
-  }
-  .lead-form .btn {
-    width: 100%;
-    margin-top: 6px;
-  }
-  .form-note {
+  .cta-card-head {
     margin: 0;
-    min-height: 1.2em;
-    font-size: 0.9rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--accent);
+  }
+  .cta-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .cta-steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    color: rgba(255, 255, 255, 0.86);
+  }
+  .cta-steps span {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .cta-card .btn {
+    width: 100%;
+    margin-top: 4px;
   }
   .cta-mq {
     position: relative;

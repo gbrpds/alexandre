@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { waLink } from '../config';
+import { MENTORIA_URL } from '../config';
 
 interface Props {
   // "light": começa sobre fundo escuro (hero); "solid": já começa com fundo.
@@ -29,12 +29,12 @@ const links = [
       <ul>
         {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
-      <a href={waLink()} class="btn btn-accent btn-sm nav-cta-mobile">
-        <Icon name="whatsapp" size={16} /> Falar com o Alexandre
+      <a href={MENTORIA_URL} class="btn btn-accent btn-sm nav-cta-mobile">
+        Falar com o Alexandre <Icon name="arrow" size={16} />
       </a>
     </nav>
-    <a href={waLink()} class="btn btn-accent btn-sm header-cta">
-      <Icon name="whatsapp" size={16} /> Falar com o Alexandre
+    <a href={MENTORIA_URL} class="btn btn-accent btn-sm header-cta">
+      Falar com o Alexandre <Icon name="arrow" size={16} />
     </a>
     <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-nav">
       <span></span><span></span>
