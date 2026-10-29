@@ -6,9 +6,11 @@ import { waLink } from '../config';
 
 interface Props {
   servico: string;
-  mensagem: string;
+  // Ex.: "questionário da Mentoria Vida Italiana na Prática"
+  assunto: string;
 }
-const { servico, mensagem } = Astro.props;
+const { servico, assunto } = Astro.props;
+const mensagem = `Olá! Acabei de preencher o ${assunto}.`;
 ---
 <Base title={`Obrigado | ${servico} | Vida Italiana na Prática`} description="Recebemos suas respostas." noindex semWhatsapp>
   <Header variant="solid" minimal />
@@ -17,11 +19,11 @@ const { servico, mensagem } = Astro.props;
       <img class="obg-avatar" src="/fotos/alexandre-avatar.jpg" alt="Alexandre" width="96" height="96" />
       <p class="std-tag"><span class="std-dot"></span> {servico}</p>
       <h1>Recebemos suas <span class="serif-italic">respostas!</span></h1>
-      <p class="obg-lede">Agora é só me chamar no WhatsApp para darmos o próximo passo.</p>
-      <a href={waLink(mensagem)} class="btn btn-accent obg-btn" target="_blank" rel="noopener">
+      <p class="obg-lede" data-obg-lede>Agora é só me chamar no WhatsApp para darmos o próximo passo.</p>
+      <a href={waLink(mensagem)} class="btn btn-accent obg-btn" data-obg-wa data-assunto={assunto}>
         <Icon name="whatsapp" size={22} /> Chamar no WhatsApp
       </a>
-      <p class="obg-note">Abre o WhatsApp com uma mensagem pronta. É só enviar.</p>
+      <p class="obg-note" data-obg-note>Abre o WhatsApp com uma mensagem pronta. É só enviar.</p>
     </div>
   </main>
 </Base>
@@ -71,3 +73,23 @@ const { servico, mensagem } = Astro.props;
     color: var(--ink-2);
   }
 </style>
+
+<script>
+  // Vindo do questionário do site: personaliza a mensagem com o nome e abre o WhatsApp sozinho.
+  const params = new URLSearchParams(location.search);
+  const wa = document.querySelector<HTMLAnchorElement>('[data-obg-wa]');
+  if (wa && wa.href.includes('wa.me')) {
+    const nome = (params.get('nome') || '').replace(/[^\p{L}\s'-]/gu, '').trim().slice(0, 40);
+    if (nome) {
+      const texto = `Olá, Alexandre! Sou ${nome} e acabei de preencher o ${wa.dataset.assunto}.`;
+      wa.href = wa.href.split('?')[0] + '?text=' + encodeURIComponent(texto);
+    }
+    if (params.get('enviado') === '1') {
+      document.querySelector('[data-obg-lede]')!.textContent = 'Estou abrindo o meu WhatsApp para você. Se não abrir, toque no botão abaixo.';
+      document.querySelector('[data-obg-note]')!.textContent = 'A mensagem já vai pronta. É só enviar.';
+      // Troca a URL para não reabrir o WhatsApp ao voltar para esta página.
+      history.replaceState(null, '', location.pathname);
+      setTimeout(() => (location.href = wa.href), 1500);
+    }
+  }
+</script>

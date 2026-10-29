@@ -17,11 +17,12 @@ export const SITE = {
 // Os botões da mentoria levam primeiro ao questionário; o WhatsApp vem depois dele.
 export const MENTORIA_URL = '/mentoria';
 
-// Questionários de pré-qualificação (Google Forms). As respostas ficam na conta Google do cliente.
-// Para trocar de formulário, mude só aqui.
+// Questionários de pré-qualificação (Google Forms). O site mostra as perguntas com o próprio visual
+// e envia as respostas para o Google Forms do cliente; o site não guarda nenhum dado.
+// As perguntas ficam em src/data/questionarios.ts. Para trocar de formulário, mude o ID aqui.
 const gform = (id: string) => ({
   url: `https://docs.google.com/forms/d/e/${id}/viewform`,
-  embed: `https://docs.google.com/forms/d/e/${id}/viewform?embedded=true`,
+  action: `https://docs.google.com/forms/d/e/${id}/formResponse`,
 });
 export const FORMS = {
   mentoria: gform('1FAIpQLSdlgeHYs9hsqgND64mkxGm36VW7DbDcneTmqL4DcMSzeupBiw'),

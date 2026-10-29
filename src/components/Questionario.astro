@@ -2,19 +2,24 @@
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Icon from './Icon.astro';
+import { FORMS } from '../config';
+import { QUESTIONARIOS } from '../data/questionarios';
 
-// Página de pré-qualificação: o Google Form embutido vem antes de qualquer contato.
-// O site não guarda nenhum dado; as respostas ficam no Google Forms do cliente.
+// Página de pré-qualificação: o contato no WhatsApp só acontece depois do questionário.
+// As respostas vão direto para o Google Forms do cliente; o site não guarda nenhum dado.
 interface Props {
+  chave: 'mentoria' | 'assessoria';
   servico: string;
   titulo: string;
   tituloDestaque: string;
   pageTitle: string;
   description: string;
-  form: { url: string; embed: string };
   image?: string;
 }
-const { servico, titulo, tituloDestaque, pageTitle, description, form, image } = Astro.props;
+const { chave, servico, titulo, tituloDestaque, pageTitle, description, image } = Astro.props;
+const form = FORMS[chave];
+const { secoes, paginasGoogle } = QUESTIONARIOS[chave];
+const total = secoes.length;
 ---
 <Base title={pageTitle} description={description} image={image} semWhatsapp>
   <Header variant="solid" minimal />
@@ -24,8 +29,8 @@ const { servico, titulo, tituloDestaque, pageTitle, description, form, image } =
         <p class="std-tag"><span class="std-dot"></span> Questionário · {servico}</p>
         <h1>{titulo} <span class="serif-italic">{tituloDestaque}</span></h1>
         <p class="qst-lede">
-          Para te atender de forma personalizada, preencha o questionário abaixo (5 a 10 minutos). Ao final, você poderá falar
-          diretamente comigo no WhatsApp.
+          Para te atender de forma personalizada, responda o questionário abaixo (5 a 10 minutos). Ao enviar, você vai direto
+          para o meu WhatsApp.
         </p>
       </header>
 
@@ -34,17 +39,97 @@ const { servico, titulo, tituloDestaque, pageTitle, description, form, image } =
         <span>Seus dados serão usados apenas para o seu atendimento pela Vida Italiana e não serão compartilhados.</span>
       </p>
 
-      <div class="qst-frame" data-qst-frame>
-        <div class="qst-loading" aria-hidden="true">
-          <span class="qst-spinner"></span>
-          Carregando questionário…
+      <form
+        class="qf"
+        data-qf
+        data-action={form.action}
+        data-paginas={paginasGoogle}
+        data-obrigado={`/obrigado-${chave}`}
+        novalidate
+      >
+        <div class="qf-progress" aria-live="polite">
+          <div class="qf-progress-text">
+            <span>Etapa <strong data-qf-atual>1</strong> de {total}</span>
+            <span class="qf-progress-nome" data-qf-nome>{secoes[0].titulo}</span>
+          </div>
+          <div class="qf-bar"><span data-qf-bar style={`width:${100 / total}%`}></span></div>
         </div>
-        <iframe src={form.embed} title={`Questionário da ${servico}`} loading="lazy">Carregando questionário…</iframe>
-      </div>
+
+        {secoes.map((sec, si) => (
+          <fieldset class="qf-step" data-qf-step data-titulo={sec.titulo ?? ''} hidden={si > 0}>
+            {sec.titulo && <legend class="qf-legend">{sec.titulo}</legend>}
+            {sec.descricao && <p class="qf-desc">{sec.descricao}</p>}
+
+            {sec.perguntas.map((p) => {
+              const id = `q-${p.entry}`;
+              const nome = `entry.${p.entry}`;
+              const req = p.obrigatoria ? '' : undefined;
+              const multipla = p.tipo === 'radio' || p.tipo === 'checkbox';
+              return (
+                <div class="qf-q" data-q={p.tipo} data-required={req} data-max={p.max}>
+                  {multipla ? (
+                    <p class="qf-label" id={`${id}-l`}>
+                      {p.titulo}
+                      {p.obrigatoria && <span class="qf-req" aria-hidden="true">*</span>}
+                    </p>
+                  ) : (
+                    <label class="qf-label" for={id}>
+                      {p.titulo}
+                      {p.obrigatoria && <span class="qf-req" aria-hidden="true">*</span>}
+                    </label>
+                  )}
+                  {p.ajuda && <p class="qf-help">{p.ajuda}</p>}
+
+                  {p.tipo === 'paragrafo' && <textarea id={id} name={nome} rows="4" required={p.obrigatoria}></textarea>}
+                  {p.tipo === 'texto' && <input id={id} name={nome} type="text" required={p.obrigatoria} />}
+                  {p.tipo === 'email' && (
+                    <input id={id} name={nome} type="email" autocomplete="email" inputmode="email" required={p.obrigatoria} />
+                  )}
+                  {p.tipo === 'tel' && (
+                    <input id={id} name={nome} type="tel" autocomplete="tel" inputmode="tel" placeholder="+55 11 91234-5678" required={p.obrigatoria} />
+                  )}
+
+                  {multipla && (
+                    <div class="qf-opts" role={p.tipo === 'radio' ? 'radiogroup' : 'group'} aria-labelledby={`${id}-l`}>
+                      {p.opcoes?.map((o) => (
+                        <label class="qf-opt">
+                          <input type={p.tipo} name={nome} value={o} />
+                          <span>{o}</span>
+                        </label>
+                      ))}
+                      {p.outro && (
+                        <label class="qf-opt qf-opt-outro">
+                          <input type={p.tipo} name={nome} value="__other_option__" data-outro />
+                          <span>Outro:</span>
+                          <input type="text" name={`${nome}.other_option_response`} class="qf-outro-txt" aria-label="Outro, especifique" />
+                        </label>
+                      )}
+                    </div>
+                  )}
+                  <p class="qf-err" role="alert"></p>
+                </div>
+              );
+            })}
+          </fieldset>
+        ))}
+
+        <div class="qf-nav">
+          <button type="button" class="btn btn-ghost qf-back" data-qf-back hidden>
+            <Icon name="arrow" size={16} class="qf-back-ico" /> Voltar
+          </button>
+          <button type="button" class="btn btn-accent qf-next" data-qf-next>
+            Continuar <Icon name="arrow" size={16} />
+          </button>
+          <button type="submit" class="btn btn-accent qf-send" data-qf-send hidden>
+            <Icon name="whatsapp" size={18} /> <span data-qf-send-txt>Enviar respostas</span>
+          </button>
+        </div>
+        <p class="qf-status" data-qf-status role="status" aria-live="polite"></p>
+      </form>
 
       <p class="qst-fallback">
-        Problemas para visualizar?
-        <a href={form.url} target="_blank" rel="noopener">Abra o questionário em uma nova aba <Icon name="arrow" size={14} /></a>
+        Problemas com o questionário?
+        <a href={form.url} target="_blank" rel="noopener">Responda pelo Google Forms <Icon name="arrow" size={14} /></a>
       </p>
     </div>
   </main>
@@ -86,47 +171,197 @@ const { servico, titulo, tituloDestaque, pageTitle, description, form, image } =
     margin-top: 2px;
     color: var(--terra);
   }
-  .qst-frame {
-    position: relative;
+
+  /* ---------- Formulário ---------- */
+  .qf {
+    scroll-margin-top: 96px;
+    padding: clamp(20px, 4vw, 40px);
     border-radius: var(--r-lg);
-    overflow: hidden;
     background: #fff;
     border: 1px solid var(--line);
     box-shadow: var(--shadow-sm);
   }
-  .qst-frame iframe {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 1800px;
-    border: 0;
+  .qf-progress {
+    margin-bottom: 28px;
   }
-  .qst-loading {
-    position: absolute;
-    inset: 0 0 auto;
+  .qf-progress-text {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 12px;
-    padding: 64px 16px;
     font-family: var(--font-display);
+    font-size: 0.85rem;
     color: var(--ink-2);
+    margin-bottom: 10px;
   }
-  .qst-frame.is-loaded .qst-loading {
+  .qf-progress-nome {
+    text-align: right;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .qf-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--sand);
+    overflow: hidden;
+  }
+  .qf-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+    transition: width 0.5s var(--ease);
+  }
+  .qf-step {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .qf-step[hidden] {
     display: none;
   }
-  .qst-spinner {
+  .qf-legend {
+    padding: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .qf-desc {
+    white-space: pre-line;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    margin: 0 0 8px;
+  }
+  .qf-q {
+    margin-top: 26px;
+  }
+  .qf-label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    margin: 0 0 10px;
+  }
+  .qf-req {
+    color: var(--terra);
+    margin-left: 4px;
+  }
+  .qf-help {
+    margin: -4px 0 10px;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .qf input[type='text'],
+  .qf input[type='email'],
+  .qf input[type='tel'],
+  .qf textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .qf textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+  .qf input:focus-visible,
+  .qf textarea:focus-visible {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.45);
+  }
+  .qf-opts {
+    display: grid;
+    gap: 8px;
+  }
+  .qf-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+    cursor: pointer;
+    line-height: 1.35;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .qf-opt:hover {
+    border-color: var(--ink-2);
+  }
+  .qf-opt:has(input:checked) {
+    border-color: var(--ink);
+    background: rgba(245, 196, 0, 0.14);
+  }
+  .qf-opt input[type='radio'],
+  .qf-opt input[type='checkbox'] {
+    flex: none;
     width: 18px;
     height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--line-strong);
-    border-top-color: var(--accent);
-    animation: qst-spin 0.8s linear infinite;
+    margin: 0;
+    accent-color: var(--ink);
   }
-  @keyframes qst-spin {
-    to {
-      transform: rotate(360deg);
-    }
+  .qf-opt-outro .qf-outro-txt {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 12px !important;
+  }
+  .qf-err {
+    margin: 8px 0 0;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: #b3261e;
+  }
+  .qf-err:empty {
+    display: none;
+  }
+  .qf-q.is-invalid input[type='text'],
+  .qf-q.is-invalid input[type='email'],
+  .qf-q.is-invalid input[type='tel'],
+  .qf-q.is-invalid textarea,
+  .qf-q.is-invalid .qf-opt {
+    border-color: #b3261e;
+  }
+  .qf-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .qf-nav .btn[hidden] {
+    display: none;
+  }
+  .qf-next,
+  .qf-send {
+    margin-left: auto;
+  }
+  .qf-nav :global(.qf-back-ico) {
+    transform: rotate(180deg);
+  }
+  .qf-send[disabled] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .qf-status {
+    margin: 14px 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    text-align: center;
+  }
+  .qf-status:empty {
+    display: none;
+  }
+  .qf-status.is-error {
+    color: #b3261e;
   }
   .qst-fallback {
     margin: 16px 0 0;
@@ -141,6 +376,15 @@ const { servico, titulo, tituloDestaque, pageTitle, description, form, image } =
     font-weight: 600;
     color: var(--ink);
   }
+  @media (max-width: 520px) {
+    .qf-nav .btn {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .qf-send {
+      flex: 1;
+    }
+  }
   @media (min-width: 760px) {
     .qst {
       padding-top: 140px;
@@ -152,15 +396,137 @@ const { servico, titulo, tituloDestaque, pageTitle, description, form, image } =
       margin-top: 24px;
       font-size: 0.92rem;
     }
-    .qst-frame iframe {
-      height: 1400px;
-    }
   }
 </style>
 
 <script>
-  // Só esconde o "Carregando…". O envio do formulário não é detectável (iframe de outro domínio).
-  document.querySelectorAll<HTMLElement>('[data-qst-frame]').forEach((box) => {
-    box.querySelector('iframe')?.addEventListener('load', () => box.classList.add('is-loaded'), { once: true });
-  });
+  const form = document.querySelector<HTMLFormElement>('[data-qf]');
+  if (form) {
+    const steps = [...form.querySelectorAll<HTMLElement>('[data-qf-step]')];
+    const back = form.querySelector<HTMLButtonElement>('[data-qf-back]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-qf-next]')!;
+    const send = form.querySelector<HTMLButtonElement>('[data-qf-send]')!;
+    const sendTxt = form.querySelector<HTMLElement>('[data-qf-send-txt]')!;
+    const status = form.querySelector<HTMLElement>('[data-qf-status]')!;
+    const atual = form.querySelector<HTMLElement>('[data-qf-atual]')!;
+    const nomeEtapa = form.querySelector<HTMLElement>('[data-qf-nome]')!;
+    const bar = form.querySelector<HTMLElement>('[data-qf-bar]')!;
+    let cur = 0;
+
+    const erro = (q: HTMLElement, msg: string) => {
+      q.classList.toggle('is-invalid', !!msg);
+      q.querySelector('.qf-err')!.textContent = msg;
+      return !msg;
+    };
+
+    const validar = (q: HTMLElement) => {
+      const tipo = q.dataset.q;
+      const obrig = q.hasAttribute('data-required');
+      if (tipo === 'radio' || tipo === 'checkbox') {
+        const marcados = [...q.querySelectorAll<HTMLInputElement>(`input[type=${tipo}]:checked`)];
+        if (obrig && !marcados.length) return erro(q, 'Escolha uma opção.');
+        const max = Number(q.dataset.max || 0);
+        if (max && marcados.length > max) return erro(q, `Escolha no máximo ${max} opções.`);
+        const outro = q.querySelector<HTMLInputElement>('[data-outro]');
+        const outroTxt = q.querySelector<HTMLInputElement>('.qf-outro-txt');
+        if (outro?.checked && !outroTxt?.value.trim()) return erro(q, 'Conte qual é a outra opção.');
+        return erro(q, '');
+      }
+      const campo = q.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
+      const v = campo.value.trim();
+      if (obrig && !v) return erro(q, 'Este campo é obrigatório.');
+      if (v && tipo === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return erro(q, 'Confira o e-mail.');
+      if (v && tipo === 'tel' && v.replace(/\D/g, '').length < 10) return erro(q, 'Informe o WhatsApp com DDD.');
+      return erro(q, '');
+    };
+
+    const validarEtapa = (i: number) => {
+      const qs = [...steps[i].querySelectorAll<HTMLElement>('[data-q]')];
+      const invalidas = qs.filter((q) => !validar(q));
+      if (invalidas.length) {
+        invalidas[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        invalidas[0].querySelector<HTMLElement>('input, textarea')?.focus({ preventScroll: true });
+      }
+      return !invalidas.length;
+    };
+
+    const mostrar = (i: number) => {
+      steps.forEach((s, k) => (s.hidden = k !== i));
+      cur = i;
+      const ultima = i === steps.length - 1;
+      back.hidden = i === 0;
+      next.hidden = ultima;
+      send.hidden = !ultima;
+      atual.textContent = String(i + 1);
+      nomeEtapa.textContent = steps[i].dataset.titulo || '';
+      bar.style.width = `${((i + 1) / steps.length) * 100}%`;
+      const lenis = (window as any).lenis;
+      if (lenis) lenis.scrollTo(form, { offset: -96 });
+      else form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    next.addEventListener('click', () => validarEtapa(cur) && mostrar(cur + 1));
+    back.addEventListener('click', () => mostrar(cur - 1));
+
+    // Corrige o erro assim que a pessoa responde; ao digitar em "Outro", marca a opção.
+    form.addEventListener('input', (e) => {
+      const alvo = e.target as HTMLInputElement;
+      if (alvo.classList.contains('qf-outro-txt') && alvo.value) {
+        const outro = alvo.closest('.qf-opt')?.querySelector<HTMLInputElement>('[data-outro]');
+        if (outro) outro.checked = true;
+      }
+      const q = alvo.closest<HTMLElement>('[data-q]');
+      if (q?.classList.contains('is-invalid')) validar(q);
+    });
+
+    // Enter num campo de texto avança a etapa em vez de enviar.
+    form.addEventListener('keydown', (e) => {
+      const alvo = e.target as HTMLElement;
+      if (e.key === 'Enter' && alvo.tagName === 'INPUT' && cur < steps.length - 1) {
+        e.preventDefault();
+        next.click();
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validarEtapa(cur)) return;
+      // Confere as etapas anteriores também, por segurança.
+      for (let i = 0; i < steps.length; i++) {
+        if (![...steps[i].querySelectorAll<HTMLElement>('[data-q]')].every(validar)) {
+          mostrar(i);
+          return;
+        }
+      }
+
+      const dados = new FormData(form);
+      const corpo = new URLSearchParams();
+      for (const [k, v] of dados) {
+        if (typeof v !== 'string') continue;
+        if (k.endsWith('.other_option_response') && !v.trim()) continue;
+        corpo.append(k, v.trim());
+      }
+      // O Google pede o histórico de todas as páginas do formulário original.
+      const paginas = Number(form.dataset.paginas || 1);
+      corpo.append('pageHistory', Array.from({ length: paginas }, (_, i) => i).join(','));
+      corpo.append('fvv', '1');
+
+      send.disabled = true;
+      sendTxt.textContent = 'Enviando…';
+      status.classList.remove('is-error');
+      status.textContent = '';
+      try {
+        // O Google não devolve a resposta para outro site (no-cors); se a rede falhar, cai no catch.
+        await fetch(form.dataset.action!, { method: 'POST', mode: 'no-cors', body: corpo });
+        const nomeCompleto = String(dados.get(form.querySelector<HTMLInputElement>('input[type=text]')!.name) || '');
+        const primeiro = nomeCompleto.trim().split(/\s+/)[0] || '';
+        window.location.href = `${form.dataset.obrigado}?enviado=1${primeiro ? `&nome=${encodeURIComponent(primeiro)}` : ''}`;
+      } catch {
+        send.disabled = false;
+        sendTxt.textContent = 'Enviar respostas';
+        status.classList.add('is-error');
+        status.textContent = 'Não conseguimos enviar agora. Verifique a sua conexão e tente de novo.';
+      }
+    });
+  }
 </script>
