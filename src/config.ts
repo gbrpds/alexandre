@@ -6,8 +6,11 @@ export const SITE = {
   instagram: 'https://www.instagram.com/vidaitaliananapratica.oficial/',
   tiktok: 'https://www.tiktok.com/@vidaitaliananapratica',
   youtube: 'https://www.youtube.com/@vidaitaliananapratica',
-  // ID do vídeo da entrevista com Rafael e Luciana (parte final da URL do YouTube).
-  videoDepoimento: '',
+  // Entrevistas com mentorados no YouTube (o ID é o código depois de "watch?v=").
+  videosDepoimento: [
+    { id: 'KVwUoOMmQIA', titulo: 'Entrevista com mentorados' },
+    { id: 'UeFxASOn17A', titulo: 'Entrevista com mentorados' },
+  ],
   guiaUrl: 'https://pay.hotmart.com/H103483390L?off=5svxi8vu',
 };
 

@@ -372,17 +372,15 @@ const faqs = [
           <p class="sec-lede">Rafael e Luciana me conheceram em janeiro. Em 1º de abril, desembarcaram com um apartamento esperando por eles no centro histórico de Monza.</p>
         </div>
         <div class="video reveal">
-          {SITE.videoDepoimento ? (
-            <button class="video-facade" data-video={SITE.videoDepoimento} aria-label="Assistir à entrevista com Rafael e Luciana">
-              <img src="/fotos/rafael-luciana.jpg" alt="" loading="lazy" width="1280" height="720" />
-              <span class="play" aria-hidden="true"></span>
-            </button>
-          ) : (
-            <div class="video-facade">
-              <img src="/fotos/rafael-luciana.jpg" alt="Rafael e Luciana em Monza" loading="lazy" width="1280" height="720" />
-              <span class="play" aria-hidden="true"></span>
-            </div>
-          )}
+          {SITE.videosDepoimento.map((v) => (
+            <figure class="video-item">
+              <button class="video-facade" data-video={v.id} data-title={v.titulo} aria-label={`Assistir: ${v.titulo}`}>
+                <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" onerror="this.onerror=null;this.src='/fotos/rafael-luciana.jpg'" />
+                <span class="play" aria-hidden="true"></span>
+              </button>
+              <figcaption><Icon name="youtube" size={16} /> {v.titulo}</figcaption>
+            </figure>
+          ))}
         </div>
         <div class="mq testi-mq">
           <div class="mq-track testi-track" style="--dur:80s">
@@ -607,7 +605,7 @@ const faqs = [
     btn.addEventListener('click', () => {
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.video}?autoplay=1`;
-      iframe.title = 'Entrevista com Rafael e Luciana';
+      iframe.title = btn.dataset.title ?? 'Entrevista com mentorados';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
       iframe.allowFullscreen = true;
       btn.replaceWith(iframe);
@@ -1632,8 +1630,45 @@ const faqs = [
     margin-bottom: 22px;
   }
   .video {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.4vw, 28px);
     margin-top: 48px;
     margin-bottom: 48px;
+  }
+  .video-item {
+    margin: 0;
+  }
+  .video-item figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .video-item figcaption :global(svg) {
+    color: var(--accent);
+  }
+  @media (max-width: 760px) {
+    .video {
+      grid-template-columns: 1fr;
+    }
+    .video .play {
+      width: 68px;
+      height: 68px;
+    }
+    .video .play::after {
+      left: 27px;
+      top: 21px;
+      border-left-width: 19px;
+      border-top-width: 13px;
+      border-bottom-width: 13px;
+    }
   }
   .video-facade,
   .video :global(iframe) {
