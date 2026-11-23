@@ -6,6 +6,8 @@ atualizado: 2026-11-23
 
 # Rafael e Luciana
 
+Transcrição completa da entrevista: [[Vídeo - Entrevista com o casal de mentorados]].
+
 - Casal de 13 anos de casados (25 juntos), sem filhos. **[CONFIRMAR origem: diz "Poços de Caldas" na apresentação e "a gente mora em Florianópolis" depois]**
 - Cidadania via consulado (BH) da Luciana, processo de **9 anos** pago pela sogra (grupo de 28 pessoas, só 4 terminaram). Rafael entra como cônjuge.
 - Conheceram o Alexandre em **18 de janeiro**; chegaram em **1º de abril** — cerca de 3 meses para resolver o que ficou travado por 9 anos.

@@ -13,6 +13,7 @@ Ponto de entrada do projeto do cliente **Alexandre - Vida Italiana na Prática**
 ## 01 - Cliente
 - [[Alexandre - perfil]]
 - [[História de vida - linha do tempo]]
+- [[Contexto inicial do cliente (briefing do projeto)]]
 
 ## 02 - Produtos
 - [[Mentoria individual]]
@@ -33,7 +34,8 @@ Ponto de entrada do projeto do cliente **Alexandre - Vida Italiana na Prática**
 - [[Identidade visual]]
 
 ## 06 - Conteúdo
-- [[Reels e vídeos - índice]] (10 reels resumidos)
+- [[Reels e vídeos - índice]] (6 vídeos longos transcritos por inteiro + 10 reels resumidos)
+- [[Glossário e correções de transcrição]]
 - [[Pauta editorial do blog]] (30 artigos planejados, 6 prontos em `Artigos/`)
 
 ## 07 - Site
@@ -46,4 +48,4 @@ Ponto de entrada do projeto do cliente **Alexandre - Vida Italiana na Prática**
 - [[08 - Pendências e dúvidas|Pendências e dúvidas]]
 
 ---
-Gerado em 23/11/2026 a partir do briefing do projeto, da pauta, dos artigos e das decisões tomadas no desenvolvimento do site. As transcrições completas dos vídeos e reels não foram guardadas: só os resumos e frases-chave.
+Gerado em 23/11/2026 a partir do briefing do projeto, da pauta, dos artigos e das decisões tomadas no desenvolvimento do site. Os 6 vídeos longos do YouTube estão transcritos por inteiro em `06 - Conteúdo/Transcrições`. Dos 10 reels existem só os resumos e as frases-chave.

@@ -6,7 +6,7 @@ atualizado: 2026-11-23
 
 # Voz e linguagem
 
-Guia para escrever como o Alexandre. Vale para artigos, site e roteiros.
+Guia para escrever como o Alexandre. Vale para artigos, site e roteiros. Para ouvir o raciocínio e o jeito de falar dele, leia as [[Reels e vídeos - índice|transcrições completas]].
 
 **Tom:** pai de família experiente, honesto, sem romantizar. Acolhedor, mas firme. Fala de igual para igual, com emoção e números.
 

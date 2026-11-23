@@ -6,12 +6,16 @@ atualizado: 2026-11-23
 
 # Reels e vídeos - índice
 
-## Vídeos longos (YouTube)
-Já consolidados em [[História de vida - linha do tempo]], [[Rafael e Luciana]] e [[Números de referência (Lombardia 2026)]]:
-- **Minha História** (partes 1 a 3; a parte 4, "A grande virada", ainda não foi gravada)
-- **A Itália real**
-- **Custo de vida na Itália**
-- **Entrevista com o casal de mentorados** (Rafael e Luciana)
+## Vídeos longos (YouTube): transcrições completas
+Texto inteiro de cada vídeo, sem marcadores de tempo. Glossário de correções: [[Glossário e correções de transcrição]].
+- [[Vídeo - Minha História PT1]] (1998 a 2003: o sequestro, o Projeto Itália, a chegada em Nice)
+- [[Vídeo - Minha História PT2]] (a crise do euro, 100 fábricas, o emprego com o tio, a casa de 300 €)
+- [[Vídeo - Minha História PT3]] (a família chega, a moto, o eBay, o inverno; PT4 "A grande virada" ainda não foi gravada)
+- [[Vídeo - A Itália real que ninguém te conta no Instagram]]
+- [[Vídeo - Custo de vida na Itália]]
+- [[Vídeo - Entrevista com o casal de mentorados]]
+
+Resumos já consolidados em [[História de vida - linha do tempo]], [[Rafael e Luciana]] e [[Números de referência (Lombardia 2026)]].
 
 ## Reels - lote 1
 - [[Reel - O coração da imigração]]
@@ -32,4 +36,4 @@ Já consolidados em [[História de vida - linha do tempo]], [[Rafael e Luciana]]
 - TikTok: https://www.tiktok.com/@vidaitaliananapratica
 - YouTube: https://www.youtube.com/@vidaitaliananapratica
 
-> Os textos completos das transcrições originais não estão aqui: o que existe são os resumos e as frases-chave extraídas delas. Para guardar as transcrições inteiras, cole cada uma em uma nota nesta pasta e ligue a nota ao reel correspondente.
+> Os 6 vídeos longos estão transcritos por inteiro acima. Os 10 reels têm só resumo e frases-chave; para guardar o texto inteiro de um reel, crie uma nota em `Transcrições/` e ligue ao reel correspondente.

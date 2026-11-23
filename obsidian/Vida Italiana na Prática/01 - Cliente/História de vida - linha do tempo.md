@@ -6,7 +6,7 @@ atualizado: 2026-11-23
 
 # História de vida - linha do tempo
 
-Fonte: série de vídeos "Minha História" (YouTube) e entrevistas. Perfil: [[Alexandre - perfil]].
+Fonte: série "Minha História" (YouTube): [[Vídeo - Minha História PT1]], [[Vídeo - Minha História PT2]] e [[Vídeo - Minha História PT3]] (transcrições completas), e entrevistas. Perfil: [[Alexandre - perfil]].
 
 | Ano | Momento |
 |---|---|
